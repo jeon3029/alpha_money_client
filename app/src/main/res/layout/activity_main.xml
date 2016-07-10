@@ -3,14 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hongik.alpha_money.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <!-- 상단 메뉴-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:id="@+id/main_topmenu_layout"
+        >
+    </LinearLayout>
+
+    <!-- 지출 수입 통계-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/main_topmenu_layout"
+        android:orientation="horizontal"
+        android:id="@+id/main_top_layout"
+        >
+    </LinearLayout>
+    <!-- 중간 내용-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/main_top_layout"
+        android:layout_above="@+id/main_bottom_layout"
+        android:id="@+id/main_middle_layout"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <!-- 밑에 지출 수입 통계 넘어가는 메뉴-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:id="@+id/main_bottom_layout"
+        >
+
+    </LinearLayout>
 </RelativeLayout>

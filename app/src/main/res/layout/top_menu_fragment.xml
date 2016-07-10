@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="start">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/redcircle"
+                android:id="@+id/signalLight"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/magnifier"
+                />
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/plus"
+                android:clickable="true"
+                android:onClick="clickAddData"
+                />
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/menu"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
