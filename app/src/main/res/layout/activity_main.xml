@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hongik.alpha_money.MainActivity">
 
     <!-- 상단 메뉴-->
@@ -14,20 +18,11 @@
         >
     </LinearLayout>
 
-    <!-- 지출 수입 통계-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_below="@id/main_topmenu_layout"
-        android:orientation="horizontal"
-        android:id="@+id/main_top_layout"
-        >
-    </LinearLayout>
-    <!-- 중간 내용-->
+    <!-- 중간 리스트 내용-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/main_top_layout"
+        android:layout_below="@+id/main_topmenu_layout"
         android:layout_above="@+id/main_bottom_layout"
         android:id="@+id/main_middle_layout"
         android:orientation="horizontal">
@@ -42,6 +37,5 @@
         android:orientation="horizontal"
         android:id="@+id/main_bottom_layout"
         >
-
     </LinearLayout>
 </RelativeLayout>

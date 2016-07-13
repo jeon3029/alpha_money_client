@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/res/merged/androidTest/debug/color/vpi__light_theme.xml",
+        "source": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/bundles/debug/res/color/vpi__light_theme.xml"
+    },
+    {
+        "merged": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/res/merged/androidTest/debug/color/vpi__dark_theme.xml",
+        "source": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/bundles/debug/res/color/vpi__dark_theme.xml"
+    }
+]
