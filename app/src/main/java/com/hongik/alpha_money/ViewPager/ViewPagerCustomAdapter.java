@@ -17,6 +17,7 @@ import com.hongik.alpha_money.R;
  * Created by jeon3029 on 16. 7. 13..
  */
 public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
+    private static final String[] CONTENT = new String[]{"지출","수입","통계"};
     Fragment[] fragments = new Fragment[3];
 
     public ViewPagerCustomAdapter(FragmentManager fm) {
@@ -27,6 +28,11 @@ public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
     }
     public Fragment getItem(int arg0) {
         return fragments[arg0];
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return CONTENT[position % CONTENT.length];
     }
 
     public int getCount() {

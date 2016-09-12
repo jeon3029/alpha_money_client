@@ -16,8 +16,7 @@
             android:layout_height="match_parent"
             android:text="오늘"
             android:background="#9abae6"
-            android:id="@+id/buttonToday"
-            android:onClick="clickbuttonToday" />
+            android:id="@+id/buttonToday" />
 
         <Button
             android:layout_width="0dp"
@@ -27,8 +26,7 @@
             android:layout_height="match_parent"
             android:text="이번 주"
             android:background="#9abae6"
-            android:id="@+id/buttonWeek"
-            android:onClick="clickbuttonWeek" />
+            android:id="@+id/buttonWeek" />
 
         <Button
             android:layout_width="0dp"
@@ -38,7 +36,6 @@
             android:layout_height="match_parent"
             android:text="이번 달"
             android:background="#9abae6"
-            android:id="@+id/buttonMonth"
-            android:onClick="clickbuttonMonth" />
+            android:id="@+id/buttonMonth"/>
     </LinearLayout>
 </LinearLayout>
