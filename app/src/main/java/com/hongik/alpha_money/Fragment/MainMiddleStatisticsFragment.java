@@ -20,6 +20,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootViewBasic = inflater.inflate(R.layout.main_statistics_graph, container, false);
+
         return rootViewBasic;
     }
 }
