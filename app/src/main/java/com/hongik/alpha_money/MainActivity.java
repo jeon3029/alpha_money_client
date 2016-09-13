@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager = getSupportFragmentManager();
     MainTopFragment mainTopFragment;
     MainViewPagerFragment mainViewPagerFragment;
+
     MainBottomFragment mainBottomFragment;
     FragmentManager fm = getSupportFragmentManager();
     @Override
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         mainViewPagerFragment = new MainViewPagerFragment();
         mainTopFragment =  new MainTopFragment();
     }
-    public void ShowMainExpenseList(){
+
+    public void ShowMainExpenseList(){//사실상 필요 없음
         fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, mainBottomFragment).commit();
