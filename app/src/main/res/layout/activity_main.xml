@@ -26,6 +26,16 @@
 
     </LinearLayout>
 
+    <!--메뉴바 클릭-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/detail_bottom_layout"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        >
+    </LinearLayout>
+
     <!-- 밑에 지출 수입 통계 넘어가는 메뉴-->
     <LinearLayout
         android:layout_width="match_parent"
