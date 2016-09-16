@@ -5,10 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hongik.alpha_money.Activity.MainActivity;
+import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.Fragment.MainMiddleExpenseFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleIncomeFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleStatisticsFragment;
@@ -27,29 +30,35 @@ public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
         fragments[1] = new MainMiddleIncomeFragment();
         fragments[2] = new MainMiddleStatisticsFragment();
     }
+
     public Fragment getItem(int arg0) {
         return fragments[arg0];
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        //TODO : statistics 에 왔을 때 아래의 오늘 이번주 이번달 -> 메뉴 로 변화시켜야 함
+        Context ctx = ApplicationSingleton.getInstance().GetMainActivityContext();
         if(position == 0){
-
+            Log.i("TAGPAGE","0");
+            ((MainActivity)ctx).ShowExpenseFragment();
         }
         else if(position == 1){
-
+            Log.i("TAGPAGE","1");
+            ((MainActivity)ctx).ShowIncomeFragment();
         }
         else if(position == 2){
 
+            Log.i("TAGPAGE","2");
+            ((MainActivity)ctx).ShowStatisticsFragment();
         }
+
         return super.instantiateItem(container, position);
     }
-
     @Override
     public int getItemPosition(Object object) {
         return super.getItemPosition(object);
     }
-
     @Override
     public CharSequence getPageTitle(int position) {
         return CONTENT[position % CONTENT.length];

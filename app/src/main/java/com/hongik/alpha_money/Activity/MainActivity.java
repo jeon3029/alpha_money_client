@@ -50,11 +50,24 @@ public class MainActivity extends AppCompatActivity {
         emptyFragment2 = new EmptyFragment();
         statisticsMenuFragment = new StatisticsMenuFragment();
     }
-
-    public void ShowMainExpenseList(){//사실상 필요 없음
+    public void ShowExpenseFragment(){
         fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, mainBottomFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, emptyFragment2).commit();
+
+    }
+    public void ShowIncomeFragment(){
+        fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, mainBottomFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, emptyFragment2).commit();
+    }
+    public void ShowStatisticsFragment(){
+        fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, emptyFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, statisticsMenuFragment).commit();
     }
     public void ChangeStatisticsMenuState(int option){//0 = empty 1 = visible
         if(option == 0) {
