@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.hongik.alpha_money.Fragment.MainMiddleExpenseFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleIncomeFragment;
@@ -28,6 +29,25 @@ public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
     }
     public Fragment getItem(int arg0) {
         return fragments[arg0];
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        if(position == 0){
+
+        }
+        else if(position == 1){
+
+        }
+        else if(position == 2){
+
+        }
+        return super.instantiateItem(container, position);
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return super.getItemPosition(object);
     }
 
     @Override

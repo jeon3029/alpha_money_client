@@ -3,6 +3,8 @@ package com.hongik.alpha_money.DataStructure;
 /**
  * Created by jeon3029 on 16. 9. 12..
  */
+
+
 public class struct {
     public int ID;
     public String date;

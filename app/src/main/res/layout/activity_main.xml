@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context="com.hongik.alpha_money.MainActivity">
+    tools:context=".Activity.MainActivity">
 
     <!-- 상단 메뉴-->
     <LinearLayout
@@ -30,7 +30,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="290dp"
-        android:id="@+id/detail_bottom_layout"
+        android:id="@+id/statistics_bottom_layout"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         >

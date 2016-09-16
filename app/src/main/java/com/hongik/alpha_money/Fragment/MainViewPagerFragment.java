@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hongik.alpha_money.ApplicationSingleton;
-import com.hongik.alpha_money.MainActivity;
+import com.hongik.alpha_money.Activity.MainActivity;
 import com.hongik.alpha_money.R;
 import com.hongik.alpha_money.ViewPager.ViewPagerCustomAdapter;
 import com.viewpagerindicator.TabPageIndicator;
