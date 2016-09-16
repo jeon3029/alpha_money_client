@@ -38,6 +38,7 @@ public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         //TODO : statistics 에 왔을 때 아래의 오늘 이번주 이번달 -> 메뉴 로 변화시켜야 함
+        //Have a PROBLEM!! (NOT SOLVED)
         Context ctx = ApplicationSingleton.getInstance().GetMainActivityContext();
         if(position == 0){
             Log.i("TAGPAGE","0");
