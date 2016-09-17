@@ -77,4 +77,5 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, statisticsMenuFragment).commit();
         }
     }
+    //그래프 작업 시작
 }
