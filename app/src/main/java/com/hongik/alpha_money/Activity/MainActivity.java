@@ -6,6 +6,10 @@ import android.os.Bundle;
 
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.Fragment.EmptyFragment;
+import com.hongik.alpha_money.Fragment.GraphMonthFragment;
+import com.hongik.alpha_money.Fragment.GraphPaymentFragment;
+import com.hongik.alpha_money.Fragment.GraphTimeFragment;
+import com.hongik.alpha_money.Fragment.GraphWeekFragment;
 import com.hongik.alpha_money.Fragment.MainBottomFragment;
 import com.hongik.alpha_money.Fragment.MainViewPagerFragment;
 import com.hongik.alpha_money.Fragment.MainTopFragment;
@@ -22,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     EmptyFragment emptyFragment2;
     MainBottomFragment mainBottomFragment;
     StatisticsMenuFragment statisticsMenuFragment;
+
+    GraphMonthFragment graphMonthFragment;
+    GraphTimeFragment graphTimeFragment;
+    GraphWeekFragment graphWeekFragment;
+    GraphPaymentFragment graphPaymentFragment;
 
     FragmentManager fm = getSupportFragmentManager();
     @Override
@@ -49,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         emptyFragment = new EmptyFragment();
         emptyFragment2 = new EmptyFragment();
         statisticsMenuFragment = new StatisticsMenuFragment();
+
+        graphMonthFragment = new GraphMonthFragment();
+        graphPaymentFragment = new GraphPaymentFragment();
+        graphTimeFragment = new GraphTimeFragment();
+        graphWeekFragment = new GraphWeekFragment();
     }
     public void ShowExpenseFragment(){
         fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
@@ -76,5 +90,21 @@ public class MainActivity extends AppCompatActivity {
         else{
             fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, statisticsMenuFragment).commit();
         }
+    }
+    public void ChangeMenu1Graph(){
+        //mainViewPagerFragment.SetFragment(2,graphMonthFragment);
+        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphMonthFragment).commit();
+    }
+    public void ChangeMenu2Graph(){
+        //mainViewPagerFragment.SetFragment(2,graphWeekFragment);
+        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphWeekFragment).commit();
+    }
+    public void ChangeMenu3Graph(){
+        //mainViewPagerFragment.SetFragment(2,graphTimeFragment);
+        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphTimeFragment).commit();
+    }
+    public void ChangeMenu4Graph(){
+        //mainViewPagerFragment.SetFragment(2,graphPaymentFragment);
+        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphPaymentFragment).commit();
     }
 }

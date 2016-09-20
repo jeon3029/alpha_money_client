@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hongik.alpha_money.Activity.MainActivity;
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.R;
 
@@ -26,6 +27,7 @@ public class StatisticsMenuFragment extends Fragment{
 
     View rootViewBasic;
     Context ctx;
+    Context mainctx;
     LinearLayout menuLayout;
     Button menuBtn;
     ImageView updownImg;
@@ -44,6 +46,7 @@ public class StatisticsMenuFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootViewBasic = inflater.inflate(R.layout.main_statistics_menu,container,false);
         ctx = ApplicationSingleton.getInstance().getApplicationContext();
+        mainctx = ApplicationSingleton.getInstance().GetMainActivityContext();
         //initiate
         menuBtn = (Button)rootViewBasic.findViewById(R.id.menubtn);
         updownImg = (ImageView)rootViewBasic.findViewById(R.id.menu_up_image);
@@ -102,8 +105,102 @@ public class StatisticsMenuFragment extends Fragment{
                 }
             }
         });
-
-
+        menu1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)mainctx).ChangeMenu1Graph();
+                if(updownState == false){//다운 되어 있는 상태
+                    updownState = true;
+                    menuLayout.setVisibility(LinearLayout.VISIBLE);
+                    updownImg.setImageResource(R.mipmap.menubar_down);
+                    int paddingPixel = 0;
+                    float density = ctx.getResources().getDisplayMetrics().density;
+                    int paddingDp = (int)(paddingPixel * density);
+                    relativeLayout.setPaddingRelative(0,paddingDp,0,0);//red line, but it's ok
+                }
+                else if(updownState == true){//업 되어 있는 상태
+                    updownState = false;
+                    menuLayout.setVisibility(LinearLayout.GONE);
+                    updownImg.setImageResource(R.mipmap.menubar_up);
+                    int paddingPixel = 200;
+                    float density = ctx.getResources().getDisplayMetrics().density;
+                    int paddingDp = (int)(paddingPixel * density);
+                    relativeLayout.setPaddingRelative(0,paddingDp,0,0);//red line, but it's ok
+                }
+            }
+        });
+        menu2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)mainctx).ChangeMenu2Graph();
+                if(updownState == false){//다운 되어 있는 상태
+                    updownState = true;
+                    menuLayout.setVisibility(LinearLayout.VISIBLE);
+                    updownImg.setImageResource(R.mipmap.menubar_down);
+                    int paddingPixel = 0;
+                    float density = ctx.getResources().getDisplayMetrics().density;
+                    int paddingDp = (int)(paddingPixel * density);
+                    relativeLayout.setPaddingRelative(0,paddingDp,0,0);//red line, but it's ok
+                }
+                else if(updownState == true){//업 되어 있는 상태
+                    updownState = false;
+                    menuLayout.setVisibility(LinearLayout.GONE);
+                    updownImg.setImageResource(R.mipmap.menubar_up);
+                    int paddingPixel = 200;
+                    float density = ctx.getResources().getDisplayMetrics().density;
+                    int paddingDp = (int)(paddingPixel * density);
+                    relativeLayout.setPaddingRelative(0,paddingDp,0,0);//red line, but it's ok
+                }
+            }
+        });
+        menu3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)mainctx).ChangeMenu3Graph();
+                if(updownState == false){//다운 되어 있는 상태
+                    updownState = true;
+                    menuLayout.setVisibility(LinearLayout.VISIBLE);
+                    updownImg.setImageResource(R.mipmap.menubar_down);
+                    int paddingPixel = 0;
+                    float density = ctx.getResources().getDisplayMetrics().density;
+                    int paddingDp = (int)(paddingPixel * density);
+                    relativeLayout.setPaddingRelative(0,paddingDp,0,0);//red line, but it's ok
+                }
+                else if(updownState == true){//업 되어 있는 상태
+                    updownState = false;
+                    menuLayout.setVisibility(LinearLayout.GONE);
+                    updownImg.setImageResource(R.mipmap.menubar_up);
+                    int paddingPixel = 200;
+                    float density = ctx.getResources().getDisplayMetrics().density;
+                    int paddingDp = (int)(paddingPixel * density);
+                    relativeLayout.setPaddingRelative(0,paddingDp,0,0);//red line, but it's ok
+                }
+            }
+        });
+        menu4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)mainctx).ChangeMenu4Graph();
+                if(updownState == false){//다운 되어 있는 상태
+                    updownState = true;
+                    menuLayout.setVisibility(LinearLayout.VISIBLE);
+                    updownImg.setImageResource(R.mipmap.menubar_down);
+                    int paddingPixel = 0;
+                    float density = ctx.getResources().getDisplayMetrics().density;
+                    int paddingDp = (int)(paddingPixel * density);
+                    relativeLayout.setPaddingRelative(0,paddingDp,0,0);//red line, but it's ok
+                }
+                else if(updownState == true){//업 되어 있는 상태
+                    updownState = false;
+                    menuLayout.setVisibility(LinearLayout.GONE);
+                    updownImg.setImageResource(R.mipmap.menubar_up);
+                    int paddingPixel = 200;
+                    float density = ctx.getResources().getDisplayMetrics().density;
+                    int paddingDp = (int)(paddingPixel * density);
+                    relativeLayout.setPaddingRelative(0,paddingDp,0,0);//red line, but it's ok
+                }
+            }
+        });
 
 
         return rootViewBasic;
