@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/src/main/assets"/><source path="/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/src/release/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\alpha\viewPagerIndicatorLibrary\src\main\assets"/><source path="D:\alpha\viewPagerIndicatorLibrary\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="D:\alpha\viewPagerIndicatorLibrary\src\release\assets"/></dataSet></merger>

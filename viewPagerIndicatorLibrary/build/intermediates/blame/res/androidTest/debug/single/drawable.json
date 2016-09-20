@@ -1,6 +1,10 @@
 [
     {
-        "merged": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/res/merged/androidTest/debug/drawable/vpi__tab_indicator.xml",
-        "source": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/bundles/debug/res/drawable/vpi__tab_indicator.xml"
+        "merged": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\vpi__tab_indicator.xml",
+        "source": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_indicator.xml"
+    },
+    {
+        "merged": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\vpi__tab_indicator.xml",
+        "source": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_indicator.xml"
     }
 ]

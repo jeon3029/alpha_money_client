@@ -1,26 +1,50 @@
 [
     {
-        "merged": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/vpi__tab_unselected_pressed_holo.9.png",
-        "source": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/vpi__tab_unselected_pressed_holo.9.png"
+        "merged": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_unselected_focused_holo.9.png",
+        "source": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_unselected_focused_holo.9.png"
     },
     {
-        "merged": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/vpi__tab_selected_focused_holo.9.png",
-        "source": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/vpi__tab_selected_focused_holo.9.png"
+        "merged": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_unselected_holo.9.png",
+        "source": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_unselected_holo.9.png"
     },
     {
-        "merged": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/vpi__tab_unselected_focused_holo.9.png",
-        "source": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/vpi__tab_unselected_focused_holo.9.png"
+        "merged": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_selected_focused_holo.9.png",
+        "source": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_selected_focused_holo.9.png"
     },
     {
-        "merged": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/vpi__tab_unselected_holo.9.png",
-        "source": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/vpi__tab_unselected_holo.9.png"
+        "merged": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_unselected_holo.9.png",
+        "source": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_unselected_holo.9.png"
     },
     {
-        "merged": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/vpi__tab_selected_holo.9.png",
-        "source": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/vpi__tab_selected_holo.9.png"
+        "merged": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_selected_pressed_holo.9.png",
+        "source": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_selected_pressed_holo.9.png"
     },
     {
-        "merged": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/vpi__tab_selected_pressed_holo.9.png",
-        "source": "/Users/jeon3029/alpha_money_client/viewPagerIndicatorLibrary/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/vpi__tab_selected_pressed_holo.9.png"
+        "merged": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_unselected_pressed_holo.9.png",
+        "source": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_unselected_pressed_holo.9.png"
+    },
+    {
+        "merged": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_unselected_pressed_holo.9.png",
+        "source": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_unselected_pressed_holo.9.png"
+    },
+    {
+        "merged": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_selected_focused_holo.9.png",
+        "source": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_selected_focused_holo.9.png"
+    },
+    {
+        "merged": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_selected_pressed_holo.9.png",
+        "source": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_selected_pressed_holo.9.png"
+    },
+    {
+        "merged": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_unselected_focused_holo.9.png",
+        "source": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_unselected_focused_holo.9.png"
+    },
+    {
+        "merged": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_selected_holo.9.png",
+        "source": "D:\\Users\\jeon3029\\alpha_money_client\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_selected_holo.9.png"
+    },
+    {
+        "merged": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\vpi__tab_selected_holo.9.png",
+        "source": "D:\\alpha\\viewPagerIndicatorLibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\vpi__tab_selected_holo.9.png"
     }
 ]
