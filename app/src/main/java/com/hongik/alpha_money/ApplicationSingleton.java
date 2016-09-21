@@ -3,6 +3,8 @@ package com.hongik.alpha_money;
 import android.app.Application;
 import android.content.Context;
 
+import com.hongik.alpha_money.DataBase.DBHelper;
+
 /**
  * Created by jeon3029 on 16. 7. 13..
  */
@@ -13,6 +15,10 @@ public class ApplicationSingleton extends Application {
     public static ApplicationSingleton getInstance(){
         return instance;
     }
+
+    DBHelper mydb = new DBHelper(GetMainActivityContext());
+
+    public DBHelper GetDataBase(){return mydb;}
 
     private Context mainActivityContext;
     public void SetMainActivityContext(Context ctx){mainActivityContext = ctx;};

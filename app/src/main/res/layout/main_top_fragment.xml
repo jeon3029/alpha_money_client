@@ -29,18 +29,20 @@
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
+                android:id="@+id/top_search_image"
                 android:src="@drawable/magnifier"
                 />
 
             <ImageView
                 android:layout_width="45dp"
+                android:id="@+id/top_plus_image"
                 android:layout_height="45dp"
                 android:src="@drawable/plus"
                 android:clickable="true"
-                android:onClick="clickAddData"
                 />
             <ImageView
                 android:layout_width="45dp"
+                android:id="@+id/top_menu_image"
                 android:layout_height="45dp"
                 android:src="@drawable/menu"
                 />
