@@ -10,6 +10,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.R;
 
 import java.util.ArrayList;
@@ -38,7 +39,9 @@ public class GraphMonthFragment extends Fragment {
         entries.add(new PieEntry(24.0f, "Red"));
         entries.add(new PieEntry(30.8f, "Blue"));
 
-        PieDataSet set = new PieDataSet(entries, "Election Results");
+        PieDataSet set = new PieDataSet(entries, "Month Usage");
+
+        set.setColors(new int [] {R.color.rainbow1, R.color.rainbow2, R.color.rainbow3, R.color.rainbow4, R.color.rainbow5, R.color.rainbow6, R.color.rainbow7}, ApplicationSingleton.getInstance().GetMainActivityContext());
         PieData data = new PieData(set);
         MonthChart.setData(data);
         MonthChart.invalidate(); // refresh
