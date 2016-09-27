@@ -16,12 +16,15 @@ public class ApplicationSingleton extends Application {
         return instance;
     }
 
-    DBHelper mydb = new DBHelper(GetMainActivityContext());
+    DBHelper mydb;
 
     public DBHelper GetDataBase(){return mydb;}
 
     private Context mainActivityContext;
-    public void SetMainActivityContext(Context ctx){mainActivityContext = ctx;};
+    public void SetMainActivityContext(Context ctx){
+        mainActivityContext = ctx;
+        mydb = new DBHelper(ctx);
+    }
     public Context GetMainActivityContext(){return mainActivityContext;}
     @Override
     public void onCreate(){

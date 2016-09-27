@@ -9,7 +9,7 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/main_income_listview"
+            android:id="@+id/main_expense_listview"
             android:background="#ffeeddcc">
         </ListView>
     </ScrollView>
