@@ -73,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
         emptyFragment = new EmptyFragment();
         emptyFragment2 = new EmptyFragment();
         statisticsMenuFragment = new StatisticsMenuFragment();
-
-
     }
     public void ShowExpenseFragment(){
         fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
