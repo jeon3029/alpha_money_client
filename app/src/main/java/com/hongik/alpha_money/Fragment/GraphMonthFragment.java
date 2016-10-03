@@ -24,7 +24,6 @@ public class GraphMonthFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,6 +42,12 @@ public class GraphMonthFragment extends Fragment {
 
         set.setColors(new int [] {R.color.rainbow1, R.color.rainbow2, R.color.rainbow3, R.color.rainbow4, R.color.rainbow5, R.color.rainbow6, R.color.rainbow7}, ApplicationSingleton.getInstance().GetMainActivityContext());
         PieData data = new PieData(set);
+
+        data.setHighlightEnabled(false); // highlight 삭제
+
+        MonthChart.getDescription().setEnabled(false); // 설명삭제
+
+
         MonthChart.setData(data);
         MonthChart.invalidate(); // refresh
 
