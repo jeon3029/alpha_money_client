@@ -38,4 +38,7 @@ public class MainViewPagerFragment extends Fragment {
         tabPageIndicator.setViewPager(viewPager);
         return rootViewBasic;
     }
+    public void SetFragment(int pos,Fragment f){
+        viewPagerCustomAdapter.SetFragment(pos,f);
+    }
 }

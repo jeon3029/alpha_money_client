@@ -4,10 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.hongik.alpha_money.Activity.MainActivity;
@@ -15,7 +12,6 @@ import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.Fragment.MainMiddleExpenseFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleIncomeFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleStatisticsFragment;
-import com.hongik.alpha_money.R;
 
 /**
  * Created by jeon3029 on 16. 7. 13..
@@ -29,6 +25,10 @@ public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
         fragments[0] = new MainMiddleExpenseFragment();
         fragments[1] = new MainMiddleIncomeFragment();
         fragments[2] = new MainMiddleStatisticsFragment();
+    }
+
+    public void SetFragment(int pos,Fragment f){
+        fragments[pos]=f;
     }
 
     public Fragment getItem(int arg0) {
