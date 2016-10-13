@@ -1,8 +1,14 @@
 package com.hongik.alpha_money.Activity;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.Fragment.EmptyFragment;
@@ -11,10 +17,11 @@ import com.hongik.alpha_money.Fragment.GraphPaymentFragment;
 import com.hongik.alpha_money.Fragment.GraphTimeFragment;
 import com.hongik.alpha_money.Fragment.GraphWeekFragment;
 import com.hongik.alpha_money.Fragment.MainBottomFragment;
-import com.hongik.alpha_money.Fragment.MainViewPagerFragment;
 import com.hongik.alpha_money.Fragment.MainTopFragment;
+import com.hongik.alpha_money.Fragment.MainViewPagerFragment;
 import com.hongik.alpha_money.Fragment.StatisticsMenuFragment;
 import com.hongik.alpha_money.R;
+import com.hongik.alpha_money.Sms.SmsReceiver;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     GraphTimeFragment graphTimeFragment;
     GraphWeekFragment graphWeekFragment;
     GraphPaymentFragment graphPaymentFragment;
+    BroadcastReceiver smsReceiver;
 
     FragmentManager fm = getSupportFragmentManager();
     @Override
@@ -48,6 +56,18 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.statistics_bottom_layout,emptyFragment).commit();
             //처음엔 아무것도 안보이게 세팅
         }
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS);
+        if(permissionCheck == PackageManager.PERMISSION_DENIED){
+            // 권한 없음
+            int i = 0;
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECEIVE_SMS}, i);
+        }
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("android.provide.Telephony.SMS_RECEIVED");
+        smsReceiver = new SmsReceiver();
+        registerReceiver(smsReceiver, intentFilter);
     }
     public FragmentManager GetFM(){return fm;}
     private void initiate() {
@@ -107,4 +127,16 @@ public class MainActivity extends AppCompatActivity {
         //mainViewPagerFragment.SetFragment(2,graphPaymentFragment);
         fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphPaymentFragment).commit();
     }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+
+        unregisterReceiver(smsReceiver);
+    }
+    /*public class Broadcast extends BroadcastReceiver{
+
+    }*/
+
 }
