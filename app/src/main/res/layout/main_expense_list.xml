@@ -2,17 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_above="@+id/total_expense_layout"
-        android:layout_height="match_parent">
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/main_expense_listview"
-            android:background="#ffeeddcc">
-        </ListView>
-    </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,4 +44,12 @@
                 />
         </LinearLayout>
     </LinearLayout>
+    <ListView
+        android:layout_above="@id/total_expense_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_expense_listview"
+        android:background="#ffeeddcc"
+        >
+    </ListView>
 </RelativeLayout>

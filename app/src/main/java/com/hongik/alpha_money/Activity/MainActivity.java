@@ -1,5 +1,6 @@
 package com.hongik.alpha_money.Activity;
-
+import android.app.ActivityManager;
+import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,9 +23,7 @@ import com.hongik.alpha_money.Fragment.StatisticsMenuFragment;
 import com.hongik.alpha_money.R;
 
 import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
-
     //Fragment
     FragmentManager fragmentManager = getSupportFragmentManager();
     MainTopFragment mainTopFragment;
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<struct> arrayList_income;
     ArrayList<struct> arrayList_expense;
-
     ListCustomAdapter listCustomAdapter_1;
     ListCustomAdapter listCustomAdapter_2;
     ListView listView_income;
@@ -51,26 +49,40 @@ public class MainActivity extends AppCompatActivity {
     TextView priceView;
     ImageView signalLightView;
 
+    int pageState = 0;/*0 : expense, today
+                        1 : expense, week
+                        2 : expense, month
+                        3 : income, today
+                        4 : income, week
+                        5 : income, month
+                        6 : statistics, menu1(month)
+                        7 : statistics, menu2(week)
+                        8 : statistics, menu3(time)
+                        9 : statistics, menu4(payment)
+                        */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ApplicationSingleton.getInstance().SetMainActivityContext(this);//initiate 안에 있으면 에러남(initiate를 다른거 하면서 돌리는듯
-        initiate();
 
+        //clear all caches in application
+        //((ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE)).clearApplicationUserData();
+
+        initiate();
         arrayList_expense = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(1);
         arrayList_income = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(2);
-
         if (savedInstanceState == null) {
             //프래그먼트 3가지 세팅
-
             fragmentManager.beginTransaction().add(R.id.main_topmenu_layout, mainTopFragment).commit();
             fragmentManager.beginTransaction().add(R.id.main_middle_layout, mainViewPagerFragment).commit();
             fragmentManager.beginTransaction().add(R.id.main_bottom_layout, mainBottomFragment).commit();
 
             //통계에서 메뉴바 레이아웃으로 사용 될 것임
             fragmentManager.beginTransaction().add(R.id.statistics_bottom_layout,emptyFragment).commit();
+
+            pageState = 0;
             //처음엔 아무것도 안보이게 세팅
         }
     }
@@ -107,14 +119,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, emptyFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, statisticsMenuFragment).commit();
     }
-
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         arrayList_expense = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(1);
         arrayList_income = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(2);
     }
-
     public void ChangeStatisticsMenuState(int option){//0 = empty 1 = visible
         if(option == 0) {
             fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, emptyFragment2).commit();
@@ -124,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     //그래프 작업 시작
-
     public void ChangeMenu1Graph(){
         //mainViewPagerFragment.SetFragment(2,graphMonthFragment);
         fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphMonthFragment).commit();

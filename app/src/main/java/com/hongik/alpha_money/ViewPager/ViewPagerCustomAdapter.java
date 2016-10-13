@@ -27,6 +27,7 @@ public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
         fragments[2] = new MainMiddleStatisticsFragment();
     }
 
+    //made to change fragment
     public void SetFragment(int pos,Fragment f){
         fragments[pos]=f;
     }

@@ -30,8 +30,11 @@ public class MainMiddleIncomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootViewBasic = inflater.inflate(R.layout.main_income_list, container, false);
         listView_income = (ListView)rootViewBasic.findViewById(R.id.main_income_listview);
+        arrayList_income = ApplicationSingleton.getInstance().GetIncomeList(0,"");
+
         listCustomAdapter_1 = new ListCustomAdapter(arrayList_income, ApplicationSingleton.getInstance());
         listView_income.setAdapter(listCustomAdapter_1);
         return rootViewBasic;
     }
+
 }
