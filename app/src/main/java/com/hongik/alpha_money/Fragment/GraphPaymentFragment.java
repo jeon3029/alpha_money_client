@@ -33,7 +33,7 @@ public class GraphPaymentFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.graph_payment_fragment, container, false);
 
-        PaymentChart = (PieChart) rootView.findViewById(R.id.paymentgraph);
+        PaymentChart = (PieChart) rootView.findViewById(R.id.payment_graph);
 
         List<PieEntry> entries = new ArrayList<>();
 

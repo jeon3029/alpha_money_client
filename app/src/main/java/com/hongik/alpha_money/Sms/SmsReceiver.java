@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 
 /**
@@ -23,7 +26,7 @@ public class SmsReceiver extends BroadcastReceiver{
     public static final String SMS_RECV = "android.provider.Telephony.SMS_RECEIVED";
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
 
         String strMessage = "";
         int string = 0;
@@ -58,14 +61,27 @@ public class SmsReceiver extends BroadcastReceiver{
             Log.i("TAG", String.valueOf(curDate.getMonth()));
             Log.i("TAG", String.valueOf(curDate.getDate()));
 
-
             try {
-                Runtime.getRuntime().exec("TestLex < text");
-                Log.i("TAG", "exec");
-            } catch (IOException e) {
+                FileOutputStream fos = context.openFileOutput("text.txt", Context.MODE_APPEND);
+                PrintWriter out = new PrintWriter(fos);
+                out.println(strMessage);
+                Log.i("TAG", "try out!");
+                out.close();
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
+            Log.i("TAG", String.valueOf(context.getFileStreamPath("text")));
+            Log.i("TAG", String.valueOf(context.getFileStreamPath("a.out")));
+
+
+            String[] command = {"", "", String.valueOf(context.getFileStreamPath("a.out"))};
+            try {
+                Runtime.getRuntime().exec("a.out < text");
+                Log.i("TAG", "try!");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 /*
 // SMS 발신 번호 확인

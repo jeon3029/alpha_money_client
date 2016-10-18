@@ -7,7 +7,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/monthgraph"
+        android:id="@+id/month_graph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp">
