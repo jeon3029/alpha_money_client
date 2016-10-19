@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.hongik.alpha_money.Activity.MainActivity;
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.DataStructure.ListCustomAdapter;
 import com.hongik.alpha_money.DataStructure.struct;

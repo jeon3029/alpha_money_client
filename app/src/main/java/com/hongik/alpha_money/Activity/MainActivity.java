@@ -1,6 +1,4 @@
 package com.hongik.alpha_money.Activity;
-import android.app.ActivityManager;
-import android.content.Context;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -8,10 +6,10 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -108,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         smsReceiver = new SmsReceiver();
         registerReceiver(smsReceiver, intentFilter);
     }
-    public FragmentManager GetFM(){return fm;}
+
     private void initiate() {
         mainBottomFragment = new MainBottomFragment();
         mainViewPagerFragment = new MainViewPagerFragment();
@@ -123,24 +121,24 @@ public class MainActivity extends AppCompatActivity {
         graphWeekFragment = new GraphWeekFragment();
     }
     public void ShowExpenseFragment(){
-        fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
-        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, mainBottomFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, emptyFragment2).commit();
-
     }
     public void ShowIncomeFragment(){
-        fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
-        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, mainBottomFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, emptyFragment2).commit();
     }
     public void ShowStatisticsFragment(){
-        fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
-        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, emptyFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, statisticsMenuFragment).commit();
     }
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -172,6 +170,13 @@ public class MainActivity extends AppCompatActivity {
         //mainViewPagerFragment.SetFragment(2,graphPaymentFragment);
         fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphPaymentFragment).commit();
     }
+
+    public FragmentManager GetFM(){return fm;}
+    public Fragment GetStatisticsMenuFragment() { return statisticsMenuFragment; }
+    public Fragment GetEmptyFragment() { return  emptyFragment; }
+    public Fragment GetEmptyFragment2() { return  emptyFragment2; }
+    public Fragment GetMainBottomFragment() { return mainBottomFragment; }
+
 
     @Override
     public void onDestroy()
