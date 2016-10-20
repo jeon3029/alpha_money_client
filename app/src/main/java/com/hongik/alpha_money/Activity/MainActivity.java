@@ -6,7 +6,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     MainViewPagerFragment mainViewPagerFragment;
     EmptyFragment emptyFragment;
     EmptyFragment emptyFragment2;
+    EmptyFragment emptyFragment3;
     MainBottomFragment mainBottomFragment;
     StatisticsMenuFragment statisticsMenuFragment;
 
@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         mainTopFragment =  new MainTopFragment();
         emptyFragment = new EmptyFragment();
         emptyFragment2 = new EmptyFragment();
+        emptyFragment3= new EmptyFragment();
         statisticsMenuFragment = new StatisticsMenuFragment();
 
         graphMonthFragment = new GraphMonthFragment();
@@ -120,22 +121,12 @@ public class MainActivity extends AppCompatActivity {
         graphTimeFragment = new GraphTimeFragment();
         graphWeekFragment = new GraphWeekFragment();
     }
-    public void ShowExpenseFragment(){
-        //fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
-        //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
-        fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, mainBottomFragment).commit();
-        fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, emptyFragment2).commit();
-    }
-    public void ShowIncomeFragment(){
-        //fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
-        //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
+    public void ShowExpenseIncomeFragment(){
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, mainBottomFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, emptyFragment2).commit();
     }
     public void ShowStatisticsFragment(){
-        //fragmentManager.beginTransaction().replace(R.id.main_topmenu_layout, mainTopFragment).commit();
-        //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, mainViewPagerFragment).commit();
-        fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, emptyFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, emptyFragment3).commit();
         fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, statisticsMenuFragment).commit();
     }
 
@@ -145,38 +136,23 @@ public class MainActivity extends AppCompatActivity {
         arrayList_expense = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(1);
         arrayList_income = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(2);
     }
-    public void ChangeStatisticsMenuState(int option){//0 = empty 1 = visible
-        if(option == 0) {
-            fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, emptyFragment2).commit();
-        }
-        else{
-            fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, statisticsMenuFragment).commit();
-        }
-    }
+
     //그래프 작업 시작
     public void ChangeMenu1Graph(){
         //mainViewPagerFragment.SetFragment(2,graphMonthFragment);
         fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphMonthFragment).commit();
     }
     public void ChangeMenu2Graph(){
-        //mainViewPagerFragment.SetFragment(2,graphWeekFragment);
         fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphWeekFragment).commit();
     }
     public void ChangeMenu3Graph(){
-        //mainViewPagerFragment.SetFragment(2,graphTimeFragment);
         fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphTimeFragment).commit();
     }
     public void ChangeMenu4Graph(){
-        //mainViewPagerFragment.SetFragment(2,graphPaymentFragment);
         fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphPaymentFragment).commit();
     }
 
     public FragmentManager GetFM(){return fm;}
-    public Fragment GetStatisticsMenuFragment() { return statisticsMenuFragment; }
-    public Fragment GetEmptyFragment() { return  emptyFragment; }
-    public Fragment GetEmptyFragment2() { return  emptyFragment2; }
-    public Fragment GetMainBottomFragment() { return mainBottomFragment; }
-
 
     @Override
     public void onDestroy()
@@ -185,8 +161,5 @@ public class MainActivity extends AppCompatActivity {
 
         unregisterReceiver(smsReceiver);
     }
-    /*public class Broadcast extends BroadcastReceiver{
-
-    }*/
 
 }

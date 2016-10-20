@@ -22,15 +22,15 @@ import com.viewpagerindicator.TabPageIndicator;
 public class MainViewPagerFragment extends Fragment {
     View rootViewBasic;
     ViewPager viewPager;
-    ViewPager.OnPageChangeListener listener;
     TabPageIndicator tabPageIndicator;
     FragmentManager fragmentManager = ((MainActivity)ApplicationSingleton.getInstance().GetMainActivityContext()).GetFM();
     Context ctx = ApplicationSingleton.getInstance().GetMainActivityContext();
-
     ViewPagerCustomAdapter viewPagerCustomAdapter = new ViewPagerCustomAdapter(fragmentManager);
+
     public MainViewPagerFragment() {
 
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,8 +38,10 @@ public class MainViewPagerFragment extends Fragment {
 
         viewPager = (ViewPager)rootViewBasic.findViewById(R.id.viewPager);
         viewPager.setAdapter(viewPagerCustomAdapter);
+        tabPageIndicator = (TabPageIndicator)rootViewBasic.findViewById(R.id.id_indicator);
+        tabPageIndicator.setViewPager(viewPager);
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        tabPageIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -48,12 +50,10 @@ public class MainViewPagerFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 if(position == 2) {
-                    fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, ((MainActivity)ctx).GetEmptyFragment()).commit();
-                    fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, ((MainActivity)ctx).GetStatisticsMenuFragment()).commit();
+                    ((MainActivity)ctx).ShowStatisticsFragment();
                 }
-                else { //it is same state on income, expense so use same command hangul anduim
-                    fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, ((MainActivity)ctx).GetMainBottomFragment()).commit();
-                    fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, ((MainActivity)ctx).GetEmptyFragment2()).commit();
+                else {
+                    ((MainActivity)ctx).ShowExpenseIncomeFragment();
                 }
             }
 
@@ -63,13 +63,6 @@ public class MainViewPagerFragment extends Fragment {
             }
         });
 
-        tabPageIndicator = (TabPageIndicator)rootViewBasic.findViewById(R.id.id_indicator);
-        tabPageIndicator.setViewPager(viewPager);
-
         return rootViewBasic;
     }
-
-    /* public void SetFragment(int pos,Fragment f){
-       viewPagerCustomAdapter.SetFragment(pos,f);
-    }*/
 }
