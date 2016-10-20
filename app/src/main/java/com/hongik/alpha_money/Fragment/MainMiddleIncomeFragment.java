@@ -37,4 +37,12 @@ public class MainMiddleIncomeFragment extends Fragment {
         return rootViewBasic;
     }
 
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        //TODO : same
+        arrayList_income = ApplicationSingleton.getInstance().GetExpenseList(0,"");//get all data
+        listCustomAdapter_1.notifyDataSetChanged();
+    }
+
 }

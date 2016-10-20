@@ -29,7 +29,7 @@ public class GraphMonthFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.graph_month_fragment, container, false);
         // Inflate the layout for this fragment
-        MonthChart = (PieChart) rootView.findViewById(R.id.monthgraph);
+        MonthChart = (PieChart) rootView.findViewById(R.id.month_graph);
 
         List<PieEntry> entries = new ArrayList<>();
 

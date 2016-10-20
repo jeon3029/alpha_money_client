@@ -1,7 +1,6 @@
 package com.hongik.alpha_money.Activity;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -51,6 +50,7 @@ public class AddDataActivity extends Activity {
                 else option = 1;//지출
                 ApplicationSingleton.getInstance().onInsertdata(editTextDate.getText().toString(), editTextPrice.getText().toString(), editTextStore.getText().toString(), editTextCategory.getText().toString(), editTextMemo.getText().toString(), "0", "0",option);
                 Toast.makeText(AddDataActivity.this, "정보가 저장되었습니다.", Toast.LENGTH_SHORT).show();
+
                 finish();
             }
         });

@@ -34,7 +34,7 @@ public class GraphTimeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.graph_time_fragment, container, false);
         // Inflate the layout for this fragment
-        TimeChart = (HorizontalBarChart) rootView.findViewById(R.id.timegraph);
+        TimeChart = (HorizontalBarChart) rootView.findViewById(R.id.time_graph);
 
         List<BarEntry> entries = new ArrayList<>();
 
