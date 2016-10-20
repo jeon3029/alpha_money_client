@@ -50,6 +50,7 @@ digit [0-9]
 <TT>.*"("{digit}"*"{digit}"*)"	{ strcpy(pay, yytext); }
 <TT><<EOF>>	{ strcpy(store, temp); return 0;}
 <TT>.*	{ strcpy(temp, yytext); }
+"[".*"]" ;
 %%
 int yywrap()
 {
