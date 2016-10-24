@@ -49,6 +49,7 @@
                     android:text="월"
                     android:textSize="30sp"
                     android:textAlignment="center"
+                    android:id="@+id/week_graph_1_day"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -56,6 +57,7 @@
                     android:text="금액"
                     android:textSize="30sp"
                     android:textAlignment="center"
+                    android:id="@+id/week_graph_1_price"
                     />
             </LinearLayout>
 
@@ -73,6 +75,7 @@
                     android:text="월"
                     android:textSize="25sp"
                     android:textAlignment="center"
+                    android:id="@+id/week_graph_2_day"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -81,6 +84,8 @@
                     android:textSize="25sp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
+
+                    android:id="@+id/week_graph_2_price"
                     />
             </LinearLayout>
 
@@ -98,6 +103,7 @@
                     android:text="월"
                     android:textSize="20sp"
                     android:textAlignment="center"
+                    android:id="@+id/week_graph_3_day"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -106,10 +112,11 @@
                     android:textSize="20sp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
+                    android:id="@+id/week_graph_3_price"
                     />
             </LinearLayout>
 
-            <!--4rd-->
+            <!--4th-->
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
@@ -123,6 +130,7 @@
                     android:text="월"
                     android:textSize="15sp"
                     android:textAlignment="center"
+                    android:id="@+id/week_graph_4_day"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -131,55 +139,11 @@
                     android:textSize="15sp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp"
-                android:background="#eeeeee"
-                >
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:text="월"
-                    android:textSize="10sp"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="금액"
-                    android:textSize="10sp"
-                    android:gravity="center_vertical"
-                    android:textAlignment="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp"
-                android:background="#eeeeee"
-                >
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:text="월"
-                    android:textSize="10sp"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="금액"
-                    android:textSize="10sp"
-                    android:gravity="center_vertical"
-                    android:textAlignment="center"
+                    android:id="@+id/week_graph_4_price"
                     />
             </LinearLayout>
 
+            <!--5th-->
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
@@ -193,6 +157,7 @@
                     android:text="월"
                     android:textSize="10sp"
                     android:textAlignment="center"
+                    android:id="@+id/week_graph_5_day"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -201,6 +166,61 @@
                     android:textSize="10sp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
+                    android:id="@+id/week_graph_5_price"
+                    />
+            </LinearLayout>
+
+            <!--6th-->
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:background="#eeeeee"
+                >
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="월"
+                    android:textSize="10sp"
+                    android:textAlignment="center"
+                    android:id="@+id/week_graph_6_day"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="금액"
+                    android:textSize="10sp"
+                    android:gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:id="@+id/week_graph_6_price"
+                    />
+            </LinearLayout>
+
+            <!--7th-->
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:background="#eeeeee"
+                >
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="월"
+                    android:textSize="10sp"
+                    android:textAlignment="center"
+                    android:id="@+id/week_graph_7_day"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="금액"
+                    android:textSize="10sp"
+                    android:gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:id="@+id/week_graph_7_price"
                     />
             </LinearLayout>
         </LinearLayout>

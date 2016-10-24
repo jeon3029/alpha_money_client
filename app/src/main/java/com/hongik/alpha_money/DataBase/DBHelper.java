@@ -13,6 +13,7 @@ import com.hongik.alpha_money.DataStructure.struct;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
+    // ex.2016102119125 yyyy/mm/dd/hh/mm/day
 
     public static final String databaseName = "TH.db";
     String tableName = "expensetable";
@@ -60,12 +61,12 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
         if(option == 1) {
-            cursor= db.rawQuery("SELECT * FROM " + tableName + "where date like "
-                    + date.substring(0, 5) + "% ", null);
+            cursor= db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + " where date like '"
+                    + date.substring(0, 5) + "%'", null);
         }
         else {
-            cursor = db.rawQuery("SELECT * FROM " + tableName2 + "where date like "
-                    + date.substring(0, 5) + "% ", null);
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + " where date like '"
+                    + date.substring(0, 5) + "%'", null);
         }
         count = cursor.getCount();
         cursor.moveToFirst();
@@ -95,11 +96,11 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
         if(option == 1){
-            cursor = db.rawQuery("SELECT * FROM " + tableName + "where date like "
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + "where date like "
                     + date.substring(0, 7) + "% ", null);
         }
         else{
-            cursor = db.rawQuery("SELECT * FROM " + tableName2 + "where date like "
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + "where date like "
                     + date.substring(0, 7) + "% ", null);
         }
         count = cursor.getCount();
@@ -126,11 +127,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor ;
         if(option == 1){
-            cursor = db.rawQuery("SELECT * FROM " + tableName + "where date like "
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + "where date like "
                     + date.substring(0,7) + "% ", null);
         }
         else{
-            cursor = db.rawQuery("SELECT * FROM " + tableName2 + "where date like "
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + "where date like "
                     + date.substring(0,7) + "% ", null);
         }
         count = cursor.getCount();
