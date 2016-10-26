@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.Fragment.MainMiddleExpenseFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleIncomeFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleStatisticsFragment;
@@ -19,8 +20,10 @@ public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
         super(fm);
         fragments[0] = new MainMiddleExpenseFragment();
         fragments[1] = new MainMiddleIncomeFragment();
-        fragments[2] = new MainMiddleStatisticsFragment();
-
+        //fragments[2] = ((MainActivity)ctx).GetMainMiddleStatisticsFragment();
+        MainMiddleStatisticsFragment st = new MainMiddleStatisticsFragment();
+        fragments[2] = st;
+        ApplicationSingleton.getInstance().SetStatisticsFragment(st);
     }
     public Fragment getItem(int arg0) {
         return fragments[arg0];

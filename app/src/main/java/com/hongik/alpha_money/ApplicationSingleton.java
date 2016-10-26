@@ -2,11 +2,10 @@ package com.hongik.alpha_money;
 
 import android.app.Application;
 import android.content.Context;
-import android.widget.ListView;
 
 import com.hongik.alpha_money.DataBase.DBHelper;
-import com.hongik.alpha_money.DataStructure.ListCustomAdapter;
 import com.hongik.alpha_money.DataStructure.struct;
+import com.hongik.alpha_money.Fragment.MainMiddleStatisticsFragment;
 
 import java.util.ArrayList;
 
@@ -32,6 +31,8 @@ public class ApplicationSingleton extends Application {
         }
         else if(option == 1){
             //TODO:: 월일 나누면서 추가로 작업
+
+            return mydb.onGetmonthdata(key, 1);
         }
         else if(option == 2){
 
@@ -72,6 +73,12 @@ public class ApplicationSingleton extends Application {
     public void onCreate(){
         super.onCreate();
         ApplicationSingleton.instance = this;
-
+    }
+    MainMiddleStatisticsFragment StatisticsFragment;
+    public void SetStatisticsFragment(MainMiddleStatisticsFragment fm){
+        StatisticsFragment =fm;
+    }
+    public MainMiddleStatisticsFragment GetStatisticsFragment(){
+        return StatisticsFragment;
     }
 }

@@ -17,11 +17,8 @@ import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.DataStructure.ListCustomAdapter;
 import com.hongik.alpha_money.DataStructure.struct;
 import com.hongik.alpha_money.Fragment.EmptyFragment;
-import com.hongik.alpha_money.Fragment.GraphMonthFragment;
-import com.hongik.alpha_money.Fragment.GraphPaymentFragment;
-import com.hongik.alpha_money.Fragment.GraphTimeFragment;
-import com.hongik.alpha_money.Fragment.GraphWeekFragment;
 import com.hongik.alpha_money.Fragment.MainBottomFragment;
+import com.hongik.alpha_money.Fragment.MainMiddleStatisticsFragment;
 import com.hongik.alpha_money.Fragment.MainTopFragment;
 import com.hongik.alpha_money.Fragment.MainViewPagerFragment;
 import com.hongik.alpha_money.Fragment.StatisticsMenuFragment;
@@ -39,11 +36,8 @@ public class MainActivity extends AppCompatActivity {
     EmptyFragment emptyFragment3;
     MainBottomFragment mainBottomFragment;
     StatisticsMenuFragment statisticsMenuFragment;
+    MainMiddleStatisticsFragment mainMiddleStatisticsFragment;
 
-    GraphMonthFragment graphMonthFragment;
-    GraphTimeFragment graphTimeFragment;
-    GraphWeekFragment graphWeekFragment;
-    GraphPaymentFragment graphPaymentFragment;
     BroadcastReceiver smsReceiver;
 
     FragmentManager fm = getSupportFragmentManager();
@@ -115,11 +109,9 @@ public class MainActivity extends AppCompatActivity {
         emptyFragment2 = new EmptyFragment();
         emptyFragment3= new EmptyFragment();
         statisticsMenuFragment = new StatisticsMenuFragment();
+        //mainMiddleStatisticsFragment = new MainMiddleStatisticsFragment();
 
-        graphMonthFragment = new GraphMonthFragment();
-        graphPaymentFragment = new GraphPaymentFragment();
-        graphTimeFragment = new GraphTimeFragment();
-        graphWeekFragment = new GraphWeekFragment();
+        mainMiddleStatisticsFragment = ApplicationSingleton.getInstance().GetStatisticsFragment();
     }
     public void ShowExpenseIncomeFragment(){
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, mainBottomFragment).commit();
@@ -138,19 +130,24 @@ public class MainActivity extends AppCompatActivity {
     //그래프 작업 시작
     public void ChangeMenu1Graph(){
         //mainViewPagerFragment.SetFragment(2,graphMonthFragment);
-        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphMonthFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphMonthFragment).commit();
+        mainMiddleStatisticsFragment.ShowMonthGraph();
     }
     public void ChangeMenu2Graph(){
-        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphWeekFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphWeekFragment).commit();
+        mainMiddleStatisticsFragment.ShowWeekGraph();
     }
     public void ChangeMenu3Graph(){
-        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphTimeFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphTimeFragment).commit();
+        mainMiddleStatisticsFragment.ShowTimeGraph();
     }
     public void ChangeMenu4Graph(){
-        fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphPaymentFragment).commit();
+        //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphPaymentFragment).commit();
+        mainMiddleStatisticsFragment.ShowPaymentGraph();
     }
 
     public FragmentManager GetFM(){return fm;}
+   // public MainMiddleStatisticsFragment GetMainMiddleStatisticsFragment() { return mainMiddleStatisticsFragment; }
 
     @Override
     public void onDestroy()
