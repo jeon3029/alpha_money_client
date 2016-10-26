@@ -129,14 +129,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, emptyFragment3).commit();
         fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, statisticsMenuFragment).commit();
     }
-
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         arrayList_expense = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(1);
         arrayList_income = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(2);
     }
-
     //그래프 작업 시작
     public void ChangeMenu1Graph(){
         //mainViewPagerFragment.SetFragment(2,graphMonthFragment);
