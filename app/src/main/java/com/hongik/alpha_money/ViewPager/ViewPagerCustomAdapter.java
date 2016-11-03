@@ -18,11 +18,14 @@ public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
 
     public ViewPagerCustomAdapter(FragmentManager fm) {
         super(fm);
-        fragments[0] = new MainMiddleExpenseFragment();
-        fragments[1] = new MainMiddleIncomeFragment();
-        //fragments[2] = ((MainActivity)ctx).GetMainMiddleStatisticsFragment();
+        MainMiddleExpenseFragment ex = new MainMiddleExpenseFragment();
+        MainMiddleIncomeFragment in = new MainMiddleIncomeFragment();
         MainMiddleStatisticsFragment st = new MainMiddleStatisticsFragment();
+        fragments[0] = ex;
+        fragments[1] = in;
         fragments[2] = st;
+        ApplicationSingleton.getInstance().SetExpenseFragment(ex);
+        ApplicationSingleton.getInstance().SetIncomeFragment(in);
         ApplicationSingleton.getInstance().SetStatisticsFragment(st);
     }
     public Fragment getItem(int arg0) {

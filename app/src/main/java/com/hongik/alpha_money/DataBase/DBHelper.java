@@ -8,9 +8,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.hongik.alpha_money.DataStructure.struct;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {
     // ex.2016102119125 yyyy/mm/dd/hh/mm/day
@@ -62,11 +65,11 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor;
         if(option == 1) {
             cursor= db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + " where date like '"
-                    + date.substring(0, 5) + "%'", null);
+                    + date.substring(0, 6) + "%'", null);
         }
         else {
             cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + " where date like '"
-                    + date.substring(0, 5) + "%'", null);
+                    + date.substring(0, 6) + "%'", null);
         }
         count = cursor.getCount();
         cursor.moveToFirst();
@@ -89,35 +92,179 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<struct> onGetweekdata(String date,int option) {
-        //TODO : week 나눠야함
-        //방법 : 그 일의 요일을 구해서 위치 적절히 수정 ex)화요일 -1~+5 수요일 -2~+4 이런식
-        //다음달로 넘어가는 경우는 따로 계산
+        // 받은 요일이 포함된 월~일 주를 모두 반환
         ArrayList<struct> arrayList = new ArrayList<struct>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor;
-        if(option == 1){
-            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + "where date like "
-                    + date.substring(0, 7) + "% ", null);
+        Cursor cursor = null;
+        Date date1;
+        int y, m, d, checkday;
+        int t[] = {0,3,2,5,0,3,5,1,4,6,2,4};
+        int notleap[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; // 평년
+        int leapYear[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; // 윤년
+        int leap = 0; // 1 = 윤년 2 = 평년
+        int weekday[] = {0,0,0,0,0,0,0}; // 주별날짜를 얻기위한 월일 int 형
+        int tempy, tempm, tempd;
+        String tempstring;
+
+        long now = System.currentTimeMillis();
+        date1 = new Date(now); // 현재시간을 받고
+
+        // 시간 포맷 지정
+
+        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
+        // 지정된 포맷으로 String 타입 리턴
+        String strCurYear = CurYearFormat.format(date1);
+        String strCurMonth = CurMonthFormat.format(date1);
+        String strCurDay = CurDayFormat.format(date1);
+
+        y = Integer.parseInt(strCurYear);
+        tempy = Integer.parseInt(strCurYear);
+        m = Integer.parseInt(strCurMonth);
+        tempm = Integer.parseInt(strCurMonth);
+        d = Integer.parseInt(strCurDay);
+        tempd = Integer.parseInt(strCurDay);
+
+        //윤년 체크
+        if(y % 4 > 0)
+            leap = 0;
+        else {
+            if(y % 400 == 0)
+                leap = 1;
+            else if(y % 100 == 0)
+                leap = 0;
+            else
+                leap = 1;
+        }
+
+        if (m < 3) { // 요일 확인
+            y--;
+        }
+        checkday = (y + (y / 4) - (y / 100) + (y / 400) + t[m - 1] + d) % 7; // 0 = SUN ~ 6 = SAT
+
+        y = tempy;
+        m = tempm;
+        d = tempd;
+
+        if(leap == 1)//윤년일때 일주일의 날짜 7개를 찾아냄
+        {
+            for(int i = checkday;i < 7; i++, d++)
+            {
+                if(d > leapYear[m-1]) {
+                    d = 1;
+                    m++;
+                    if(m > 12)
+                    {
+                        m = 1;
+                        y++;
+                    }
+                }
+                weekday[i] = y*10000 + m*100 + d;
+            }
+
+            y = tempy;
+            m = tempm;
+            d = tempd;
+
+            for(int i = checkday; i >= 0; i--, d--)
+            {
+                if(d < 1) {
+                    d = leapYear[m - 2];
+                    m--;
+                    if(m < 1){
+                        m = 12;
+                        y--;
+                    }
+                }
+                weekday[i] = y*10000 + m*100 + d;
+            }
+        }
+        else // 평년일대
+        {
+            for(int i = checkday;i < 7; i++, d++)
+            {
+                if(d > notleap[m-1]) {
+                    d = 1;
+                    m++;
+                }
+                weekday[i] = y*10000 + m*100 +d;
+            }
+
+            y = tempy;
+            m = tempm;
+            d = tempd;
+
+            for(int i = checkday; i >= 0; i--, d--)
+            {
+                if(d < 1) {
+                    d = notleap[m - 2];
+                    m--;
+                    if(m < 1){
+                        m = 12;
+                        y--;
+                    }
+                }
+                weekday[i] = y*10000 + m*100 + d;
+            }
+        }
+
+        if(option == 1) {
+            for (int i = 0; i < 7; i++) {
+                struct temp;
+                tempstring = String.valueOf(weekday[i]);
+                cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + " where date like '"
+                        + tempstring + "%'", null);
+                count = cursor.getCount();
+                cursor.moveToFirst();
+                temp = new struct();
+                temp.storeName = String.valueOf(weekday[i]%10000);
+                temp.price = "";
+                arrayList.add(temp);
+
+                while(cursor.isAfterLast() == false)
+                {
+                    temp = new struct();
+                    temp.date = cursor.getString(0);
+                    temp.price = cursor.getString(1);
+                    temp.storeName = cursor.getString(2);
+                    temp.category = cursor.getString(3);
+                    temp.memo = cursor.getString(4);
+                    temp.gridX = cursor.getDouble(5);
+                    temp.gridY = cursor.getDouble(6);
+                    arrayList.add(temp);
+                    cursor.moveToNext();
+                }
+            }
         }
         else{
-            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + "where date like "
-                    + date.substring(0, 7) + "% ", null);
+            for (int i = 0; i < 7; i++) {
+                struct temp;
+                tempstring = String.valueOf(weekday[i]);
+                cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + " where date like '"
+                        + tempstring + "%'", null);
+                count = cursor.getCount();
+                cursor.moveToFirst();
+                temp = new struct();
+                temp.storeName = String.valueOf(weekday[i]%10000);
+                temp.price = "";
+                arrayList.add(temp);
+
+                while (cursor.isAfterLast() == false) {
+                    temp = new struct();
+                    temp.date = cursor.getString(0);
+                    temp.price = cursor.getString(1);
+                    temp.storeName = cursor.getString(2);
+                    temp.category = cursor.getString(3);
+                    temp.memo = cursor.getString(4);
+                    temp.gridX = cursor.getDouble(5);
+                    temp.gridY = cursor.getDouble(6);
+                    arrayList.add(temp);
+                    cursor.moveToNext();
+                }
+            }
         }
-        count = cursor.getCount();
-        cursor.moveToFirst();
-        while(cursor.isAfterLast() == false)
-        {
-            struct temp = new struct();
-            temp.date = cursor.getString(0);
-            temp.price = cursor.getString(1);
-            temp.storeName = cursor.getString(2);
-            temp.category = cursor.getString(3);
-            temp.memo = cursor.getString(4);
-            temp.gridX = cursor.getDouble(5);
-            temp.gridY = cursor.getDouble(6);
-            arrayList.add(temp);
-            cursor.moveToNext();
-        }
+
         return  arrayList;
     }
 
@@ -125,14 +272,14 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<struct> arrayList = new ArrayList<struct>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor ;
+        Cursor cursor;
         if(option == 1){
-            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + "where date like "
-                    + date.substring(0,7) + "% ", null);
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + " where date like '"
+                    + date.substring(0,8) + "%'", null);
         }
         else{
-            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + "where date like "
-                    + date.substring(0,7) + "% ", null);
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + " where date like '"
+                    + date.substring(0,8) + "%'", null);
         }
         count = cursor.getCount();
         cursor.moveToFirst();

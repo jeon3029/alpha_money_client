@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class MainMiddleIncomeFragment extends Fragment {
     View rootViewBasic;
     ListView listView_income;
-    ListCustomAdapter listCustomAdapter_1;
+    ListCustomAdapter listCustomAdapter_income;
     ArrayList<struct> arrayList_income;
     public MainMiddleIncomeFragment() {
     }
@@ -32,8 +32,8 @@ public class MainMiddleIncomeFragment extends Fragment {
         listView_income = (ListView)rootViewBasic.findViewById(R.id.main_income_listview);
         arrayList_income = ApplicationSingleton.getInstance().GetIncomeList(0,"");
 
-        listCustomAdapter_1 = new ListCustomAdapter(arrayList_income, ApplicationSingleton.getInstance());
-        listView_income.setAdapter(listCustomAdapter_1);
+        listCustomAdapter_income = new ListCustomAdapter(arrayList_income, ApplicationSingleton.getInstance());
+        listView_income.setAdapter(listCustomAdapter_income);
         return rootViewBasic;
     }
 
@@ -42,7 +42,7 @@ public class MainMiddleIncomeFragment extends Fragment {
         super.onViewStateRestored(savedInstanceState);
         //TODO : same
         arrayList_income = ApplicationSingleton.getInstance().GetExpenseList(0,"");//get all data
-        listCustomAdapter_1.notifyDataSetChanged();
+        listCustomAdapter_income.notifyDataSetChanged();
     }
 
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.hongik.alpha_money.DataBase.DBHelper;
 import com.hongik.alpha_money.DataStructure.struct;
+import com.hongik.alpha_money.Fragment.MainMiddleExpenseFragment;
+import com.hongik.alpha_money.Fragment.MainMiddleIncomeFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleStatisticsFragment;
 
 import java.util.ArrayList;
@@ -25,6 +27,10 @@ public class ApplicationSingleton extends Application {
     ArrayList<struct> arrayList_expense;
     ArrayList<struct> arrayList_income;
 
+    MainMiddleStatisticsFragment StatisticsFragment;
+    MainMiddleExpenseFragment ExpenseFragment;
+    MainMiddleIncomeFragment IncomeFragment;
+
     public ArrayList<struct> GetExpenseList(int option,String key){//0 = all 1=month 2=week 3=day
         if(option == 0){
             arrayList_expense = mydb.onGetalldata(1);//1=expense
@@ -32,13 +38,13 @@ public class ApplicationSingleton extends Application {
         else if(option == 1){
             //TODO:: 월일 나누면서 추가로 작업
 
-            return mydb.onGetmonthdata(key, 1);
+            arrayList_expense = mydb.onGetmonthdata(key, 1);
         }
         else if(option == 2){
-
+            arrayList_expense = mydb.onGetweekdata(key, 1);
         }
         else if(option == 3){
-
+            arrayList_expense = mydb.onGetdaydata(key, 1);
         }
         return arrayList_expense;
     }
@@ -74,10 +80,13 @@ public class ApplicationSingleton extends Application {
         super.onCreate();
         ApplicationSingleton.instance = this;
     }
-    MainMiddleStatisticsFragment StatisticsFragment;
     public void SetStatisticsFragment(MainMiddleStatisticsFragment fm){
         StatisticsFragment =fm;
     }
+    public void SetExpenseFragment(MainMiddleExpenseFragment fm) { ExpenseFragment = fm; }
+    public void SetIncomeFragment(MainMiddleIncomeFragment fm) { IncomeFragment = fm; }
+    public MainMiddleExpenseFragment GetExpenseFragment() { return ExpenseFragment;}
+    public MainMiddleIncomeFragment GetIncomeFragment() { return IncomeFragment;}
     public MainMiddleStatisticsFragment GetStatisticsFragment(){
         return StatisticsFragment;
     }
