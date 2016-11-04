@@ -2,6 +2,7 @@ package com.hongik.alpha_money.Activity;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hongik.alpha_money.ApplicationSingleton;
+import com.hongik.alpha_money.DataBase.DBHelper;
 import com.hongik.alpha_money.DataStructure.ListCustomAdapter;
 import com.hongik.alpha_money.DataStructure.struct;
 import com.hongik.alpha_money.Fragment.EmptyFragment;
@@ -160,6 +162,41 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(smsReceiver);
     }
 
+
+    @Override
+    protected void onActivityResult(int RequestCode, int ResultCode, Intent data) {
+        switch (ResultCode) {
+            case RESULT_OK:
+                struct temp = new struct();
+                int From, Del, ID, option;
+                From = data.getIntExtra("From", 0);
+                Del = data.getIntExtra("Del", 0);
+                ID = data.getIntExtra("ID", 0);
+                option = data.getIntExtra("option", 0);
+                DBHelper mydb = ApplicationSingleton.getInstance().GetDataBase();
+
+                if (From == 1) {
+                    if(Del == 1) {
+                        mydb.onDeletedata(option, ID);
+                    }
+                    else {
+                        temp.ID = data.getIntExtra("ID", 0);
+                        temp.date = data.getStringExtra("date");
+                        temp.price = data.getStringExtra("price");
+                        temp.storeName = data.getStringExtra("storeName");
+                        temp.category = data.getStringExtra("category");
+                        temp.memo = data.getStringExtra("memo");
+                        temp.gridX = data.getDoubleExtra("gridX", 0.000000);
+                        temp.gridY = data.getDoubleExtra("gridY", 0.000000);
+                        mydb.onUpdate(temp.date, temp.price, temp.storeName, temp.category, temp.memo
+                                , Double.toString(temp.gridX), Double.toString(temp.gridY), option, temp.ID);
+                    }
+                }
+                break;
+            default:
+                super.onActivityResult(RequestCode, ResultCode, data);
+        }
+    }
     public MainBottomFragment getMainBottomFragment() {
         return mainBottomFragment;
     }
