@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class ListCustomAdapter extends BaseAdapter {
     private ArrayList<struct> itemDatas = null;
     private LayoutInflater layoutInflater = null;
+
     public ListCustomAdapter(ArrayList<struct> itemDatas, Context ctx){
         this.itemDatas = itemDatas;
         layoutInflater = (LayoutInflater)ctx.getSystemService(ctx.LAYOUT_INFLATER_SERVICE);
@@ -54,4 +55,5 @@ public class ListCustomAdapter extends BaseAdapter {
         price.setText(itemData_temp.price);
         return convertView;
     }
+
 }

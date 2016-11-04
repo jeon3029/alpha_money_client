@@ -199,49 +199,52 @@ public class MainMiddleStatisticsFragment extends Fragment {
         for(Iterator<struct> iterator = arrayList.iterator(); iterator.hasNext();) { // 가져온 데이터를 돌면서
             struct = iterator.next();
 
-            strCurYear = struct.date.substring(0, 3);
-            strCurMonth = struct.date.substring(4, 5);
-            strCurDay = struct.date.substring(6, 7);
-
-            Log.i("TAG", strCurYear + " " + strCurMonth + " " + strCurDay);
+            strCurYear = struct.date.substring(0, 4);
+            strCurMonth = struct.date.substring(4, 6);
+            strCurDay = struct.date.substring(6, 8);
 
             //요일 계산
             y = Integer.parseInt(strCurYear);
             m = Integer.parseInt(strCurMonth);
             d = Integer.parseInt(strCurDay);
 
+            Log.i("TAG", y + " " + m + " " + d);
+
             if (m < 3) {
                 y--;
             }
             checkday = (y + (y / 4) - (y / 100) + (y / 400) + t[m - 1] + d) % 7; // 0 = SUN ~ 6 = SAT
 
-            switch (checkday){ // TODO : @EMERGENCY@ 값을 더하는 과정에 오류가 있음. SAT가 0임
+
+            Log.i("TAG", y + " " + m + " " + d + " " + checkday + " " + struct.price);
+
+            switch (checkday) { // TODO : @EMERGENCY@ 값을 더하는 과정에 오류가 있음. SAT가 0임
                 case 0:
-                    weeks[0].SetValue( weeks[0].GetValue() + Integer.parseInt(struct.price));
+                    weeks[0].SetValue(weeks[0].GetValue() + Integer.parseInt(struct.price));
                     break;
                 case 1:
-                    weeks[1].SetValue( weeks[1].GetValue() + Integer.parseInt(struct.price));
+                    weeks[1].SetValue(weeks[1].GetValue() + Integer.parseInt(struct.price));
                     break;
                 case 2:
-                    weeks[2].SetValue( weeks[2].GetValue() + Integer.parseInt(struct.price));
+                    weeks[2].SetValue(weeks[2].GetValue() + Integer.parseInt(struct.price));
                     break;
                 case 3:
-                    weeks[3].SetValue( weeks[3].GetValue() + Integer.parseInt(struct.price));
+                    weeks[3].SetValue(weeks[3].GetValue() + Integer.parseInt(struct.price));
                     break;
                 case 4:
-                    weeks[4].SetValue( weeks[4].GetValue() + Integer.parseInt(struct.price));
+                    weeks[4].SetValue(weeks[4].GetValue() + Integer.parseInt(struct.price));
                     break;
                 case 5:
-                    weeks[5].SetValue( weeks[5].GetValue() + Integer.parseInt(struct.price));
+                    weeks[5].SetValue(weeks[5].GetValue() + Integer.parseInt(struct.price));
                     break;
                 case 6:
-                    weeks[6].SetValue( weeks[6].GetValue() + Integer.parseInt(struct.price));
+                    weeks[6].SetValue(weeks[6].GetValue() + Integer.parseInt(struct.price));
                     break;
             }
+        }
             Arrays.sort(weeks);
 
-            weeks[0].GetWeek();
-            Log.i("TAG",weeks[0].GetValue() + "  " +  weeks[0].GetWeek());
+            Log.i("TAG",weeks[6].GetValue() + "  " +  weeks[6].GetWeek());
 
             week1day.setText(weeks[0].GetWeek());
             week2day.setText(weeks[1].GetWeek());
@@ -259,9 +262,9 @@ public class MainMiddleStatisticsFragment extends Fragment {
             week6price.setText(String.valueOf(weeks[5].GetValue()));
             week7price.setText(String.valueOf(weeks[6].GetValue()));
 
-        }
-
     }
+
+
 
     public void ShowTimeGraph() {//graph3
         Graph_Layout3.setVisibility(LinearLayout.VISIBLE);

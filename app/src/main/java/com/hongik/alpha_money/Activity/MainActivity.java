@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<struct> arrayList_income;
     ArrayList<struct> arrayList_expense;
+    Bundle instance;
     ListCustomAdapter listCustomAdapter_1;
     ListCustomAdapter listCustomAdapter_2;
     ListView listView_income;
@@ -114,10 +115,12 @@ public class MainActivity extends AppCompatActivity {
         mainMiddleStatisticsFragment = ApplicationSingleton.getInstance().GetStatisticsFragment();
     }
     public void ShowExpenseIncomeFragment(){
+        mainBottomFragment.onResume();
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, mainBottomFragment).commit();
         fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, emptyFragment2).commit();
     }
     public void ShowStatisticsFragment(){
+        mainBottomFragment.onSaveInstanceState(instance);
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, emptyFragment3).commit();
         fragmentManager.beginTransaction().replace(R.id.statistics_bottom_layout, statisticsMenuFragment).commit();
     }
@@ -157,4 +160,7 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(smsReceiver);
     }
 
+    public MainBottomFragment getMainBottomFragment() {
+        return mainBottomFragment;
+    }
 }

@@ -44,7 +44,6 @@ public class MainViewPagerFragment extends Fragment {
         tabPageIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
