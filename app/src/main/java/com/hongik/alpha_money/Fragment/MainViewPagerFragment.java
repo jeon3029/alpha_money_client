@@ -50,9 +50,11 @@ public class MainViewPagerFragment extends Fragment {
             public void onPageSelected(int position) {
                 if(position == 2) {
                     ((MainActivity)ctx).ShowStatisticsFragment();
+                    ApplicationSingleton.getInstance().SetPageState(2);
                 }
                 else {
                     ((MainActivity)ctx).ShowExpenseIncomeFragment();
+                    ApplicationSingleton.getInstance().SetPageState(5);
                 }
             }
 

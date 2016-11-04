@@ -16,6 +16,18 @@ import java.util.ArrayList;
  */
 public class ApplicationSingleton extends Application {
 
+    int pageState = 0;/*0 : expense, today
+                        1 : expense, week
+                        2 : expense, month
+                        3 : income, today
+                        4 : income, week
+                        5 : income, month
+                        6 : statistics, menu1(month)
+                        7 : statistics, menu2(week)
+                        8 : statistics, menu3(time)
+                        9 : statistics, menu4(payment)
+                        */
+
     // Applcation 인스턴스 선언
     private static ApplicationSingleton instance;
     public static ApplicationSingleton getInstance(){
@@ -54,12 +66,14 @@ public class ApplicationSingleton extends Application {
         }
         else if(option == 1){
             //TODO:: 월일 나누면서 추가로 작업
+
+            arrayList_income = mydb.onGetmonthdata(key, 2);
         }
         else if(option == 2){
-
+            arrayList_income = mydb.onGetweekdata(key, 2);
         }
         else if(option == 3){
-
+            arrayList_income = mydb.onGetdaydata(key, 2);
         }
         return arrayList_income;
     }
@@ -90,4 +104,6 @@ public class ApplicationSingleton extends Application {
     public MainMiddleStatisticsFragment GetStatisticsFragment(){
         return StatisticsFragment;
     }
+    public void SetPageState (int state) { pageState = state; }
+    public int GetPageState () { return pageState; }
 }

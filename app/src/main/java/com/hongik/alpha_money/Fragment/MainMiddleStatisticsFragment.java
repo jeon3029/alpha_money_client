@@ -20,13 +20,12 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.hongik.alpha_money.ApplicationSingleton;
+import com.hongik.alpha_money.DataStructure.CustomDate;
 import com.hongik.alpha_money.DataStructure.struct;
 import com.hongik.alpha_money.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -44,8 +43,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
     LinearLayout Graph_Layout3;
     LinearLayout Graph_Layout4;
     ArrayList<struct> arrayList;
-    Date date;
-    int t[] = {0,3,2,5,0,3,5,1,4,6,2,4};
+    CustomDate customDate = new CustomDate();
 
     TextView week1day;
     TextView week2day;
@@ -134,7 +132,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
         week6price = (TextView)rootView.findViewById(R.id.week_graph_6_price);
         week7price = (TextView)rootView.findViewById(R.id.week_graph_7_price);
 
-        int y, m, d, checkday;
+        int checkday;
 
         class Week implements Comparable{
             int value;//sum of week value
@@ -180,43 +178,12 @@ public class MainMiddleStatisticsFragment extends Fragment {
         weeks[6] = new Week(6);
 
         struct struct;
-        long now = System.currentTimeMillis();
-        date = new Date(now); // 현재시간을 받고
-
-        // 시간 포맷 지정
-
-        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
-        SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
-        SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
-        // 지정된 포맷으로 String 타입 리턴
-        String strCurYear = CurYearFormat.format(date);
-        String strCurMonth = CurMonthFormat.format(date);
-        String strCurDay;
-        String strCurYearMonth = strCurYear + strCurMonth; // yyyymm 형식의 string
-
-        arrayList = instance.GetExpenseList(1, strCurYearMonth); // 해당 월의 DB 부름
+        arrayList = instance.GetExpenseList(1, customDate.strCurYearMonth); // 해당 월의 DB 부름
 
         for(Iterator<struct> iterator = arrayList.iterator(); iterator.hasNext();) { // 가져온 데이터를 돌면서
             struct = iterator.next();
 
-            strCurYear = struct.date.substring(0, 4);
-            strCurMonth = struct.date.substring(4, 6);
-            strCurDay = struct.date.substring(6, 8);
-
-            //요일 계산
-            y = Integer.parseInt(strCurYear);
-            m = Integer.parseInt(strCurMonth);
-            d = Integer.parseInt(strCurDay);
-
-            Log.i("TAG", y + " " + m + " " + d);
-
-            if (m < 3) {
-                y--;
-            }
-            checkday = (y + (y / 4) - (y / 100) + (y / 400) + t[m - 1] + d) % 7; // 0 = SUN ~ 6 = SAT
-
-
-            Log.i("TAG", y + " " + m + " " + d + " " + checkday + " " + struct.price);
+            checkday = customDate.checkWeekDay(struct.date);
 
             switch (checkday) { // TODO : @EMERGENCY@ 값을 더하는 과정에 오류가 있음. SAT가 0임
                 case 0:

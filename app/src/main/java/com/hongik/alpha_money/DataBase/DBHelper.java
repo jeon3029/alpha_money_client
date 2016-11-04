@@ -217,10 +217,6 @@ public class DBHelper extends SQLiteOpenHelper {
                         + tempstring + "%'", null);
                 count = cursor.getCount();
                 cursor.moveToFirst();
-                temp = new struct();
-                temp.storeName = String.valueOf(weekday[i]%10000);
-                temp.price = "";
-                arrayList.add(temp);
 
                 while(cursor.isAfterLast() == false)
                 {
@@ -245,10 +241,6 @@ public class DBHelper extends SQLiteOpenHelper {
                         + tempstring + "%'", null);
                 count = cursor.getCount();
                 cursor.moveToFirst();
-                temp = new struct();
-                temp.storeName = String.valueOf(weekday[i]%10000);
-                temp.price = "";
-                arrayList.add(temp);
 
                 while (cursor.isAfterLast() == false) {
                     temp = new struct();
