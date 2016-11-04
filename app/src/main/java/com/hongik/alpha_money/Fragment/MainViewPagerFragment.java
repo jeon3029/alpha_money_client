@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class MainViewPagerFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         rootViewBasic = inflater.inflate(R.layout.main_middle_viewpager_fragment, container, false);
 
         viewPager = (ViewPager)rootViewBasic.findViewById(R.id.viewPager);
@@ -49,13 +50,23 @@ public class MainViewPagerFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 if(position == 2) {
-                    ((MainActivity)ctx).ShowStatisticsFragment();
-                    ApplicationSingleton.getInstance().SetPageState(2);
+                    ((MainActivity)ctx).ShowStatisticsMenuFragment();
+                    ((MainActivity)ctx).SetPageState(7);
+                    Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
                 }
                 else {
                     ((MainActivity)ctx).ShowExpenseIncomeFragment();
-                    ApplicationSingleton.getInstance().SetPageState(5);
+                    if(position == 0) {
+                        ((MainActivity) ctx).SetPageState(2);
+                        Log.i("tag", String.valueOf(((MainActivity) ctx).GetPageState()));
+                    }
+                    else if(position == 1) {
+                        ((MainActivity) ctx).SetPageState(5);
+                        Log.i("tag", String.valueOf(((MainActivity) ctx).GetPageState()));
+                    }
                 }
+
+                Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
             }
 
             @Override

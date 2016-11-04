@@ -14,6 +14,7 @@ public class struct {
     public String memo;
     public double gridX;
     public double gridY;
+    public boolean invalid;
 
 
 //TODO: 나중에 쓰게 되면 추가

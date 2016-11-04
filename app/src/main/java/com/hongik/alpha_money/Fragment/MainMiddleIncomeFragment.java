@@ -1,6 +1,7 @@
 package com.hongik.alpha_money.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.hongik.alpha_money.Activity.DetailActivity;
+import com.hongik.alpha_money.Activity.MainActivity;
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.DataStructure.CustomDate;
 import com.hongik.alpha_money.DataStructure.ListCustomAdapter;
@@ -33,6 +36,11 @@ public class MainMiddleIncomeFragment extends Fragment {
     ArrayList<struct> arrayListMonth = new ArrayList<struct>();
     ArrayList<struct> arrayListWeek = new ArrayList<struct>();
     CustomDate customDate = new CustomDate();
+    int stateInFrag; // 내부적으로 현재 표시중인 리스트의 종류를 표현  프래그먼트 시작과함께 2번  버튼클릭시 해당 스테이트로 바뀜
+    // 1 = 오늘  2 = 주별  3 = 월별
+
+    Intent intent;// 보낼때 사용 보내는 형식은 ID, date, ~ ,gridY 를 putintent 하여 전송
+    // 받을때 사용 받는 형식은 From (어느 액티비티에서 왔는지), Del, ID (삭제여부와 삭제할 아이디)  + intent에 있던것들  추후 추가 가능
 
     public MainMiddleIncomeFragment() {
     }
@@ -45,7 +53,7 @@ public class MainMiddleIncomeFragment extends Fragment {
 
         listView_income = (ListView)rootViewBasic.findViewById(R.id.main_income_listview);
 
-        listView_income.setOnItemClickListener(InItemClickListener);
+        stateInFrag = 2;
 
         if(arrayListWeek.size() != 0)
             arrayListWeek.clear();
@@ -63,7 +71,7 @@ public class MainMiddleIncomeFragment extends Fragment {
                 arrayListWeek.add(temp);
             }
             struct struct = arrayList_income.get(i);
-            struct.storeName = "    " + struct.storeName;
+            struct.storeName = "     " + struct.storeName;
             arrayListWeek.add(struct);
 
             today = Integer.parseInt(date.substring(0, 8));
@@ -74,10 +82,49 @@ public class MainMiddleIncomeFragment extends Fragment {
                 sum += Integer.parseInt(arrayList_income.get(i).price); // price가 0이라 개망
 
         TotalIncome.setText(String.valueOf(sum));
-        ApplicationSingleton.getInstance().SetPageState(5);
 
         listCustomAdapter_income = new ListCustomAdapter(arrayListWeek, ApplicationSingleton.getInstance());
         listView_income.setAdapter(listCustomAdapter_income);
+
+        //list custom Adapter click listener by tj aa 2014 11 03
+        listView_income.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if(stateInFrag < 3) {
+                    struct temp;
+                    if(stateInFrag == 1)
+                        temp = arrayList_income.get(position);
+                    else
+                        temp = arrayListWeek.get(position);
+
+                    if(temp.invalid != true) {
+                        intent = new Intent(ApplicationSingleton.getInstance().GetMainActivityContext(), DetailActivity.class);
+
+                        intent.putExtra("ID", temp.ID);
+                        intent.putExtra("date", temp.date);
+                        intent.putExtra("price", temp.price);
+                        Log.i("Trim","i1: " + temp.storeName);
+                        temp.storeName.trim();//removing all leading spaces
+                        Log.i("Trim","i2: " + temp.storeName.trim());
+                        intent.putExtra("storeName", temp.storeName.trim());
+                        intent.putExtra("category", temp.category);
+                        intent.putExtra("memo", temp.memo);
+                        intent.putExtra("gridX", temp.gridX);
+                        intent.putExtra("gridY", temp.gridY);
+                        intent.putExtra("option", 2); //1 = expense 2=income
+                        startActivityForResult(intent, 2);
+                    }
+                }
+                else if(stateInFrag == 3){
+                    struct struct = arrayListMonth.get(position);
+                    onclickToday(struct.memo);
+                }
+                else{
+
+                }
+            }
+        });
 
         return rootViewBasic;
     }
@@ -86,14 +133,14 @@ public class MainMiddleIncomeFragment extends Fragment {
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         //TODO : same
-        arrayList_income = ApplicationSingleton.getInstance().GetExpenseList(0,"");//get all data
+        arrayList_income = ApplicationSingleton.getInstance().GetIncomeList(0,"");//get all data
         listCustomAdapter_income.notifyDataSetChanged();
     }
 
     public void onclickToday(String str) {
         Log.i("tag", "today clicked In");
         int sum = 0;
-        arrayList_income = ApplicationSingleton.getInstance().GetExpenseList(3, str);
+        arrayList_income = ApplicationSingleton.getInstance().GetIncomeList(3, str);
         listCustomAdapter_income.setItemDatas(arrayList_income);
 
         for (int i = 0; i < arrayList_income.size(); i++)
@@ -102,7 +149,8 @@ public class MainMiddleIncomeFragment extends Fragment {
 
         TotalIncome.setText(String.valueOf(sum));
 
-        ApplicationSingleton.getInstance().SetPageState(4);
+        ((MainActivity)ctx).SetPageState(4);
+        stateInFrag = 1;
     }
 
     public void onclickWeek(String str) {
@@ -110,7 +158,7 @@ public class MainMiddleIncomeFragment extends Fragment {
         int sum = 0, today = 0, nextday;
         if(arrayListWeek.size() != 0)
             arrayListWeek.clear();
-        arrayList_income = ApplicationSingleton.getInstance().GetExpenseList(2, str);
+        arrayList_income = ApplicationSingleton.getInstance().GetIncomeList(2, str);
 
         for(int i = 0; i < arrayList_income.size(); i++) {
             String date = arrayList_income.get(i).date;
@@ -119,10 +167,11 @@ public class MainMiddleIncomeFragment extends Fragment {
                 struct temp = new struct();
                 temp.storeName = date.substring(4,6) + "월 " + date.substring(6,8) + "일 " + customDate.checkWeekDayWithKor(date);
                 temp.price = "";
+                temp.invalid = true;
                 arrayListWeek.add(temp);
             }
             struct struct = arrayList_income.get(i);
-            struct.storeName = "    " + struct.storeName;
+            struct.storeName = "     " + struct.storeName;
             arrayListWeek.add(struct);
 
             today = Integer.parseInt(date.substring(0,8));
@@ -136,7 +185,9 @@ public class MainMiddleIncomeFragment extends Fragment {
         listCustomAdapter_income.setItemDatas(arrayListWeek);
         TotalIncome.setText(String.valueOf(sum));
 
-        ApplicationSingleton.getInstance().SetPageState(5);
+        ((MainActivity)ctx).SetPageState(5);
+
+        stateInFrag = 2;
     }
 
     public void onclickMonth(String str) {
@@ -144,7 +195,7 @@ public class MainMiddleIncomeFragment extends Fragment {
         int sum = 0;
         int dayprice[] = new int[32];
         arrayListMonth.clear();
-        arrayList_income = ApplicationSingleton.getInstance().GetExpenseList(1, str);
+        arrayList_income = ApplicationSingleton.getInstance().GetIncomeList(1, str);
 
         for(int i = 0; i < arrayList_income.size(); i++) {
             if (arrayList_income.get(i).price.length() != 0) {
@@ -169,19 +220,7 @@ public class MainMiddleIncomeFragment extends Fragment {
 
         TotalIncome.setText(String.valueOf(sum));
 
-        ApplicationSingleton.getInstance().SetPageState(6);
+        ((MainActivity)ctx).SetPageState(6);
+        stateInFrag = 3;
     }
-
-    // TODO : 월별에서 아이템 클릭시 한번은되는데 두번이 안됨 이유는 모름 쿼리문에서 막힘 개꿀
-    private AdapterView.OnItemClickListener InItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long l_position) {
-            Log.i("tag", "click item Income");
-            if(ApplicationSingleton.getInstance().GetPageState() == 6) {
-                struct struct = arrayListMonth.get(position);
-                onclickToday(struct.memo);
-            }
-        }
-    };
 }

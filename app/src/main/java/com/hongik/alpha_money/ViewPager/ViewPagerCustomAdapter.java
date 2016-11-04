@@ -1,9 +1,11 @@
 package com.hongik.alpha_money.ViewPager;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.hongik.alpha_money.Activity.MainActivity;
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.Fragment.MainMiddleExpenseFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleIncomeFragment;
@@ -15,6 +17,8 @@ import com.hongik.alpha_money.Fragment.MainMiddleStatisticsFragment;
 public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
     private static final String[] CONTENT = new String[]{"지출","수입","통계"};
     Fragment[] fragments = new Fragment[3];
+    Context ctx = ApplicationSingleton.getInstance().GetMainActivityContext();
+    FragmentManager fragmentManager = ((MainActivity)ctx).GetFM();
 
     public ViewPagerCustomAdapter(FragmentManager fm) {
         super(fm);
@@ -42,7 +46,7 @@ public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
 
         if(position == 0){
             Log.i("TAGPAGE","0");
-            fragmentManager.beginTransaction().
+            ((MainActivity)ctx).ShowExpenseFragment();
         }
         else if(position == 1){
             Log.i("TAGPAGE","1");
@@ -52,16 +56,10 @@ public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
             Log.i("TAGPAGE","2");
             ((MainActivity)ctx).ShowStatisticsFragment();
         }
-        if(position == 2) {
-            fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, ((MainActivity) ctx).GetStatisticsMenuFragment()).commit();
-        }
-        else {
-            fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, ((MainActivity)ctx).GetMainBottomFragment()).commit();
-        }
         return super.instantiateItem(container, position);
     }
-*/
 
+*/
     @Override
     public CharSequence getPageTitle(int position) {
         return CONTENT[position % CONTENT.length];

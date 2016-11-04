@@ -388,6 +388,8 @@ public class DBHelper extends SQLiteOpenHelper {
             db.delete(tableName2, "_id = ? ", new String[] {Integer.toString(id)});
     }
 
+
+    //data update
     public void onUpdate(String date, String price, String storename, String category, String memo, String gridX, String gridY,int option, int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();

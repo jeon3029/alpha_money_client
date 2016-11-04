@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hongik.alpha_money">
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <application
         android:name=".ApplicationSingleton"
         android:allowBackup="true"
@@ -14,21 +19,28 @@
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 팝업형식으로 추가되기 위해서 마지막에 .dialog 붙임 -->
+        <activity
+            android:name=".Activity.AddDataActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+            />
 
-        <!-- 팝업형식으로 추가되기 위해서 마지막에 .dialog 붙임-->
-        <activity android:name=".Activity.AddDataActivity" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"></activity>
-
-        <receiver android:name=".Sms.SmsReceiver" android:enabled="true">
+        <receiver
+            android:name=".Sms.SmsReceiver"
+            android:enabled="true">
             <intent-filter android:priority="9999">
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
-                <action android:name="android.pr"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="android.pr" />
             </intent-filter>
         </receiver>
 
+        <activity android:name=".Activity.DetailActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+            >
+        </activity>
     </application>
 
 </manifest>

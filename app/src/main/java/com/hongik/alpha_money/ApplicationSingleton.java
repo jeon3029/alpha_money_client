@@ -16,18 +16,6 @@ import java.util.ArrayList;
  */
 public class ApplicationSingleton extends Application {
 
-    int pageState = 0;/*0 : expense, today
-                        1 : expense, week
-                        2 : expense, month
-                        3 : income, today
-                        4 : income, week
-                        5 : income, month
-                        6 : statistics, menu1(month)
-                        7 : statistics, menu2(week)
-                        8 : statistics, menu3(time)
-                        9 : statistics, menu4(payment)
-                        */
-
     // Applcation 인스턴스 선언
     private static ApplicationSingleton instance;
     public static ApplicationSingleton getInstance(){
@@ -104,6 +92,4 @@ public class ApplicationSingleton extends Application {
     public MainMiddleStatisticsFragment GetStatisticsFragment(){
         return StatisticsFragment;
     }
-    public void SetPageState (int state) { pageState = state; }
-    public int GetPageState () { return pageState; }
 }
