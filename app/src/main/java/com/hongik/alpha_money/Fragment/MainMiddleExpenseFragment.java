@@ -37,7 +37,7 @@ public class MainMiddleExpenseFragment extends Fragment{
     Button.OnClickListener todayListener, weekListener, monthListener;
     TextView TotalExpense;
     Context ctx = ApplicationSingleton.getInstance().GetMainActivityContext();
-    int state;
+    int state; // 현재 내가 보고있는 리스트의 종류 1 = today  2 = week  3 = month
     ArrayList<struct> arrayListMonth = new ArrayList<struct>();
 
     long now = System.currentTimeMillis();
@@ -123,6 +123,7 @@ public class MainMiddleExpenseFragment extends Fragment{
     public void onclickToday(String str) {
         Log.i("tag", "today clicked");
         int sum = 0;
+        arrayList_expense.clear();
         arrayList_expense = ApplicationSingleton.getInstance().GetExpenseList(3, str);
         listCustomAdapter_expense.setItemDatas(arrayList_expense);
 
@@ -138,6 +139,7 @@ public class MainMiddleExpenseFragment extends Fragment{
     public void onclickWeek(String str) {
         Log.i("tag", "week clicked");
         int sum = 0;
+        arrayList_expense.clear();
         arrayList_expense = ApplicationSingleton.getInstance().GetExpenseList(2, str);
         listCustomAdapter_expense.setItemDatas(arrayList_expense);
 
@@ -154,23 +156,28 @@ public class MainMiddleExpenseFragment extends Fragment{
         Log.i("tag", "month clicked");
         int sum = 0;
         int dayprice[] = new int[32];
+        arrayList_expense.clear();
+        arrayListMonth.clear();
         arrayList_expense = ApplicationSingleton.getInstance().GetExpenseList(1, str);
 
         for(int i = 0; i < arrayList_expense.size(); i++) {
             if (arrayList_expense.get(i).price.length() != 0) {
                 sum += Integer.parseInt(arrayList_expense.get(i).price);
                 dayprice[Integer.parseInt(arrayList_expense.get(i).date.substring(6,8))] +=  Integer.parseInt(arrayList_expense.get(i).price);
-                Log.i("tag", String.valueOf(Integer.parseInt(arrayList_expense.get(i).date.substring(6,8))));
             }
         }
         for(int i = 0; i < 31; i++) { // TODO : 월별 출력에 문제가 있음
-            struct struct = new struct();
-            struct.price = String.valueOf(dayprice[i+1]);
-            Log.i("tag", struct.price);
-            struct.storeName = strCurMonth + "월 " + String.valueOf(i+1) + "일";
-            Log.i("tag", String.valueOf(i));
-            struct.memo = strCurYear + strCurMonth + String.valueOf(i+1);
-            arrayListMonth.add(struct);
+            if( dayprice[i+1] != 0) {
+                struct struct = new struct();
+                struct.price = String.valueOf(dayprice[i + 1]);
+                struct.storeName = strCurMonth + "월 " + String.valueOf(i + 1) + "일";
+                if (i < 9) {
+                    struct.memo = strCurYear + strCurMonth + '0' + String.valueOf(i + 1); // memo영역을 월별 리스트에서는 날짜를 기억하는 임시저장소로 사용
+                } else {
+                    struct.memo = strCurYear + strCurMonth + String.valueOf(i + 1);
+                }
+                arrayListMonth.add(struct);
+            }
         }
         listCustomAdapter_expense.setItemDatas(arrayListMonth);
 
