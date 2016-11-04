@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.hongik.alpha_money.R;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -52,7 +53,10 @@ public class ListCustomAdapter extends BaseAdapter {
         TextView price = (TextView)convertView.findViewById(R.id.price);
         struct itemData_temp = itemDatas.get(position);
         history.setText(itemData_temp.storeName);
-        price.setText(itemData_temp.price);
+        if(itemData_temp.price.length() != 0)
+            price.setText(String.valueOf(NumberFormat.getIntegerInstance().format(Integer.parseInt(itemData_temp.price))));
+        else
+            price.setText(itemData_temp.price);
         return convertView;
     }
 
