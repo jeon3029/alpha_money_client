@@ -11,13 +11,30 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.hongik.alpha_money.DataStructure.struct;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {
-    // ex.2016102119125 yyyy/mm/dd/hh/mm/day
-
+    // date : ex.2016102119125 yyyy/mm/dd/hh/mm/day
+    // price : string
+    // storename : string
+    /* category :   00 미분류
+                    10 식비
+                    11 밥
+                    12 음료
+                    13 디저트
+                    20 생활비
+                    21 생활용품
+                    22 교육
+                    23 교통
+                    24 통신
+                    30 여가
+                    31 문화
+                    32 건강
+                    33 의류
+                    34 미용
+    */
+    // memo : string
+    // gridX, gridY  : double
     public static final String databaseName = "TH.db";
     String tableName = "expensetable";
     String tableName2 = "incometable"; // option 1 = 지출  2 = 수입
@@ -84,6 +101,7 @@ public class DBHelper extends SQLiteOpenHelper {
             temp.memo = cursor.getString(4);
             temp.gridX = cursor.getDouble(5);
             temp.gridY = cursor.getDouble(6);
+            temp.ID = cursor.getInt(7);
             arrayList.add(temp);
             cursor.moveToNext();
         }
@@ -96,35 +114,21 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<struct> arrayList = new ArrayList<struct>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
-        Date date1;
         int y, m, d, checkday;
         int t[] = {0,3,2,5,0,3,5,1,4,6,2,4};
         int notleap[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; // 평년
         int leapYear[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; // 윤년
-        int leap = 0; // 1 = 윤년 2 = 평년
+        int leap = 0; // 1 = 윤년 0 = 평년
         int weekday[] = {0,0,0,0,0,0,0}; // 주별날짜를 얻기위한 월일 int 형
         int tempy, tempm, tempd;
         String tempstring;
 
-        long now = System.currentTimeMillis();
-        date1 = new Date(now); // 현재시간을 받고
-
-        // 시간 포맷 지정
-
-        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
-        SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
-        SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
-        // 지정된 포맷으로 String 타입 리턴
-        String strCurYear = CurYearFormat.format(date1);
-        String strCurMonth = CurMonthFormat.format(date1);
-        String strCurDay = CurDayFormat.format(date1);
-
-        y = Integer.parseInt(strCurYear);
-        tempy = Integer.parseInt(strCurYear);
-        m = Integer.parseInt(strCurMonth);
-        tempm = Integer.parseInt(strCurMonth);
-        d = Integer.parseInt(strCurDay);
-        tempd = Integer.parseInt(strCurDay);
+        y = Integer.parseInt(date.substring(0,4));
+        tempy = Integer.parseInt(date.substring(0,4));
+        m = Integer.parseInt(date.substring(4,6));
+        tempm = Integer.parseInt(date.substring(4,6));
+        d = Integer.parseInt(date.substring(6,8));
+        tempd = Integer.parseInt(date.substring(6,8));
 
         //윤년 체크
         if(y % 4 > 0)
@@ -228,6 +232,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     temp.memo = cursor.getString(4);
                     temp.gridX = cursor.getDouble(5);
                     temp.gridY = cursor.getDouble(6);
+                    temp.ID = cursor.getInt(7);
                     arrayList.add(temp);
                     cursor.moveToNext();
                 }
@@ -251,6 +256,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     temp.memo = cursor.getString(4);
                     temp.gridX = cursor.getDouble(5);
                     temp.gridY = cursor.getDouble(6);
+                    temp.ID = cursor.getInt(7);
                     arrayList.add(temp);
                     cursor.moveToNext();
                 }
@@ -286,6 +292,7 @@ public class DBHelper extends SQLiteOpenHelper {
             temp.memo = cursor.getString(4);
             temp.gridX = cursor.getDouble(5);
             temp.gridY = cursor.getDouble(6);
+            temp.ID = cursor.getInt(7);
             arrayList.add(temp);
             cursor.moveToNext();
         }

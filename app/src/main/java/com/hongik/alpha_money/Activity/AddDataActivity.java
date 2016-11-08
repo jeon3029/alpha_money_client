@@ -51,7 +51,8 @@ public class AddDataActivity extends Activity {
                 ApplicationSingleton.getInstance().onInsertdata(editTextDate.getText().toString(), editTextPrice.getText().toString(), editTextStore.getText().toString(), editTextCategory.getText().toString(), editTextMemo.getText().toString(), "0", "0",option);
                 Toast.makeText(AddDataActivity.this, "정보가 저장되었습니다.", Toast.LENGTH_SHORT).show();
 
-                ApplicationSingleton.getInstance().onInsertdata("20161103","38000","맘스터치","식사","","","",1);
+
+                ApplicationSingleton.getInstance().onInsertdata("20161103","38000","맘스터치","식사","10","","",1);
                 ApplicationSingleton.getInstance().onInsertdata("20161105","2300","한가람","문구","","","",1);
                 ApplicationSingleton.getInstance().onInsertdata("20161107","10300","다이소","생활용품","","","",1);
                 ApplicationSingleton.getInstance().onInsertdata("20161108","36400","GIODANO","패션","","","",1);
@@ -113,6 +114,16 @@ public class AddDataActivity extends Activity {
                 ApplicationSingleton.getInstance().onInsertdata("20161012","456","옛집","식사","","","",2);
                 ApplicationSingleton.getInstance().onInsertdata("20161013","456","순대국집","식사","","","",2);
                 ApplicationSingleton.getInstance().onInsertdata("20161003","456","와끝이다","기타","","","",2);
+
+
+                int stateForRefresh = ((MainActivity)ApplicationSingleton.getInstance().GetMainActivityContext()).GetPageState();
+
+                if(stateForRefresh < 4) {
+                    ApplicationSingleton.getInstance().GetExpenseFragment().onclickRefresh();
+                }
+                else if(3 < stateForRefresh && stateForRefresh < 7) {
+                    ApplicationSingleton.getInstance().GetIncomeFragment().onclickRefresh();
+                }
 
                 finish();
             }

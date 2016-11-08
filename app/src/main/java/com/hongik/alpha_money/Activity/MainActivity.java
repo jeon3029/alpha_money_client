@@ -54,16 +54,16 @@ public class MainActivity extends AppCompatActivity {
     TextView priceView;
     ImageView signalLightView;
 
-    int pageState = 0;/*0 : expense, today
-                        1 : expense, week
-                        2 : expense, month
-                        3 : income, today
-                        4 : income, week
-                        5 : income, month
-                        6 : statistics, menu1(month)
-                        7 : statistics, menu2(week)
-                        8 : statistics, menu3(time)
-                        9 : statistics, menu4(payment)
+    int pageState = 1;/*1 : expense, today
+                        2 : expense, week
+                        3 : expense, month
+                        4 : income, today
+                        5 : income, week
+                        6 : income, month
+                        7 : statistics, menu1(month)
+                        8 : statistics, menu2(week)
+                        9 : statistics, menu3(time)
+                        10 : statistics, menu4(payment)
                         */
 
     @Override

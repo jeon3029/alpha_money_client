@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class MainMiddleExpenseFragment extends Fragment{
     ListView listView_expense;
     ListCustomAdapter listCustomAdapter_expense;
     ArrayList<struct> arrayList_expense;
+    TextView LayoutDate;
     TextView TotalExpense;
     Context ctx = ApplicationSingleton.getInstance().GetMainActivityContext();
     ArrayList<struct> arrayListMonth = new ArrayList<struct>();
@@ -39,6 +41,10 @@ public class MainMiddleExpenseFragment extends Fragment{
     CustomDate customDate = new CustomDate();
     int stateInFrag; // 내부적으로 현재 표시중인 리스트의 종류를 표현  프래그먼트 시작과함께 2번  버튼클릭시 해당 스테이트로 바뀜
     // 1 = 오늘  2 = 주별  3 = 월별
+    String tempDateForRefresh;
+
+    ImageView dateLeft, dateRight;
+    String layoutDate;
 
 
     Intent intent;// 보낼때 사용 보내는 형식은 ID, date, ~ ,gridY 를 putintent 하여 전송
@@ -52,6 +58,10 @@ public class MainMiddleExpenseFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootViewBasic = inflater.inflate(R.layout.main_expense_list, container, false);
 
+        dateLeft = (ImageView)rootViewBasic.findViewById(R.id.date_left_expense);
+        dateRight = (ImageView)rootViewBasic.findViewById(R.id.date_right_expense);
+
+        LayoutDate = (TextView)rootViewBasic.findViewById(R.id.date_expense);
         TotalExpense = (TextView)rootViewBasic.findViewById(R.id.totalprice1);
 
         listView_expense = (ListView)rootViewBasic.findViewById(R.id.main_expense_listview);
@@ -71,7 +81,7 @@ public class MainMiddleExpenseFragment extends Fragment{
             nextday = Integer.parseInt(date.substring(0, 8));
             if (today < nextday){
                 struct temp = new struct();
-                temp.storeName = date.substring(4,6) + "월 " + date.substring(6,8) + "일 " + customDate.checkWeekDayWithKor(date);
+                temp.storeName = date.substring(4,6) + "월 " + date.substring(6,8) + "일 " + customDate.CheckWeekDayWithKor(date);
                 temp.price = "";
                 arrayListWeek.add(temp);
             }
@@ -88,10 +98,14 @@ public class MainMiddleExpenseFragment extends Fragment{
             if(arrayList_expense.get(i).price.length() != 0)
                 sum += Integer.parseInt(arrayList_expense.get(i).price); // price가 0이라 개망
 
+        LayoutDate.setText(customDate.strCurYear + "." + customDate.strCurMonth + "." + customDate.strCurDay);
         TotalExpense.setText(String.valueOf(sum));
+        layoutDate = customDate.strCurYearMonthDay;
 
         listCustomAdapter_expense = new ListCustomAdapter(arrayListWeek, ApplicationSingleton.getInstance());
         listView_expense.setAdapter(listCustomAdapter_expense);
+
+        tempDateForRefresh = customDate.strCurYearMonthDay;
 
         //list custom Adapter click listener by tj aa 2014 11 03
         listView_expense.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -134,6 +148,36 @@ public class MainMiddleExpenseFragment extends Fragment{
             }
         });
 
+        dateLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(stateInFrag == 1){
+                    onclickToday(customDate.GetBeforeDay(layoutDate));
+                }
+                else if(stateInFrag == 2){
+                    onclickWeek(customDate.GetBeforeWeek(layoutDate));
+                }
+                else if(stateInFrag == 3){
+                    onclickMonth(customDate.GetBeforeMonth(layoutDate));
+                }
+            }
+        });
+
+        dateRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(stateInFrag == 1){
+                    onclickToday(customDate.GetNextDay(layoutDate));
+                }
+                else if(stateInFrag == 2){
+                    onclickWeek(customDate.GetNextWeek(layoutDate));
+                }
+                else if(stateInFrag == 3){
+                    onclickMonth(customDate.GetNextMonth(layoutDate));
+                }
+            }
+        });
+
         return rootViewBasic;
     }
 
@@ -147,7 +191,9 @@ public class MainMiddleExpenseFragment extends Fragment{
 
 
     public void onclickToday(String str) {
-        Log.i("tag", "today clicked");
+        Log.i("tag", "today clicked" + str);
+        str = str.substring(0,8);
+        tempDateForRefresh = str;
         int sum = 0;
         arrayList_expense = ApplicationSingleton.getInstance().GetExpenseList(3, str);
         listCustomAdapter_expense.setItemDatas(arrayList_expense);
@@ -156,14 +202,19 @@ public class MainMiddleExpenseFragment extends Fragment{
             if (arrayList_expense.get(i).price.length() != 0)
                 sum += Integer.parseInt(arrayList_expense.get(i).price);
 
+        LayoutDate.setText(str.substring(0,4) + "." + str.substring(4,6) + "." + str.substring(6,8));
         TotalExpense.setText(String.valueOf(sum));
+
+        layoutDate = str;
 
         ((MainActivity)ctx).SetPageState(1);
         stateInFrag = 1;
     }
 
     public void onclickWeek(String str) { // TODO : 주별리스트에서 날짜표시하는 아이템이 선택되는것 막기, 스토어네임 앞에 빈칸 없애기
-        Log.i("tag", "week clicked");
+        Log.i("tag", "week clicked" + str);
+        str = str.substring(0,8);
+        tempDateForRefresh = str;
         int sum = 0, today = 0, nextday;
         if(arrayListWeek.size() != 0)
             arrayListWeek.clear();
@@ -174,7 +225,7 @@ public class MainMiddleExpenseFragment extends Fragment{
             nextday = Integer.parseInt(date.substring(0, 8));
             if (today < nextday){
                 struct temp = new struct();
-                temp.storeName = date.substring(4,6) + "월 " + date.substring(6,8) + "일 " + customDate.checkWeekDayWithKor(date);
+                temp.storeName = date.substring(4,6) + "월 " + date.substring(6,8) + "일 " + customDate.CheckWeekDayWithKor(date);
                 temp.price = "";
                 temp.invalid = true;
                 arrayListWeek.add(temp);
@@ -192,17 +243,25 @@ public class MainMiddleExpenseFragment extends Fragment{
 
 
         listCustomAdapter_expense.setItemDatas(arrayListWeek);
+
+        LayoutDate.setText(str.substring(0,4) + "." + str.substring(4,6) + "." + str.substring(6,8));
         TotalExpense.setText(String.valueOf(sum));
+
+        layoutDate = str;
 
         ((MainActivity)ctx).SetPageState(2);
         stateInFrag = 2;
     }
 
     public void onclickMonth(String str) {
-        Log.i("tag", "month clicked");
+        Log.i("tag", "month clicked" + str);
+        str = str.substring(0,6);
+        tempDateForRefresh = str;
         int sum = 0;
         int dayprice[] = new int[32];
-        arrayListMonth.clear();
+        if(arrayListMonth.size() != 0)
+            arrayListMonth.clear();
+
         arrayList_expense = ApplicationSingleton.getInstance().GetExpenseList(1, str);
 
         for(int i = 0; i < arrayList_expense.size(); i++) {
@@ -211,44 +270,38 @@ public class MainMiddleExpenseFragment extends Fragment{
                 dayprice[Integer.parseInt(arrayList_expense.get(i).date.substring(6,8))] +=  Integer.parseInt(arrayList_expense.get(i).price);
             }
         }
-        for(int i = 0; i < 31; i++) { // TODO : 월별 출력에 문제가 있음
+
+        for(int i = 0; i < 31; i++) {
             if( dayprice[i+1] != 0) {
                 struct struct = new struct();
                 struct.price = String.valueOf(dayprice[i + 1]);
-                struct.storeName = customDate.strCurMonth + "월 " + String.valueOf(i + 1) + "일";
+                struct.storeName = str.substring(4,6) + "월 " + String.valueOf(i + 1) + "일";
                 if (i < 9) {
-                    struct.memo = customDate.strCurYear + customDate.strCurMonth + '0' + String.valueOf(i + 1); // memo영역을 월별 리스트에서는 날짜를 기억하는 임시저장소로 사용
+                    struct.memo = str.substring(0,4) + str.substring(4,6) + '0' + String.valueOf(i + 1); // memo영역을 월별 리스트에서는 날짜를 기억하는 임시저장소로 사용
                 } else {
-                    struct.memo = customDate.strCurYear + customDate.strCurMonth + String.valueOf(i + 1);
+                    struct.memo = str.substring(0,4) + str.substring(4,6) + String.valueOf(i + 1);
                 }
                 arrayListMonth.add(struct);
             }
         }
         listCustomAdapter_expense.setItemDatas(arrayListMonth);
 
+        LayoutDate.setText(str.substring(0,4) + "." + str.substring(4,6));
         TotalExpense.setText(String.valueOf(sum));
+
+        layoutDate = str;
 
         ((MainActivity)ctx).SetPageState(3);
         stateInFrag = 3;
     }
-/*
-    // TODO : 월별에서 아이템 클릭시 한번은되는데 두번이 안됨 이유는 모름 쿼리문에서 막힘 개꿀
-    private AdapterView.OnItemClickListener ExItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long l_position) {
-            Log.i("tag", "click item");
-<<<<<<< HEAD
-            if(ApplicationSingleton.getInstance().GetPageState() == 3) {
-                struct struct = arrayListMonth.get(position);
-                onclickToday(struct.memo);
-            }
-        }
-    };
-=======
-            if(state == 3) {
 
-            }
-        }
-    };*/
+    public void onclickRefresh() {
+        if(stateInFrag == 1)
+            onclickToday(tempDateForRefresh);
+        else if(stateInFrag == 2)
+            onclickWeek(tempDateForRefresh);
+        else if(stateInFrag == 3)
+            onclickMonth(tempDateForRefresh);
+    }
+
 }
