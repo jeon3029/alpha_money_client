@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class MainMiddleIncomeFragment extends Fragment {
     ListView listView_income;
     ListCustomAdapter listCustomAdapter_income;
     ArrayList<struct> arrayList_income;
+    TextView LayoutDate;
     TextView TotalIncome;
     Context ctx = ApplicationSingleton.getInstance().GetMainActivityContext();
     ArrayList<struct> arrayListMonth = new ArrayList<struct>();
@@ -38,6 +40,9 @@ public class MainMiddleIncomeFragment extends Fragment {
     CustomDate customDate = new CustomDate();
     int stateInFrag; // 내부적으로 현재 표시중인 리스트의 종류를 표현  프래그먼트 시작과함께 2번  버튼클릭시 해당 스테이트로 바뀜
     // 1 = 오늘  2 = 주별  3 = 월별
+    String tempDateForRefresh;
+    String layoutDate;
+    ImageView dateLeft, dateRight;
 
     Intent intent;// 보낼때 사용 보내는 형식은 ID, date, ~ ,gridY 를 putintent 하여 전송
     // 받을때 사용 받는 형식은 From (어느 액티비티에서 왔는지), Del, ID (삭제여부와 삭제할 아이디)  + intent에 있던것들  추후 추가 가능
@@ -49,6 +54,10 @@ public class MainMiddleIncomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootViewBasic = inflater.inflate(R.layout.main_income_list, container, false);
 
+        dateLeft = (ImageView)rootViewBasic.findViewById(R.id.date_left_income);
+        dateRight = (ImageView)rootViewBasic.findViewById(R.id.date_right_income);
+
+        LayoutDate = (TextView)rootViewBasic.findViewById(R.id.date_income);
         TotalIncome = (TextView)rootViewBasic.findViewById(R.id.totalprice2);
 
         listView_income = (ListView)rootViewBasic.findViewById(R.id.main_income_listview);
@@ -66,7 +75,7 @@ public class MainMiddleIncomeFragment extends Fragment {
             nextday = Integer.parseInt(date.substring(0, 8));
             if (today < nextday){
                 struct temp = new struct();
-                temp.storeName = date.substring(4,6) + "월 " + date.substring(6,8) + "일 " + customDate.checkWeekDayWithKor(date);
+                temp.storeName = date.substring(4,6) + "월 " + date.substring(6,8) + "일 " + customDate.CheckWeekDayWithKor(date);
                 temp.price = "";
                 arrayListWeek.add(temp);
             }
@@ -81,10 +90,14 @@ public class MainMiddleIncomeFragment extends Fragment {
             if(arrayList_income.get(i).price.length() != 0)
                 sum += Integer.parseInt(arrayList_income.get(i).price); // price가 0이라 개망
 
+        LayoutDate.setText(customDate.strCurYear + "." + customDate.strCurMonth + "." + customDate.strCurDay);
         TotalIncome.setText(String.valueOf(sum));
+        layoutDate = customDate.strCurYearMonthDay;
 
         listCustomAdapter_income = new ListCustomAdapter(arrayListWeek, ApplicationSingleton.getInstance());
         listView_income.setAdapter(listCustomAdapter_income);
+
+        tempDateForRefresh = customDate.strCurYearMonthDay;
 
         //list custom Adapter click listener by tj aa 2014 11 03
         listView_income.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -126,6 +139,36 @@ public class MainMiddleIncomeFragment extends Fragment {
             }
         });
 
+        dateLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(stateInFrag == 1){
+                    onclickToday(customDate.GetBeforeDay(layoutDate));
+                }
+                else if(stateInFrag == 2){
+                    onclickWeek(customDate.GetBeforeWeek(layoutDate));
+                }
+                else if(stateInFrag == 3){
+                    onclickMonth(customDate.GetBeforeMonth(layoutDate));
+                }
+            }
+        });
+
+        dateRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(stateInFrag == 1){
+                    onclickToday(customDate.GetNextDay(layoutDate));
+                }
+                else if(stateInFrag == 2){
+                    onclickWeek(customDate.GetNextWeek(layoutDate));
+                }
+                else if(stateInFrag == 3){
+                    onclickMonth(customDate.GetNextMonth(layoutDate));
+                }
+            }
+        });
+
         return rootViewBasic;
     }
 
@@ -139,6 +182,8 @@ public class MainMiddleIncomeFragment extends Fragment {
 
     public void onclickToday(String str) {
         Log.i("tag", "today clicked In");
+        str = str.substring(0,8);
+        tempDateForRefresh = str;
         int sum = 0;
         arrayList_income = ApplicationSingleton.getInstance().GetIncomeList(3, str);
         listCustomAdapter_income.setItemDatas(arrayList_income);
@@ -147,7 +192,10 @@ public class MainMiddleIncomeFragment extends Fragment {
             if (arrayList_income.get(i).price.length() != 0)
                 sum += Integer.parseInt(arrayList_income.get(i).price);
 
+        LayoutDate.setText(str.substring(0,4) + "." + str.substring(4,6) + "." + str.substring(6,8));
         TotalIncome.setText(String.valueOf(sum));
+
+        layoutDate = str;
 
         ((MainActivity)ctx).SetPageState(4);
         stateInFrag = 1;
@@ -155,6 +203,8 @@ public class MainMiddleIncomeFragment extends Fragment {
 
     public void onclickWeek(String str) {
         Log.i("tag", "week clicked In");
+        str = str.substring(0,8);
+        tempDateForRefresh = str;
         int sum = 0, today = 0, nextday;
         if(arrayListWeek.size() != 0)
             arrayListWeek.clear();
@@ -165,7 +215,7 @@ public class MainMiddleIncomeFragment extends Fragment {
             nextday = Integer.parseInt(date.substring(0, 8));
             if (today < nextday){
                 struct temp = new struct();
-                temp.storeName = date.substring(4,6) + "월 " + date.substring(6,8) + "일 " + customDate.checkWeekDayWithKor(date);
+                temp.storeName = date.substring(4,6) + "월 " + date.substring(6,8) + "일 " + customDate.CheckWeekDayWithKor(date);
                 temp.price = "";
                 temp.invalid = true;
                 arrayListWeek.add(temp);
@@ -183,7 +233,11 @@ public class MainMiddleIncomeFragment extends Fragment {
 
 
         listCustomAdapter_income.setItemDatas(arrayListWeek);
+
+        LayoutDate.setText(str.substring(0,4) + "." + str.substring(4,6) + "." + str.substring(6,8));
         TotalIncome.setText(String.valueOf(sum));
+
+        layoutDate = str;
 
         ((MainActivity)ctx).SetPageState(5);
 
@@ -192,6 +246,8 @@ public class MainMiddleIncomeFragment extends Fragment {
 
     public void onclickMonth(String str) {
         Log.i("tag", "month clicked In");
+        str = str.substring(0,6);
+        tempDateForRefresh = str;
         int sum = 0;
         int dayprice[] = new int[32];
         arrayListMonth.clear();
@@ -207,20 +263,32 @@ public class MainMiddleIncomeFragment extends Fragment {
             if( dayprice[i+1] != 0) {
                 struct struct = new struct();
                 struct.price = String.valueOf(dayprice[i + 1]);
-                struct.storeName = customDate.strCurMonth + "월 " + String.valueOf(i + 1) + "일";
+                struct.storeName = str.substring(4,6) + "월 " + String.valueOf(i + 1) + "일";
                 if (i < 9) {
-                    struct.memo = customDate.strCurYear + customDate.strCurMonth + '0' + String.valueOf(i + 1); // memo영역을 월별 리스트에서는 날짜를 기억하는 임시저장소로 사용
+                    struct.memo = str.substring(0,4) + str.substring(4,6) + '0' + String.valueOf(i + 1); // memo영역을 월별 리스트에서는 날짜를 기억하는 임시저장소로 사용
                 } else {
-                    struct.memo = customDate.strCurYear + customDate.strCurMonth + String.valueOf(i + 1);
+                    struct.memo = str.substring(0,4) + str.substring(4,6) + String.valueOf(i + 1);
                 }
                 arrayListMonth.add(struct);
             }
         }
         listCustomAdapter_income.setItemDatas(arrayListMonth);
 
+        LayoutDate.setText(str.substring(0,4) + "." + str.substring(4,6));
         TotalIncome.setText(String.valueOf(sum));
+
+        layoutDate = str;
 
         ((MainActivity)ctx).SetPageState(6);
         stateInFrag = 3;
+    }
+
+    public void onclickRefresh() {
+        if(stateInFrag == 1)
+            onclickToday(tempDateForRefresh);
+        else if(stateInFrag == 2)
+            onclickWeek(tempDateForRefresh);
+        else if(stateInFrag == 3)
+            onclickMonth(tempDateForRefresh);
     }
 }

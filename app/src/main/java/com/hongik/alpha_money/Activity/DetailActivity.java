@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
+
+import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.R;
 
 public class DetailActivity extends Activity implements OnClickListener{
@@ -26,7 +28,6 @@ public class DetailActivity extends Activity implements OnClickListener{
     TextView detailCategory;
     TextView detailMemo;
     private Button buttonConfirm, buttonDelete;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,5 +110,15 @@ public class DetailActivity extends Activity implements OnClickListener{
             default:
                 break;
         }
+
+        int stateForRefresh = ((MainActivity) ApplicationSingleton.getInstance().GetMainActivityContext()).GetPageState();
+
+        if(stateForRefresh < 4) {
+            ApplicationSingleton.getInstance().GetExpenseFragment().onclickRefresh();
+        }
+        else if(3 < stateForRefresh && stateForRefresh < 7) {
+            ApplicationSingleton.getInstance().GetIncomeFragment().onclickRefresh();
+        }
+
     }
 }

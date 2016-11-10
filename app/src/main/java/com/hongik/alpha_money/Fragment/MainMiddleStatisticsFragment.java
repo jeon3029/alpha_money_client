@@ -105,6 +105,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
         data.setHighlightEnabled(false); // highlight 삭제
 
         MonthChart.getDescription().setEnabled(false); // 설명삭제
+        MonthChart.getLegend().setMaxSizePercent(200);
 
         MonthChart.setData(data);
         MonthChart.invalidate(); // refresh
@@ -183,7 +184,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
         for(Iterator<struct> iterator = arrayList.iterator(); iterator.hasNext();) { // 가져온 데이터를 돌면서
             struct = iterator.next();
 
-            checkday = customDate.checkWeekDay(struct.date);
+            checkday = customDate.CheckWeekDay(struct.date);
 
             switch (checkday) { // TODO : @EMERGENCY@ 값을 더하는 과정에 오류가 있음. SAT가 0임
                 case 0:
