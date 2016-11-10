@@ -31,6 +31,13 @@ public class ApplicationSingleton extends Application {
     MainMiddleExpenseFragment ExpenseFragment;
     MainMiddleIncomeFragment IncomeFragment;
 
+    int botLimit=100000,topLimit=200000;
+    public int GetBotLimit(){
+        return botLimit;
+    }
+    public int GetTopLimit(){
+        return topLimit;
+    }
     public ArrayList<struct> GetExpenseList(int option,String key){//0 = all 1=month 2=week 3=day
         if(option == 0){
             arrayList_expense = mydb.onGetalldata(1);//1=expense
