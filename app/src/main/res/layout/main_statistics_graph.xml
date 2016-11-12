@@ -58,24 +58,32 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
+        android:id="@+id/graph_layout2"
+        android:visibility="gone"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:paddingTop="50dp"
             android:paddingBottom="50dp"
-            android:visibility="gone"
-            android:id="@+id/graph_layout2"
             android:orientation="vertical"
             android:gravity="center"
             >
             <!--1st-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="요일별 사용량 순위"
+                android:textSize="30dp"
+                android:gravity="center"/>
+
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal"
                 android:background="#eeeeee"
                 >

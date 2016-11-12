@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
     HorizontalBarChart TimeChart;
     ListView WeekChart;
     RelativeLayout Graph_Layout1;
-    LinearLayout Graph_Layout2;
+    ScrollView Graph_Layout2;
     LinearLayout Graph_Layout3;
     RelativeLayout Graph_Layout4;
     ArrayList<struct> arrayList;
@@ -136,7 +137,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
         TimeChart = (HorizontalBarChart) rootView.findViewById(R.id.time_graph);
         PaymentChart = (PieChart) rootView.findViewById(R.id.payment_graph);
         Graph_Layout1 = (RelativeLayout)rootView.findViewById(R.id.graph_layout1);
-        Graph_Layout2 = (LinearLayout)rootView.findViewById(R.id.graph_layout2);
+        Graph_Layout2 = (ScrollView)rootView.findViewById(R.id.graph_layout2);
         Graph_Layout3 = (LinearLayout)rootView.findViewById(R.id.graph_layout3);
         Graph_Layout4 = (RelativeLayout)rootView.findViewById(R.id.graph_layout4);
         ShowMonthGraph(customDate.strCurYearMonth);
@@ -203,6 +204,8 @@ public class MainMiddleStatisticsFragment extends Fragment {
         MonthChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         MonthChart.setCenterText(String.valueOf(NumberFormat.getIntegerInstance().format(sum)) + "원");
         MonthChart.setCenterTextSize(28.0f);
+
+        MonthChart.setRotationEnabled(false);
 
         MonthChart.setData(data);
         MonthChart.invalidate(); // refresh
@@ -437,6 +440,8 @@ public class MainMiddleStatisticsFragment extends Fragment {
         PaymentChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         PaymentChart.setCenterText(String.valueOf(NumberFormat.getIntegerInstance().format(sum)) + "원");
         PaymentChart.setCenterTextSize(28.0f);
+
+        PaymentChart.setRotationEnabled(false);
 
         PaymentChart.setData(data);
         PaymentChart.invalidate(); // refresh
