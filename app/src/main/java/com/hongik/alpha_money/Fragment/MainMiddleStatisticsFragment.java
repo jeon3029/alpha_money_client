@@ -13,13 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -334,7 +332,11 @@ public class MainMiddleStatisticsFragment extends Fragment {
 
 
     public void ShowTimeGraph() {//graph3
-        Graph_Layout3.setVisibility(LinearLayout.VISIBLE);
+
+        Toast.makeText(instance.GetMainActivityContext(), "준비중입니다.", Toast.LENGTH_SHORT).show();
+
+
+        /*Graph_Layout3.setVisibility(LinearLayout.VISIBLE);
         Graph_Layout1.setVisibility(LinearLayout.GONE);
         Graph_Layout2.setVisibility(LinearLayout.GONE);
         Graph_Layout4.setVisibility(LinearLayout.GONE);
@@ -374,6 +376,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
 
         TimeChart.setData(data);
         TimeChart.invalidate(); // refresh
+        */
     }
 
     public void ShowPaymentGraph(String str) {//graph4
@@ -397,7 +400,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
                 for (j = 0; j < count; j++) {
                     if (payment[j].equals(arrayList.get(i).payment)) {
                         paymentsum[j] += Integer.parseInt(arrayList.get(i).price);
-                        sum += paymentsum[j];
+                        sum += Integer.parseInt(arrayList.get(i).price);
                         find = true;
                         break;
                     }
@@ -405,7 +408,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
                 if(find == false) {
                     payment[count] = arrayList.get(i).payment;
                     paymentsum[count] += Integer.parseInt(arrayList.get(i).price);
-                    sum += paymentsum[count];
+                    sum += Integer.parseInt(arrayList.get(i).price);
                     count++;
                 }
             }

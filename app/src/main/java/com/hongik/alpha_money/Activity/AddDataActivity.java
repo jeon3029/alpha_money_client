@@ -10,6 +10,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.hongik.alpha_money.ApplicationSingleton;
+import com.hongik.alpha_money.DataStructure.Category;
 import com.hongik.alpha_money.R;
 
 public class AddDataActivity extends Activity {
@@ -22,6 +23,7 @@ public class AddDataActivity extends Activity {
     Button saveButton;
     Button closeButton;
     TextView totalEI;
+    Category category = new Category();
 
     int option;
     @Override
@@ -48,7 +50,7 @@ public class AddDataActivity extends Activity {
                     option=2;//수입
                 }
                 else option = 1;//지출
-                ApplicationSingleton.getInstance().onInsertdata(editTextDate.getText().toString(), editTextPrice.getText().toString(), editTextStore.getText().toString(), editTextCategory.getText().toString(), editTextMemo.getText().toString(), "0", "0","",option);
+                ApplicationSingleton.getInstance().onInsertdata(editTextDate.getText().toString(), editTextPrice.getText().toString(), editTextStore.getText().toString(), category.GetCategoryNumber(editTextCategory.getText().toString()), editTextMemo.getText().toString(), "0", "0","NH(8070)",option);
                 Toast.makeText(AddDataActivity.this, "정보가 저장되었습니다.", Toast.LENGTH_SHORT).show();
 
 
