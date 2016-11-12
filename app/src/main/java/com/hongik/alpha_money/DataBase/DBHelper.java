@@ -102,6 +102,7 @@ public class DBHelper extends SQLiteOpenHelper {
             temp.memo = cursor.getString(4);
             temp.gridX = cursor.getDouble(5);
             temp.gridY = cursor.getDouble(6);
+
             temp.payment = cursor.getString(7);
             temp.ID = cursor.getInt(8);
             arrayList.add(temp);
@@ -234,6 +235,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     temp.memo = cursor.getString(4);
                     temp.gridX = cursor.getDouble(5);
                     temp.gridY = cursor.getDouble(6);
+
                     temp.payment = cursor.getString(7);
                     temp.ID = cursor.getInt(8);
                     arrayList.add(temp);
@@ -259,6 +261,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     temp.memo = cursor.getString(4);
                     temp.gridX = cursor.getDouble(5);
                     temp.gridY = cursor.getDouble(6);
+
                     temp.payment = cursor.getString(7);
                     temp.ID = cursor.getInt(8);
                     arrayList.add(temp);
@@ -296,6 +299,7 @@ public class DBHelper extends SQLiteOpenHelper {
             temp.memo = cursor.getString(4);
             temp.gridX = cursor.getDouble(5);
             temp.gridY = cursor.getDouble(6);
+
             temp.payment = cursor.getString(7);
             temp.ID = cursor.getInt(8);
             arrayList.add(temp);

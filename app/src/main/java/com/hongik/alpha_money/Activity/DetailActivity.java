@@ -58,7 +58,7 @@ public class DetailActivity extends Activity implements OnClickListener{
         memo = intent.getStringExtra("memo");
         gridX = intent.getDoubleExtra("gridX", 0.000000);
         gridY = intent.getDoubleExtra("gridY", 0.000000);
-        option = intent.getIntExtra("option", 0);
+        option = intent.getIntExtra("option", 0);//1 expense 2 income
 
         detailDate = (TextView) findViewById(R.id.detail_editTextDate);
         detailPrice = (TextView) findViewById(R.id.detail_editTextPrice);
