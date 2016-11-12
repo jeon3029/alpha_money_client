@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.hongik.alpha_money.ApplicationSingleton;
+import com.hongik.alpha_money.DataStructure.Category;
 import com.hongik.alpha_money.R;
 
 public class DetailActivity extends Activity implements OnClickListener{
@@ -21,6 +22,8 @@ public class DetailActivity extends Activity implements OnClickListener{
     String memo;
     double gridX;
     double gridY;
+
+    Category cate = new Category();
 
     TextView detailDate;
     TextView detailPrice;
@@ -41,7 +44,7 @@ public class DetailActivity extends Activity implements OnClickListener{
         if(date.length()!=0)detailDate.setText(date);
         if(price.length()!=0)detailPrice.setText(price);
         if(storeName.length()!=0)detailStore.setText(storeName);
-        if(category.length()!=0)detailCategory.setText(category);
+        if(category.length()!=0)detailCategory.setText(cate.GetCategoryName(category));
         if(memo.length()!=0)detailMemo.setText(memo);
     }
 
@@ -91,7 +94,7 @@ public class DetailActivity extends Activity implements OnClickListener{
                 intent.putExtra("date", date);
                 intent.putExtra("price", price);
                 intent.putExtra("storeName", storeName.trim());
-                intent.putExtra("category", category);
+                intent.putExtra("category", cate.GetCategoryNumber(category)); // 거꾸로
                 intent.putExtra("memo", memo);
                 intent.putExtra("gridX", gridX);
                 intent.putExtra("gridY", gridY);
@@ -113,10 +116,10 @@ public class DetailActivity extends Activity implements OnClickListener{
 
         int stateForRefresh = ((MainActivity) ApplicationSingleton.getInstance().GetMainActivityContext()).GetPageState();
 
-        if(stateForRefresh < 4) {
+        if(stateForRefresh < 4) {//expense page
             ApplicationSingleton.getInstance().GetExpenseFragment().onclickRefresh();
         }
-        else if(3 < stateForRefresh && stateForRefresh < 7) {
+        else if(3 < stateForRefresh && stateForRefresh < 7) {//income page
             ApplicationSingleton.getInstance().GetIncomeFragment().onclickRefresh();
         }
 

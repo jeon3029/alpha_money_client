@@ -25,9 +25,23 @@ public class SignalLight {
         for(int i=0;i<n;i++){
             sum +=Integer.parseInt(monthList.get(i).price);
         }
-        if(sum<botLimit)return 0;
-        else if(sum>=botLimit && sum<topLimit)return 1;
-        else return 2;
+        if(sum<botLimit)return 0; //green
+        else if(sum>=botLimit && sum<topLimit)return 1; //yellow
+        else return 2; //red
         //0 : green 1 : yellow 2 : red
+    }
+    public int CalcSum(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        monthList = ApplicationSingleton.getInstance().GetExpenseList(1,dateFormat.format(date));
+        int n = monthList.size();
+        //int botLimit,topLimit;
+        //botLimit = ApplicationSingleton.getInstance().GetBotLimit();
+        //topLimit = ApplicationSingleton.getInstance().GetTopLimit();
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum +=Integer.parseInt(monthList.get(i).price);
+        }
+        return sum;
     }
 }

@@ -15,6 +15,7 @@ public class struct {
     public double gridX;
     public double gridY;
     public boolean invalid;
+    public String payment;
 
 
 //TODO: 나중에 쓰게 되면 추가

@@ -52,9 +52,9 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<struct> arrayList = new ArrayList<struct>();
         SQLiteDatabase db = this.getReadableDatabase();
         if(option == 1)
-            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName, null);
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, payment, _id FROM " + tableName, null);
         else // option == 2
-            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2, null);
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, payment, _id FROM " + tableName2, null);
         count = cursor.getCount();
         cursor.moveToFirst();
 
@@ -68,7 +68,8 @@ public class DBHelper extends SQLiteOpenHelper {
             temp.memo = cursor.getString(4);
             temp.gridX = cursor.getDouble(5);
             temp.gridY = cursor.getDouble(6);
-            temp.ID = cursor.getInt(7);
+            temp.payment = cursor.getString(7);
+            temp.ID = cursor.getInt(8);
             arrayList.add(temp);
             cursor.moveToNext();
         }
@@ -81,11 +82,11 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
         if(option == 1) {
-            cursor= db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + " where date like '"
+            cursor= db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, payment, _id FROM " + tableName + " where date like '"
                     + date.substring(0, 6) + "%'", null);
         }
         else {
-            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + " where date like '"
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, payment, _id FROM " + tableName2 + " where date like '"
                     + date.substring(0, 6) + "%'", null);
         }
         count = cursor.getCount();
@@ -102,7 +103,8 @@ public class DBHelper extends SQLiteOpenHelper {
             temp.gridX = cursor.getDouble(5);
             temp.gridY = cursor.getDouble(6);
 
-            temp.ID = cursor.getInt(7);
+            temp.payment = cursor.getString(7);
+            temp.ID = cursor.getInt(8);
             arrayList.add(temp);
             cursor.moveToNext();
         }
@@ -218,7 +220,7 @@ public class DBHelper extends SQLiteOpenHelper {
             for (int i = 0; i < 7; i++) {
                 struct temp;
                 tempstring = String.valueOf(weekday[i]);
-                cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + " where date like '"
+                cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, payment, _id FROM " + tableName + " where date like '"
                         + tempstring + "%'", null);
                 count = cursor.getCount();
                 cursor.moveToFirst();
@@ -234,7 +236,8 @@ public class DBHelper extends SQLiteOpenHelper {
                     temp.gridX = cursor.getDouble(5);
                     temp.gridY = cursor.getDouble(6);
 
-                    temp.ID = cursor.getInt(7);
+                    temp.payment = cursor.getString(7);
+                    temp.ID = cursor.getInt(8);
                     arrayList.add(temp);
                     cursor.moveToNext();
                 }
@@ -244,7 +247,7 @@ public class DBHelper extends SQLiteOpenHelper {
             for (int i = 0; i < 7; i++) {
                 struct temp;
                 tempstring = String.valueOf(weekday[i]);
-                cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + " where date like '"
+                cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, payment, _id FROM " + tableName2 + " where date like '"
                         + tempstring + "%'", null);
                 count = cursor.getCount();
                 cursor.moveToFirst();
@@ -259,7 +262,8 @@ public class DBHelper extends SQLiteOpenHelper {
                     temp.gridX = cursor.getDouble(5);
                     temp.gridY = cursor.getDouble(6);
 
-                    temp.ID = cursor.getInt(7);
+                    temp.payment = cursor.getString(7);
+                    temp.ID = cursor.getInt(8);
                     arrayList.add(temp);
                     cursor.moveToNext();
                 }
@@ -275,11 +279,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor;
         if(option == 1){
-            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName + " where date like '"
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, payment, _id FROM " + tableName + " where date like '"
                     + date.substring(0,8) + "%'", null);
         }
         else{
-            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, _id FROM " + tableName2 + " where date like '"
+            cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, payment, _id FROM " + tableName2 + " where date like '"
                     + date.substring(0,8) + "%'", null);
         }
         count = cursor.getCount();
@@ -296,7 +300,8 @@ public class DBHelper extends SQLiteOpenHelper {
             temp.gridX = cursor.getDouble(5);
             temp.gridY = cursor.getDouble(6);
 
-            temp.ID = cursor.getInt(7);
+            temp.payment = cursor.getString(7);
+            temp.ID = cursor.getInt(8);
             arrayList.add(temp);
             cursor.moveToNext();
         }
@@ -325,7 +330,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "category text, "
                 + "memo text, "
                 + "gridX text, "
-                + "gridY text"
+                + "gridY text, "
+                + "payment text"
                 + ")");
 
         db.execSQL("CREATE TABLE if not exists " + tableName2 + "("
@@ -336,7 +342,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "category text, "
                 + "memo text, "
                 + "gridX text, "
-                + "gridY text"
+                + "gridY text, "
+                + "payment text"
                 + ")");
     }
 
@@ -353,6 +360,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         + "memo text, "
                         + "gridX text, "
                         + "gridY text"
+                        + "payment text"
                         + ")");
             }
             else {
@@ -362,7 +370,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void onInsertdata(String date, String price, String storename, String category, String memo, String gridX, String gridY,int option) {
+    public void onInsertdata(String date, String price, String storename, String category, String memo, String gridX, String gridY,String payment, int option) {
         SQLiteDatabase db = this.getWritableDatabase();
 /*
         db.execSQL("INSERT INTO " + tableName + "(date, price, storename, category, memo, gridX, gridY) VALUES " // primary키는 입력하지않아도 자동으로 증가하며 입력됨 oncreate참조
@@ -384,6 +392,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put("memo", memo);
         cv.put("gridX", gridX);
         cv.put("gridY", gridY);
+        cv.put("payment", payment);
         if(option == 1)//지출
             db.insert(tableName, null, cv);
         else {
@@ -401,7 +410,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //data update
-    public void onUpdate(String date, String price, String storename, String category, String memo, String gridX, String gridY,int option, int ID) {
+    public void onUpdate(String date, String price, String storename, String category, String memo, String gridX, String gridY,String payment, int option, int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -412,6 +421,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put("memo", memo);
         cv.put("gridX", gridX);
         cv.put("gridY", gridY);
+        cv.put("payment", payment);
 
         if(option == 1)
             db.update(tableName, cv, "_id = ?", new String[] {Integer.toString(ID)});

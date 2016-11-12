@@ -1,5 +1,6 @@
 package com.hongik.alpha_money.Fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,12 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -24,6 +28,7 @@ import com.hongik.alpha_money.DataStructure.CustomDate;
 import com.hongik.alpha_money.DataStructure.struct;
 import com.hongik.alpha_money.R;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -38,10 +43,10 @@ public class MainMiddleStatisticsFragment extends Fragment {
     PieChart PaymentChart;
     HorizontalBarChart TimeChart;
     ListView WeekChart;
-    LinearLayout Graph_Layout1;
+    RelativeLayout Graph_Layout1;
     LinearLayout Graph_Layout2;
     LinearLayout Graph_Layout3;
-    LinearLayout Graph_Layout4;
+    RelativeLayout Graph_Layout4;
     ArrayList<struct> arrayList;
     CustomDate customDate = new CustomDate();
 
@@ -60,6 +65,12 @@ public class MainMiddleStatisticsFragment extends Fragment {
     TextView week6price;
     TextView week7price;
 
+    TextView date_monthGraph;
+    TextView date_paymentGraph;
+    String str_date_MonthGraph;
+    String str_date_PaymentGraph;
+    ImageView date_left_month, date_right_month, date_left_payment, date_right_payment;
+
 
     ApplicationSingleton instance = ApplicationSingleton.getInstance();
 
@@ -71,41 +82,129 @@ public class MainMiddleStatisticsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.main_statistics_graph, container, false);
 
+        date_monthGraph = (TextView)rootView.findViewById(R.id.date_monthGraph);
+        date_paymentGraph = (TextView)rootView.findViewById(R.id.date_paymentGraph);
+        date_monthGraph.setText(customDate.strCurYearMonth.substring(0,4) + "." + customDate.strCurYearMonth.substring(4,6));
+        date_paymentGraph.setText(customDate.strCurYearMonth.substring(0,4) + "." + customDate.strCurYearMonth.substring(4,6));
+        str_date_MonthGraph = customDate.strCurYearMonth;
+        str_date_PaymentGraph = customDate.strCurYearMonth;
+        date_left_month = (ImageView)rootView.findViewById(R.id.date_left_monthGraph);
+        date_right_month = (ImageView)rootView.findViewById(R.id.date_right_monthGraph);
+        date_left_payment = (ImageView)rootView.findViewById(R.id.date_left_paymentGraph);
+        date_right_payment = (ImageView)rootView.findViewById(R.id.date_right_paymentGraph);
+
+        date_left_month.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("tag", "left click");
+                str_date_MonthGraph = customDate.GetBeforeMonth(str_date_MonthGraph);
+                date_monthGraph.setText(str_date_MonthGraph.substring(0,4) + "." + str_date_MonthGraph.substring(4,6));
+                ShowMonthGraph(str_date_MonthGraph);
+            }
+        });
+
+        date_right_month.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("tag", "right click");
+                str_date_MonthGraph = customDate.GetNextMonth(str_date_MonthGraph);
+                date_monthGraph.setText(str_date_MonthGraph.substring(0,4) + "." + str_date_MonthGraph.substring(4,6));
+                ShowMonthGraph(str_date_MonthGraph);
+            }
+        });
+
+        date_left_payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("tag", "left click");
+                str_date_PaymentGraph = customDate.GetBeforeMonth(str_date_PaymentGraph);
+                date_paymentGraph.setText(str_date_PaymentGraph.substring(0,4) + "." + str_date_PaymentGraph.substring(4,6));
+                ShowPaymentGraph(str_date_PaymentGraph);
+            }
+        });
+
+        date_right_payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("tag", "left click");
+                str_date_PaymentGraph = customDate.GetNextMonth(str_date_PaymentGraph);
+                date_paymentGraph.setText(str_date_PaymentGraph.substring(0,4) + "." + str_date_PaymentGraph.substring(4,6));
+                ShowPaymentGraph(str_date_PaymentGraph);
+            }
+        });
+
         MonthChart = (PieChart) rootView.findViewById(R.id.month_graph);
         //WeekChart = (ListView) rootView.findViewById(R.id.week_graph);
         TimeChart = (HorizontalBarChart) rootView.findViewById(R.id.time_graph);
         PaymentChart = (PieChart) rootView.findViewById(R.id.payment_graph);
-        Graph_Layout1 = (LinearLayout)rootView.findViewById(R.id.graph_layout1);
+        Graph_Layout1 = (RelativeLayout)rootView.findViewById(R.id.graph_layout1);
         Graph_Layout2 = (LinearLayout)rootView.findViewById(R.id.graph_layout2);
         Graph_Layout3 = (LinearLayout)rootView.findViewById(R.id.graph_layout3);
-        Graph_Layout4 = (LinearLayout)rootView.findViewById(R.id.graph_layout4);
-        ShowMonthGraph();
+        Graph_Layout4 = (RelativeLayout)rootView.findViewById(R.id.graph_layout4);
+        ShowMonthGraph(customDate.strCurYearMonth);
 
         return rootView;
     }
 
-    public void ShowMonthGraph(){//graph1
+    public void ShowMonthGraph(String str){//graph1
         Graph_Layout1.setVisibility(LinearLayout.VISIBLE);
         Graph_Layout2.setVisibility(LinearLayout.GONE);
         Graph_Layout3.setVisibility(LinearLayout.GONE);
         Graph_Layout4.setVisibility(LinearLayout.GONE);
 
         List<PieEntry> monthentries = new ArrayList<>();
+        ArrayList<struct> arrayList;
 
-        monthentries.add(new PieEntry(18.5f, "Green"));
-        monthentries.add(new PieEntry(26.7f, "Yellow"));
-        monthentries.add(new PieEntry(24.0f, "Red"));
-        monthentries.add(new PieEntry(30.8f, "Blue"));
+        int Cate = 4, i;
+        int NotCate = 0, food = 0, living = 0, leisure = 0, sum = 0;
 
-        PieDataSet set = new PieDataSet(monthentries, "Month Usage");
+        arrayList = ApplicationSingleton.getInstance().GetExpenseList(1, str);
 
-        set.setColors(new int [] {R.color.rainbow1, R.color.rainbow2, R.color.rainbow3, R.color.rainbow4, R.color.rainbow5, R.color.rainbow6, R.color.rainbow7}, ApplicationSingleton.getInstance().GetMainActivityContext());
+        for(i = 0; i < arrayList.size(); i++)
+        {
+            if(arrayList.get(i).category.length() != 0)
+                Cate = Integer.parseInt(arrayList.get(i).category.substring(0,1));
+            if(Cate == 0){
+                NotCate += Integer.parseInt(arrayList.get(i).price);
+            }
+            else if(Cate == 1) {
+                food += Integer.parseInt(arrayList.get(i).price);
+            }
+            else if(Cate == 2){
+                living += Integer.parseInt(arrayList.get(i).price);
+            }
+            else if(Cate == 3) {
+                leisure += Integer.parseInt(arrayList.get(i).price);
+            }
+
+            sum += Integer.parseInt(arrayList.get(i).price);
+        }
+
+        if(NotCate != 0)
+            monthentries.add(new PieEntry(NotCate, "미분류"));
+        if(food != 0)
+            monthentries.add(new PieEntry(food, "식비"));
+        if(living != 0)
+            monthentries.add(new PieEntry(living, "생활비"));
+        if(leisure != 0)
+            monthentries.add(new PieEntry(leisure, "여가"));
+
+        PieDataSet set = new PieDataSet(monthentries, " ");
+
+        set.setColors(new int [] {R.color.rainbow1, R.color.rainbow2, R.color.rainbow3, R.color.rainbow4, R.color.rainbow5, R.color.rainbow6, R.color.rainbow7, R.color.rainbow8, R.color.rainbow9, R.color.rainbow10, R.color.rainbow11, R.color.rainbow12, R.color.rainbow13, R.color.rainbow14, R.color.rainbow15, R.color.rainbow16, R.color.rainbow17, R.color.rainbow18, R.color.rainbow19, R.color.rainbow20, R.color.rainbow21, R.color.rainbow22, R.color.rainbow23, R.color.rainbow24, R.color.rainbow25, R.color.rainbow26, R.color.rainbow27, R.color.rainbow28, R.color.rainbow29, R.color.rainbow30, R.color.rainbow31}, ApplicationSingleton.getInstance().GetMainActivityContext());
+        set.setValueTextSize(22.0f);
         PieData data = new PieData(set);
 
         data.setHighlightEnabled(false); // highlight 삭제
 
+        MonthChart.setEntryLabelTextSize(22.0f);
+        MonthChart.setEntryLabelColor(Color.BLACK);
         MonthChart.getDescription().setEnabled(false); // 설명삭제
-        MonthChart.getLegend().setMaxSizePercent(200);
+        MonthChart.getLegend().setFormSize(20.0f);
+        MonthChart.getLegend().setTextSize(20.0f);
+        MonthChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        MonthChart.setCenterText(String.valueOf(NumberFormat.getIntegerInstance().format(sum)) + "원");
+        MonthChart.setCenterTextSize(28.0f);
 
         MonthChart.setData(data);
         MonthChart.invalidate(); // refresh
@@ -250,7 +349,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
         entries.add(new BarEntry(5, 0, "t2"));
 
         BarDataSet set = new BarDataSet(entries, "Time Usage");
-        set.setColors(new int [] {R.color.rainbow1, R.color.rainbow2, R.color.rainbow3, R.color.rainbow4, R.color.rainbow5, R.color.rainbow6, R.color.rainbow7}, ApplicationSingleton.getInstance().GetMainActivityContext());
+        set.setColors(new int [] {R.color.rainbow1, R.color.rainbow2, R.color.rainbow3, R.color.rainbow4, R.color.rainbow4, R.color.rainbow5, R.color.rainbow6}, ApplicationSingleton.getInstance().GetMainActivityContext());
 
         BarData data = new BarData(set);
         data.setHighlightEnabled(false); // highlight 삭제
@@ -277,30 +376,68 @@ public class MainMiddleStatisticsFragment extends Fragment {
         TimeChart.invalidate(); // refresh
     }
 
-    public void ShowPaymentGraph() {//graph4
+    public void ShowPaymentGraph(String str) {//graph4
         Graph_Layout4.setVisibility(LinearLayout.VISIBLE);
         Graph_Layout1.setVisibility(LinearLayout.GONE);
         Graph_Layout2.setVisibility(LinearLayout.GONE);
         Graph_Layout3.setVisibility(LinearLayout.GONE);
 
         List<PieEntry> paymententries = new ArrayList<>();
+        ArrayList<struct> arrayList;
 
-        paymententries.add(new PieEntry(18.5f, "Green"));
-        paymententries.add(new PieEntry(26.7f, "Yellow"));
-        paymententries.add(new PieEntry(24.0f, "Red"));
-        paymententries.add(new PieEntry(30.8f, "Blue"));
+        String payment[] = new String[30];
+        int paymentsum[] = new int[30];
+        boolean find = false;
+        int count = 0, sum = 0, i, j;
 
-        PieDataSet set = new PieDataSet(paymententries, "Payment Usage");
+        arrayList = ApplicationSingleton.getInstance().GetExpenseList(1, str);
 
-        set.setColors(new int [] {R.color.rainbow1, R.color.rainbow2, R.color.rainbow3, R.color.rainbow4, R.color.rainbow5, R.color.rainbow6, R.color.rainbow7}, ApplicationSingleton.getInstance().GetMainActivityContext());
+        for(i = 0; i < arrayList.size(); i++) {
+            if(arrayList.get(i).payment.length() != 0) {
+                for (j = 0; j < count; j++) {
+                    if (payment[j].equals(arrayList.get(i).payment)) {
+                        paymentsum[j] += Integer.parseInt(arrayList.get(i).price);
+                        sum += paymentsum[j];
+                        find = true;
+                        break;
+                    }
+                }
+                if(find == false) {
+                    payment[count] = arrayList.get(i).payment;
+                    paymentsum[count] += Integer.parseInt(arrayList.get(i).price);
+                    sum += paymentsum[count];
+                    count++;
+                }
+            }
+            find = false;
+        }
+
+        for(i = 0; i < count; i++) {
+            paymententries.add(new PieEntry(paymentsum[i], payment[i]));
+        }
+
+        PieDataSet set = new PieDataSet(paymententries, " ");
+
+
+
+        set.setColors(new int [] {R.color.rainbow1, R.color.rainbow2, R.color.rainbow3, R.color.rainbow4, R.color.rainbow5, R.color.rainbow6, R.color.rainbow7, R.color.rainbow8, R.color.rainbow9, R.color.rainbow10, R.color.rainbow11, R.color.rainbow12, R.color.rainbow13, R.color.rainbow14, R.color.rainbow15, R.color.rainbow16, R.color.rainbow17, R.color.rainbow18, R.color.rainbow19, R.color.rainbow20, R.color.rainbow21, R.color.rainbow22, R.color.rainbow23, R.color.rainbow24, R.color.rainbow25, R.color.rainbow26, R.color.rainbow27, R.color.rainbow28, R.color.rainbow29, R.color.rainbow30, R.color.rainbow31}, ApplicationSingleton.getInstance().GetMainActivityContext());
+        set.setValueTextSize(22.0f);
         PieData data = new PieData(set);
 
         data.setHighlightEnabled(false); // highlight 삭제
 
+        PaymentChart.setEntryLabelTextSize(22.0f);
+        PaymentChart.setEntryLabelColor(Color.BLACK);
         PaymentChart.getDescription().setEnabled(false); // 설명삭제
+        PaymentChart.getLegend().setFormSize(20.0f);
+        PaymentChart.getLegend().setTextSize(20.0f);
+        PaymentChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        PaymentChart.setCenterText(String.valueOf(NumberFormat.getIntegerInstance().format(sum)) + "원");
+        PaymentChart.setCenterTextSize(28.0f);
 
         PaymentChart.setData(data);
         PaymentChart.invalidate(); // refresh
+
     }
 
 }
