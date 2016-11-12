@@ -67,6 +67,7 @@ public class MainMiddleExpenseFragment extends Fragment{
         listView_expense = (ListView)rootViewBasic.findViewById(R.id.main_expense_listview);
 
         stateInFrag = 2;
+        ((MainActivity)ctx).SetPageState(2);
 
         //TODO : 상황에 맞는 (월,주,일) 출력 해야 함.
 
@@ -82,6 +83,8 @@ public class MainMiddleExpenseFragment extends Fragment{
             if (today < nextday){
                 struct temp = new struct();
                 temp.storeName = date.substring(4,6) + "월 " + date.substring(6,8) + "일 " + customDate.CheckWeekDayWithKor(date);
+                temp.invalid = true;
+                ////////////////////////////////////////
                 temp.price = "";
                 arrayListWeek.add(temp);
             }
@@ -129,6 +132,7 @@ public class MainMiddleExpenseFragment extends Fragment{
                         temp.storeName.trim();//removing all leading spaces
                         Log.i("Trim","e2: " + temp.storeName.trim() );
 
+
                         intent.putExtra("storeName", temp.storeName.trim());
                         intent.putExtra("category", temp.category);
                         intent.putExtra("memo", temp.memo);
@@ -141,10 +145,7 @@ public class MainMiddleExpenseFragment extends Fragment{
                 else if(((MainActivity)ctx).GetPageState() ==3){
                     struct struct = arrayListMonth.get(position);
                     onclickToday(struct.memo);
-                }
-                else{
-
-                }
+            }
             }
         });
 

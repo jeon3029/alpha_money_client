@@ -5,9 +5,36 @@
     <color name="colorAccent">#FF4081</color>
     <color name="rainbow1">#FF0000</color>
     <color name="rainbow2">#FF7F00</color>
-    <color name="rainbow3">#FFFF00</color>
-    <color name="rainbow4">#00FF00</color>
-    <color name="rainbow5">#0000FF</color>
-    <color name="rainbow6">#000080</color>
-    <color name="rainbow7">#9400D3</color>
+    <color name="rainbow3">#33CC00</color>
+    <color name="rainbow4">#0000FF</color>
+    <color name="rainbow5">#000080</color>
+    <color name="rainbow6">#9400D3</color>
+    <color name="rainbow7">#EEEEEE</color>
+    <color name="rainbow8">#0000A0</color>
+    <color name="rainbow9">#808000</color>
+    <color name="rainbow10">#A52A2A</color>
+    <color name="rainbow11">#347C17</color>
+    <color name="rainbow12">#FF0000</color>
+    <color name="rainbow13">#FF7F00</color>
+    <color name="rainbow14">#33CC00</color>
+    <color name="rainbow15">#0000FF</color>
+    <color name="rainbow16">#000080</color>
+    <color name="rainbow17">#9400D3</color>
+    <color name="rainbow18">#EEEEEE</color>
+    <color name="rainbow19">#0000A0</color>
+    <color name="rainbow20">#808000</color>
+    <color name="rainbow21">#A52A2A</color>
+    <color name="rainbow22">#347C17</color>
+    <color name="rainbow23">#FF0000</color>
+    <color name="rainbow24">#FF7F00</color>
+    <color name="rainbow25">#33CC00</color>
+    <color name="rainbow26">#0000FF</color>
+    <color name="rainbow27">#000080</color>
+    <color name="rainbow28">#9400D3</color>
+    <color name="rainbow29">#EEEEEE</color>
+    <color name="rainbow30">#0000A0</color>
+    <color name="rainbow31">#808000</color>
+
+
+
 </resources>

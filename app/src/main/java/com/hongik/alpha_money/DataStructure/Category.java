@@ -29,8 +29,6 @@ public class Category {
         int small = Integer.parseInt(category.substring(1,2));
 
         switch (big) {
-            case 0:
-                return "미분류";
             case 1:
                 switch (small) {
                     case 0:
@@ -70,8 +68,44 @@ public class Category {
                     case 4:
                         return "미용";
                 }
-                break;
         }
-        return " ";
+        return "미분류";
+    }
+
+    public String GetCategoryNumber(String category) {
+        if(category.length() != 0) {
+            if (category.equals("식비"))
+                return "10";
+            else if (category.equals("밥"))
+                return "11";
+            else if (category.equals("음료"))
+                return "12";
+            else if (category.equals("디저트"))
+                return "13";
+            else if (category.equals("생활비"))
+                return "20";
+            else if (category.equals("생활용품"))
+                return "21";
+            else if (category.equals("교육"))
+                return "22";
+            else if (category.equals("교통"))
+                return "23";
+            else if (category.equals("통신"))
+                return "24";
+            else if (category.equals("여가"))
+                return "30";
+            else if (category.equals("문화"))
+                return "31";
+            else if (category.equals("건강"))
+                return "32";
+            else if (category.equals("의류"))
+                return "33";
+            else if (category.equals("미용"))
+                return "34";
+            else
+                return "00";
+        }
+        else
+            return "00";
     }
 }

@@ -3,28 +3,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/statistics_graph"
+    android:background="#ffeeddcc"
     >
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:paddingTop="50dp"
-        android:visibility="gone"
+        android:layout_height="wrap_content"
         android:paddingBottom="50dp"
         android:id="@+id/graph_layout1"
+        android:orientation="vertical"
         >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/top1"
+            android:background="#ffffffff">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/left"
+                android:clickable="true"
+                android:layout_weight="1"
+                android:id="@+id/date_left_monthGraph"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:id="@+id/date_monthGraph"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:layout_height="match_parent"
+                android:src="@drawable/right"
+                android:id="@+id/date_right_monthGraph"
+                />
+        </LinearLayout>
+
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/month_graph"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@id/top1">
         </com.github.mikephil.charting.charts.PieChart>
-    </LinearLayout>
+    </RelativeLayout>
     <!--Month-->
 
+    <!--Week-->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,6 +69,7 @@
             android:paddingBottom="50dp"
             android:id="@+id/graph_layout2"
             android:orientation="vertical"
+            android:gravity="center"
             >
             <!--1st-->
             <LinearLayout
@@ -73,7 +108,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:text="월"
-                    android:textSize="25sp"
+                    android:textSize="27sp"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_2_day"
                     />
@@ -81,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="금액"
-                    android:textSize="25sp"
+                    android:textSize="27sp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
 
@@ -101,7 +136,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:text="월"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_3_day"
                     />
@@ -109,7 +144,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="금액"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_3_price"
@@ -128,7 +163,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:text="월"
-                    android:textSize="15sp"
+                    android:textSize="22sp"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_4_day"
                     />
@@ -136,7 +171,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="금액"
-                    android:textSize="15sp"
+                    android:textSize="22sp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_4_price"
@@ -155,7 +190,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:text="월"
-                    android:textSize="10sp"
+                    android:textSize="20sp"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_5_day"
                     />
@@ -163,7 +198,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="금액"
-                    android:textSize="10sp"
+                    android:textSize="20sp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_5_price"
@@ -182,7 +217,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:text="월"
-                    android:textSize="10sp"
+                    android:textSize="18sp"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_6_day"
                     />
@@ -190,7 +225,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="금액"
-                    android:textSize="10sp"
+                    android:textSize="18sp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_6_price"
@@ -209,7 +244,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:text="월"
-                    android:textSize="10sp"
+                    android:textSize="15sp"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_7_day"
                     />
@@ -217,7 +252,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="금액"
-                    android:textSize="10sp"
+                    android:textSize="15sp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_7_price"
@@ -248,22 +283,56 @@
     <!--Time-->
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
+        android:layout_height="wrap_content"
         android:visibility="gone"
-        android:paddingTop="50dp"
         android:paddingBottom="50dp"
         android:id="@+id/graph_layout4"
+        android:orientation = "vertical"
         >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/top4"
+            android:background="#ffffffff">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/left"
+                android:clickable="true"
+                android:layout_weight="1"
+                android:id="@+id/date_left_paymentGraph"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:id="@+id/date_paymentGraph"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:layout_height="match_parent"
+                android:src="@drawable/right"
+                android:id="@+id/date_right_paymentGraph"
+                />
+        </LinearLayout>
+
+
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/payment_graph"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@id/top4">
         </com.github.mikephil.charting.charts.PieChart>
-    </LinearLayout>
+    </RelativeLayout>
     <!--Payment-->
 
 

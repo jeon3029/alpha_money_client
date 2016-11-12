@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.DataBase.DBHelper;
+import com.hongik.alpha_money.DataStructure.CustomDate;
 import com.hongik.alpha_money.DataStructure.ListCustomAdapter;
 import com.hongik.alpha_money.DataStructure.struct;
 import com.hongik.alpha_money.Fragment.EmptyFragment;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     MainBottomFragment mainBottomFragment;
     StatisticsMenuFragment statisticsMenuFragment;
     MainMiddleStatisticsFragment mainMiddleStatisticsFragment;
+    CustomDate customDate = new CustomDate();
 
     BroadcastReceiver smsReceiver;
 
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     public void ChangeMenu1Graph(){
         //mainViewPagerFragment.SetFragment(2,graphMonthFragment);
         //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphMonthFragment).commit();
-        mainMiddleStatisticsFragment.ShowMonthGraph();
+        mainMiddleStatisticsFragment.ShowMonthGraph(customDate.strCurYearMonth);
     }
     public void ChangeMenu2Graph(){
         //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphWeekFragment).commit();
@@ -161,10 +163,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void ChangeMenu4Graph(){
         //fragmentManager.beginTransaction().replace(R.id.main_middle_layout, graphPaymentFragment).commit();
-        mainMiddleStatisticsFragment.ShowPaymentGraph();
+        mainMiddleStatisticsFragment.ShowPaymentGraph(customDate.strCurYearMonth);
     }
 
-    public FragmentManager GetFM(){return fm;}
+    public FragmentManager GetFM(){
+            return fragmentManager;
+    }
    // public MainMiddleStatisticsFragment GetMainMiddleStatisticsFragment() { return mainMiddleStatisticsFragment; }
 
     @Override
@@ -201,8 +205,9 @@ public class MainActivity extends AppCompatActivity {
                         temp.memo = data.getStringExtra("memo");
                         temp.gridX = data.getDoubleExtra("gridX", 0.000000);
                         temp.gridY = data.getDoubleExtra("gridY", 0.000000);
+                        temp.payment = data.getStringExtra("payment");
                         mydb.onUpdate(temp.date, temp.price, temp.storeName, temp.category, temp.memo
-                                , Double.toString(temp.gridX), Double.toString(temp.gridY), option, temp.ID);
+                                , Double.toString(temp.gridX), Double.toString(temp.gridY),temp.payment, option, temp.ID);
                     }
                 }
                 break;

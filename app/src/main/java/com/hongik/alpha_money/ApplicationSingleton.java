@@ -66,8 +66,8 @@ public class ApplicationSingleton extends Application {
         return arrayList_income;
     }
     public DBHelper GetDataBase(){return mydb;}
-    public void onInsertdata(String date, String price, String storename, String category, String memo, String gridX, String gridY,int option) {
-        mydb.onInsertdata(date,price,storename,category,memo,gridX,gridY,option);
+    public void onInsertdata(String date, String price, String storename, String category, String memo, String gridX, String gridY,String payment, int option) {
+        mydb.onInsertdata(date,price,storename,category,memo,gridX,gridY,payment,option);
         return;
     }
 
