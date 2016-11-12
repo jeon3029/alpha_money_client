@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         //((ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE)).clearApplicationUserData();
 
         initiate();
-        arrayList_expense = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(1);
-        arrayList_income = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(2);
+        //arrayList_expense = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(1);
+        //arrayList_income = ApplicationSingleton.getInstance().GetDataBase().onGetalldata(2);
         if (savedInstanceState == null) {
             //프래그먼트 3가지 세팅
             fragmentManager.beginTransaction().add(R.id.main_topmenu_layout, mainTopFragment).commit();

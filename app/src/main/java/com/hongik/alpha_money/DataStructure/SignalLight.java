@@ -30,7 +30,7 @@ public class SignalLight {
         else return 2; //red
         //0 : green 1 : yellow 2 : red
     }
-    public int CalcSum(){
+    public int CalcSum(){//returns total amount of spend this month
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
         monthList = ApplicationSingleton.getInstance().GetExpenseList(1,dateFormat.format(date));

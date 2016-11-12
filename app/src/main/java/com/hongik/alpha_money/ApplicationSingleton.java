@@ -31,7 +31,7 @@ public class ApplicationSingleton extends Application {
     MainMiddleExpenseFragment ExpenseFragment;
     MainMiddleIncomeFragment IncomeFragment;
 
-    int botLimit=100000,topLimit=200000;
+    int botLimit=100000,topLimit=200000;//about signal light
     public int GetBotLimit(){
         return botLimit;
     }

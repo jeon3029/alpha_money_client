@@ -359,7 +359,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         + "category text, "
                         + "memo text, "
                         + "gridX text, "
-                        + "gridY text"
+                        + "gridY text, "
                         + "payment text"
                         + ")");
             }
