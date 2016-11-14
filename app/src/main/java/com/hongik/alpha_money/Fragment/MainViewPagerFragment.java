@@ -49,18 +49,19 @@ public class MainViewPagerFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 2) {
+                if(position == 2) {//통계
                     ((MainActivity)ctx).ShowStatisticsMenuFragment();
                     ((MainActivity)ctx).SetPageState(7);
                     Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
                 }
                 else {
                     ((MainActivity)ctx).ShowExpenseIncomeFragment();
-                    if(position == 0) {
+                    if(position == 0) {//지출
                         ((MainActivity) ctx).SetPageState(2);
                         Log.i("tag", String.valueOf(((MainActivity) ctx).GetPageState()));
                     }
-                    else if(position == 1) {
+                    else if(position == 1) {//수입
+
                         ((MainActivity) ctx).SetPageState(5);
                         Log.i("tag", String.valueOf(((MainActivity) ctx).GetPageState()));
                     }

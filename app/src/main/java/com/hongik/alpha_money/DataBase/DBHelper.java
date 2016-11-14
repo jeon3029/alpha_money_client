@@ -73,7 +73,8 @@ public class DBHelper extends SQLiteOpenHelper {
             arrayList.add(temp);
             cursor.moveToNext();
         }
-
+        db.close();
+        /////
         return arrayList;
     }
 
@@ -109,6 +110,8 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
 
+        db.close();
+        /////
         return  arrayList;
     }
 
@@ -269,6 +272,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 }
             }
         }
+        db.close();
+        /////
+
 
         return  arrayList;
     }
@@ -305,13 +311,14 @@ public class DBHelper extends SQLiteOpenHelper {
             arrayList.add(temp);
             cursor.moveToNext();
         }
-
+        db.close();
+        /////
         return  arrayList;
     }
 
 
     public DBHelper(Context context) {
-        super(context, databaseName, null, 1);
+        super(context, databaseName, null, 5);
         //onOpen(db);
     }
 
@@ -349,7 +356,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { // 어플리케이션 업그레이드시 사용될 기능
-        try {
+        /*try {
             if(db != null) {
                 db.execSQL("CREATE TABLE if not exists " + tableName + "("
                         + "_id integer PRIMARY KEY autoincrement, "
@@ -367,13 +374,16 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
+        db.execSQL("drop table if exists expensetable");
+        db.execSQL("drop table if exists incometable");
     }
 
     public void onInsertdata(String date, String price, String storename, String category, String memo, String gridX, String gridY,String payment, int option) {
         SQLiteDatabase db = this.getWritableDatabase();
 /*
-        db.execSQL("INSERT INTO " + tableName + "(date, price, storename, category, memo, gridX, gridY) VALUES " // primary키는 입력하지않아도 자동으로 증가하며 입력됨 oncreate참조
+        db.execS
+        QL("INSERT INTO " + tableName + "(date, price, storename, category, memo, gridX, gridY) VALUES " // primary키는 입력하지않아도 자동으로 증가하며 입력됨 oncreate참조
                 + "(" + date
                 + ", " + price
                 + ", '" + storename
@@ -398,6 +408,9 @@ public class DBHelper extends SQLiteOpenHelper {
         else {
             db.insert(tableName2, null, cv);
         }
+
+        db.close();
+        /////
     }
 
     public void onDeletedata(int option, int id){
@@ -406,9 +419,10 @@ public class DBHelper extends SQLiteOpenHelper {
             db.delete(tableName, "_id = ? ", new String[] {Integer.toString(id)});
         else
             db.delete(tableName2, "_id = ? ", new String[] {Integer.toString(id)});
+
+        db.close();
+        /////
     }
-
-
     //data update
     public void onUpdate(String date, String price, String storename, String category, String memo, String gridX, String gridY,String payment, int option, int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -427,5 +441,8 @@ public class DBHelper extends SQLiteOpenHelper {
             db.update(tableName, cv, "_id = ?", new String[] {Integer.toString(ID)});
         else
             db.update(tableName2, cv, "_id = ?", new String[] {Integer.toString(ID)});
+
+        db.close();
+        /////
     }
 }

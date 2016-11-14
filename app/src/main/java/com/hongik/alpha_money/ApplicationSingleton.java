@@ -61,7 +61,6 @@ public class ApplicationSingleton extends Application {
         }
         else if(option == 1){
             //TODO:: 월일 나누면서 추가로 작업
-
             arrayList_income = mydb.onGetmonthdata(key, 2);
         }
         else if(option == 2){

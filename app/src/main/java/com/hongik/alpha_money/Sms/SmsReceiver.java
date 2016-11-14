@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
+import com.hongik.alpha_money.DataStructure.struct;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,7 +34,6 @@ public class SmsReceiver extends BroadcastReceiver{
         int string = 0;
         if(intent.getAction().equals(SMS_RECV)){
             Log.i("TAG", "문자수신");
-
             Bundle bundle = intent.getExtras();
             Object messages[] = (Object[])bundle.get("pdus");
             SmsMessage smsMessage[] = new SmsMessage[messages.length];
@@ -42,7 +43,6 @@ public class SmsReceiver extends BroadcastReceiver{
                 for(int i = 0; i < messages.length; i++) {
                     String format = bundle.getString("format");
                     smsMessage[i] = SmsMessage.createFromPdu((byte[]) messages[i], format);
-
                     strMessage += smsMessage[i].getMessageBody();
                 }
             }
@@ -55,7 +55,6 @@ public class SmsReceiver extends BroadcastReceiver{
             }
 
             Log.i("TAG", strMessage);
-
             Date curDate = new Date(smsMessage[0].getTimestampMillis());
             Log.i("TAG", curDate.toString());
             Log.i("TAG", String.valueOf(curDate.getMonth()));
@@ -70,10 +69,8 @@ public class SmsReceiver extends BroadcastReceiver{
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
             Log.i("TAG", String.valueOf(context.getFileStreamPath("text")));
             Log.i("TAG", String.valueOf(context.getFileStreamPath("a.out")));
-
 
             String[] command = {"", "", String.valueOf(context.getFileStreamPath("a.out"))};
             try {
@@ -82,7 +79,19 @@ public class SmsReceiver extends BroadcastReceiver{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            Log.i("STRING",strMessage);
 
+            //price
+            //storename
+            //bank
+            //date
+            //-->struct 에 저장해서 반환
+
+
+            struct ret;
+            ret = new Tokenizer().parsingString(strMessage);
+            Log.i("PATTERN",ret.date);
+            //이거로 작업하면 됨 price,storename, bank
 /*
 // SMS 발신 번호 확인
             String origNumber = smsMessage[0].getOriginatingAddress();
@@ -92,7 +101,7 @@ public class SmsReceiver extends BroadcastReceiver{
             Log.i("TAG", "발신자 : "+origNumber+", 내용 : " + message);
 
 */
-        }
 
+        }
     }
 }

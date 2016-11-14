@@ -1,6 +1,7 @@
 package com.hongik.alpha_money.Fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,6 +44,13 @@ public class MainBottomFragment extends Fragment {
         buttonToday.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) { // TODO : 통계갖다왔을때 버튼 씹히는현상 고치기
+                buttonToday.setBackgroundColor(0xffaf8944);
+                buttonWeek.setBackgroundColor(0xff9abae6);
+                buttonMonth.setBackgroundColor(0xff9abae6);
+                buttonToday.invalidate();
+                buttonWeek.invalidate();
+                buttonMonth.invalidate();
+
                 Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
                 if(((MainActivity)ctx).GetPageState() < 4) {
                     ApplicationSingleton.getInstance().GetExpenseFragment().onclickToday(customDate.strCurYearMonthDay);
@@ -56,6 +64,12 @@ public class MainBottomFragment extends Fragment {
         buttonWeek.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonToday.setBackgroundColor(0xff9abae6);
+                buttonWeek.setBackgroundColor(0xffaf8944);
+                buttonMonth.setBackgroundColor(0xff9abae6);
+                buttonToday.invalidate();
+                buttonWeek.invalidate();
+                buttonMonth.invalidate();
                 Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
                 if(((MainActivity)ctx).GetPageState() < 4)
                     ApplicationSingleton.getInstance().GetExpenseFragment().onclickWeek(customDate.strCurYearMonthDay);
@@ -67,6 +81,12 @@ public class MainBottomFragment extends Fragment {
         buttonMonth.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonToday.setBackgroundColor(0xff9abae6);
+                buttonWeek.setBackgroundColor(0xff9abae6);
+                buttonMonth.setBackgroundColor(0xffaf8944);
+                buttonToday.invalidate();
+                buttonWeek.invalidate();
+                buttonMonth.invalidate();
                 Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
                 if(((MainActivity)ctx).GetPageState() < 4) {
                     ApplicationSingleton.getInstance().GetExpenseFragment().onclickMonth(customDate.strCurYearMonthDay);

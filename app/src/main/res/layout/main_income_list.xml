@@ -84,7 +84,7 @@
         android:layout_above="@id/total_income_layout"
         android:layout_height="match_parent"
         android:id="@+id/main_income_listview"
-        android:background="#ffeeddcc">
+        android:background="#55aaddcc">
     </ListView>
 </RelativeLayout>
 </LinearLayout>
