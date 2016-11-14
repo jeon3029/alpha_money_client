@@ -40,15 +40,20 @@ public class MainBottomFragment extends Fragment {
         buttonWeek = (Button)rootViewBasic.findViewById(R.id.buttonWeek);
         buttonMonth = (Button)rootViewBasic.findViewById(R.id.buttonMonth);
 
+        buttonWeek.setBackgroundColor(0xffaf8944);
+        buttonWeek.invalidate();
+
+        if(((MainActivity)ctx).GetPageState() < 4)
+        {
+            ApplicationSingleton.getInstance().GetExpenseFragment().Selected();
+        }
+        else if(3 < ((MainActivity)ctx).GetPageState()) {
+            ApplicationSingleton.getInstance().GetIncomeFragment().Selected();
+        }
+
         buttonToday.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) { // TODO : 통계갖다왔을때 버튼 씹히는현상 고치기
-                buttonToday.setBackgroundColor(0xffaf8944);
-                buttonWeek.setBackgroundColor(0xff9abae6);
-                buttonMonth.setBackgroundColor(0xff9abae6);
-                buttonToday.invalidate();
-                buttonWeek.invalidate();
-                buttonMonth.invalidate();
 
                 Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
                 if(((MainActivity)ctx).GetPageState() < 4) {
@@ -63,12 +68,6 @@ public class MainBottomFragment extends Fragment {
         buttonWeek.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonToday.setBackgroundColor(0xff9abae6);
-                buttonWeek.setBackgroundColor(0xffaf8944);
-                buttonMonth.setBackgroundColor(0xff9abae6);
-                buttonToday.invalidate();
-                buttonWeek.invalidate();
-                buttonMonth.invalidate();
 
                 Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
                 if(((MainActivity)ctx).GetPageState() < 4)
@@ -81,12 +80,6 @@ public class MainBottomFragment extends Fragment {
         buttonMonth.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonToday.setBackgroundColor(0xff9abae6);
-                buttonWeek.setBackgroundColor(0xff9abae6);
-                buttonMonth.setBackgroundColor(0xffaf8944);
-                buttonToday.invalidate();
-                buttonWeek.invalidate();
-                buttonMonth.invalidate();
 
                 Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
                 if(((MainActivity)ctx).GetPageState() < 4) {

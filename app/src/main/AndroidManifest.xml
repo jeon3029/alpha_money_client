@@ -23,7 +23,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Activity.MainActivity" >
+        <activity android:name=".Activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +34,8 @@
         <!-- 팝업형식으로 추가되기 위해서 마지막에 .dialog 붙임 -->
         <activity
             android:name=".Activity.AddDataActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+            android:screenOrientation="portrait"/>
 
         <receiver
             android:name=".Sms.SmsReceiver"
@@ -46,7 +48,8 @@
 
         <activity
             android:name=".Activity.DetailActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AIandPopup.PopupActivity"
             android:launchMode="singleInstance"
@@ -68,7 +71,8 @@
         <activity
             android:name=".Activity.MapsActivity"
             android:label="@string/title_activity_maps"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"></activity>
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

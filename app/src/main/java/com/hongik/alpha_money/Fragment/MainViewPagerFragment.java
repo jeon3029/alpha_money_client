@@ -59,11 +59,13 @@ public class MainViewPagerFragment extends Fragment {
                     if(position == 0) {//지출
                         ((MainActivity) ctx).SetPageState(2);
                         Log.i("tag", String.valueOf(((MainActivity) ctx).GetPageState()));
+                        ApplicationSingleton.getInstance().GetExpenseFragment().Selected();
                     }
                     else if(position == 1) {//수입
 
                         ((MainActivity) ctx).SetPageState(5);
                         Log.i("tag", String.valueOf(((MainActivity) ctx).GetPageState()));
+                        ApplicationSingleton.getInstance().GetIncomeFragment().Selected();
                     }
                 }
 
