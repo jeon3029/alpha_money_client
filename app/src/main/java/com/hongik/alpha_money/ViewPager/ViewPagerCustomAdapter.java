@@ -1,11 +1,9 @@
 package com.hongik.alpha_money.ViewPager;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.hongik.alpha_money.Activity.MainActivity;
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.Fragment.MainMiddleExpenseFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleIncomeFragment;
@@ -17,8 +15,6 @@ import com.hongik.alpha_money.Fragment.MainMiddleStatisticsFragment;
 public class ViewPagerCustomAdapter extends FragmentPagerAdapter {
     private static final String[] CONTENT = new String[]{"지출","수입","통계"};
     Fragment[] fragments = new Fragment[3];
-    Context ctx = ApplicationSingleton.getInstance().GetMainActivityContext();
-    FragmentManager fragmentManager = ((MainActivity)ctx).GetFM();
 
     public ViewPagerCustomAdapter(FragmentManager fm) {
         super(fm);

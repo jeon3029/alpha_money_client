@@ -1,8 +1,12 @@
 package com.hongik.alpha_money.Activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,19 +20,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     LatLng grid;
-    double gridX,gridY;
+    double gridX, gridY;
     Intent intent;
+    String price, storename;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
+
         intent = getIntent();
         gridX = intent.getDoubleExtra("gridX", 0.000000);
         gridY = intent.getDoubleExtra("gridY", 0.000000);
+        price = intent.getStringExtra("price");
+        storename = intent.getStringExtra("storename");
         grid = new LatLng(gridX,gridY);
 
-        setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
@@ -42,13 +52,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        mMap.addMarker(new MarkerOptions().position(grid).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(grid));
+        grid = new LatLng(37.555940, 126.931763);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(grid, 16));
+
+        mMap.addMarker(new MarkerOptions()
+                .title(storename)
+                .snippet(price)
+                .position(grid));
+
+        if (mMap.getUiSettings().isMapToolbarEnabled() == true)
+            Log.i("tag", "toolbar on");
     }
 
     public void showMap(double X, double Y)
@@ -56,6 +80,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         grid = new LatLng(X,Y);
         onMapReady(mMap);
     }
-
 
 }

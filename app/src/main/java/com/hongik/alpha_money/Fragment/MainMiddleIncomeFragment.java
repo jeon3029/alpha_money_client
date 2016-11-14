@@ -63,7 +63,6 @@ public class MainMiddleIncomeFragment extends Fragment {
         listView_income = (ListView)rootViewBasic.findViewById(R.id.main_income_listview);
 
         stateInFrag = 2;
-        ((MainActivity)ctx).SetPageState(5);
 
         if(arrayListWeek.size() != 0)
             arrayListWeek.clear();
