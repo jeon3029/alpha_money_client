@@ -12,9 +12,17 @@
         android:layout_height="45dp"
         android:orientation="horizontal"
         android:id="@+id/main_topmenu_layout"
+        android:layout_alignParentTop="true"
         >
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:id="@+id/main_topmenu_clicked_layout"
+        >
+    </LinearLayout>
     <!-- 중간 리스트 내용-->
     <LinearLayout
         android:layout_width="match_parent"

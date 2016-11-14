@@ -19,5 +19,6 @@ public class AIMent {
         else if(t==2){//빨간불
 
         }
+        return "";
     }
 }

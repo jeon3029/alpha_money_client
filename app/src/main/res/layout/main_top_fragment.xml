@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="#ffffff"
+    android:orientation="vertical"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,6 +41,7 @@
                 android:src="@drawable/plus"
                 android:clickable="true"
                 />
+
             <ImageView
                 android:layout_width="45dp"
                 android:id="@+id/top_menu_image"
@@ -47,5 +49,17 @@
                 android:src="@drawable/menu"
                 />
         </LinearLayout>
+
     </LinearLayout>
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:text="About Alpha Money"
+        android:textSize="20sp"
+        android:layout_gravity="right"
+        android:background="#eeeeee"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/top_about_text"
+        />
 </LinearLayout>
