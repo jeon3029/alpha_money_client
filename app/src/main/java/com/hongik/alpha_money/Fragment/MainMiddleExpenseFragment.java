@@ -42,6 +42,7 @@ public class MainMiddleExpenseFragment extends Fragment{
     int stateInFrag; // 내부적으로 현재 표시중인 리스트의 종류를 표현  프래그먼트 시작과함께 2번  버튼클릭시 해당 스테이트로 바뀜
     // 1 = 오늘  2 = 주별  3 = 월별
     String tempDateForRefresh;
+    MainBottomFragment mainBottomFragment = ((MainActivity)ctx).getMainBottomFragment();
 
     ImageView dateLeft, dateRight;
     String layoutDate;
@@ -209,6 +210,7 @@ public class MainMiddleExpenseFragment extends Fragment{
 
         ((MainActivity)ctx).SetPageState(1);
         stateInFrag = 1;
+        Selected();
     }
 
     public void onclickWeek(String str) { // TODO : 주별리스트에서 날짜표시하는 아이템이 선택되는것 막기, 스토어네임 앞에 빈칸 없애기
@@ -251,6 +253,7 @@ public class MainMiddleExpenseFragment extends Fragment{
 
         ((MainActivity)ctx).SetPageState(2);
         stateInFrag = 2;
+        Selected();
     }
 
     public void onclickMonth(String str) {
@@ -293,6 +296,7 @@ public class MainMiddleExpenseFragment extends Fragment{
 
         ((MainActivity)ctx).SetPageState(3);
         stateInFrag = 3;
+        Selected();
     }
 
     public void onclickRefresh() {
@@ -302,6 +306,35 @@ public class MainMiddleExpenseFragment extends Fragment{
             onclickWeek(tempDateForRefresh);
         else if(stateInFrag == 3)
             onclickMonth(tempDateForRefresh);
+    }
+
+    public void Selected() {
+        Log.i("tag", "selected ex");
+        if(stateInFrag == 1) {
+            mainBottomFragment.buttonToday.setBackgroundColor(0xffaf8944);
+            mainBottomFragment.buttonWeek.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonMonth.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonToday.invalidate();
+            mainBottomFragment.buttonWeek.invalidate();
+            mainBottomFragment.buttonMonth.invalidate();
+        }
+        else if(stateInFrag == 2){
+            mainBottomFragment.buttonToday.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonWeek.setBackgroundColor(0xffaf8944);
+            mainBottomFragment.buttonMonth.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonToday.invalidate();
+            mainBottomFragment.buttonWeek.invalidate();
+            mainBottomFragment.buttonMonth.invalidate();
+        }
+
+        else if(stateInFrag == 3) {
+            mainBottomFragment.buttonToday.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonWeek.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonMonth.setBackgroundColor(0xffaf8944);
+            mainBottomFragment.buttonToday.invalidate();
+            mainBottomFragment.buttonWeek.invalidate();
+            mainBottomFragment.buttonMonth.invalidate();
+        }
     }
 
 }

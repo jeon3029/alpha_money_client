@@ -3,6 +3,7 @@ package com.hongik.alpha_money.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -130,9 +131,11 @@ public class DetailActivity extends Activity implements OnClickListener{
         int stateForRefresh = ((MainActivity) ApplicationSingleton.getInstance().GetMainActivityContext()).GetPageState();
 
         if(stateForRefresh < 4) {//expense page
+            Log.i("tag", "stateForRefresh ex");
             ApplicationSingleton.getInstance().GetExpenseFragment().onclickRefresh();
         }
         else if(3 < stateForRefresh && stateForRefresh < 7) {//income page
+            Log.i("tag", "stateForRefresh in");
             ApplicationSingleton.getInstance().GetIncomeFragment().onclickRefresh();
         }
 

@@ -43,6 +43,7 @@ public class MainMiddleIncomeFragment extends Fragment {
     String tempDateForRefresh;
     String layoutDate;
     ImageView dateLeft, dateRight;
+    MainBottomFragment mainBottomFragment = ((MainActivity)ctx).getMainBottomFragment();
 
     Intent intent;// 보낼때 사용 보내는 형식은 ID, date, ~ ,gridY 를 putintent 하여 전송
     // 받을때 사용 받는 형식은 From (어느 액티비티에서 왔는지), Del, ID (삭제여부와 삭제할 아이디)  + intent에 있던것들  추후 추가 가능
@@ -200,6 +201,7 @@ public class MainMiddleIncomeFragment extends Fragment {
 
         ((MainActivity)ctx).SetPageState(4);
         stateInFrag = 1;
+        Selected();
     }
 
     public void onclickWeek(String str) {
@@ -243,6 +245,7 @@ public class MainMiddleIncomeFragment extends Fragment {
         ((MainActivity)ctx).SetPageState(5);
 
         stateInFrag = 2;
+        Selected();
     }
 
     public void onclickMonth(String str) {
@@ -282,6 +285,7 @@ public class MainMiddleIncomeFragment extends Fragment {
 
         ((MainActivity)ctx).SetPageState(6);
         stateInFrag = 3;
+        Selected();
     }
 
     public void onclickRefresh() {
@@ -291,5 +295,34 @@ public class MainMiddleIncomeFragment extends Fragment {
             onclickWeek(tempDateForRefresh);
         else if(stateInFrag == 3)
             onclickMonth(tempDateForRefresh);
+    }
+
+    public void Selected() {
+        Log.i("tag", "selected in");
+        if(stateInFrag == 1) {
+            mainBottomFragment.buttonToday.setBackgroundColor(0xffaf8944);
+            mainBottomFragment.buttonWeek.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonMonth.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonToday.invalidate();
+            mainBottomFragment.buttonWeek.invalidate();
+            mainBottomFragment.buttonMonth.invalidate();
+        }
+        else if(stateInFrag == 2){
+            mainBottomFragment.buttonToday.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonWeek.setBackgroundColor(0xffaf8944);
+            mainBottomFragment.buttonMonth.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonToday.invalidate();
+            mainBottomFragment.buttonWeek.invalidate();
+            mainBottomFragment.buttonMonth.invalidate();
+        }
+
+        else if(stateInFrag == 3) {
+            mainBottomFragment.buttonToday.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonWeek.setBackgroundColor(0xff9abae6);
+            mainBottomFragment.buttonMonth.setBackgroundColor(0xffaf8944);
+            mainBottomFragment.buttonToday.invalidate();
+            mainBottomFragment.buttonWeek.invalidate();
+            mainBottomFragment.buttonMonth.invalidate();
+        }
     }
 }
