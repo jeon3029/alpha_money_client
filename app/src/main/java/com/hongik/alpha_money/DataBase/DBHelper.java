@@ -50,7 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<struct> onGetalldata(int option) {//op == 1 지출 2 수입
         Cursor cursor;
         ArrayList<struct> arrayList = new ArrayList<struct>();
-        SQLiteDatabase db = this.getReadableDatabase();
+        db = this.getReadableDatabase();
         if(option == 1)
             cursor = db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, payment, _id FROM " + tableName, null);
         else // option == 2
@@ -80,7 +80,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public ArrayList<struct> onGetmonthdata(String date, int option) { //op ==1 지출 2 수입
         ArrayList<struct> arrayList = new ArrayList<struct>();
-        SQLiteDatabase db = this.getReadableDatabase();
+        db = this.getReadableDatabase();
         Cursor cursor;
         if(option == 1) {
             cursor= db.rawQuery("SELECT date, price, storename, category, memo, gridX, gridY, payment, _id FROM " + tableName + " where date like '"
@@ -118,7 +118,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<struct> onGetweekdata(String date,int option) {
         // 받은 요일이 포함된 월~일 주를 모두 반환
         ArrayList<struct> arrayList = new ArrayList<struct>();
-        SQLiteDatabase db = this.getReadableDatabase();
+        db = this.getReadableDatabase();
         Cursor cursor = null;
         int y, m, d, checkday;
         int t[] = {0,3,2,5,0,3,5,1,4,6,2,4};
@@ -281,7 +281,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public ArrayList<struct> onGetdaydata(String date, int option) {
         ArrayList<struct> arrayList = new ArrayList<struct>();
-        SQLiteDatabase db = this.getReadableDatabase();
+        db = this.getReadableDatabase();
 
         Cursor cursor;
         if(option == 1){
@@ -380,7 +380,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void onInsertdata(String date, String price, String storename, String category, String memo, String gridX, String gridY,String payment, int option) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
 /*
         db.execS
         QL("INSERT INTO " + tableName + "(date, price, storename, category, memo, gridX, gridY) VALUES " // primary키는 입력하지않아도 자동으로 증가하며 입력됨 oncreate참조
@@ -425,7 +425,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     //data update
     public void onUpdate(String date, String price, String storename, String category, String memo, String gridX, String gridY,String payment, int option, int ID) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put("date", date);
