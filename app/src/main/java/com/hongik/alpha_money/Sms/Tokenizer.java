@@ -67,6 +67,9 @@ G마켓
                 Date date = new Date();
                 temp.date = dateFormat.format(date);
 
+                temp.gridX = 0;
+                temp.gridY = 0;
+
                 //TODO :: double x, double y GPS로 받아 넣어 줘야함, GOOGLE MAP API 관련
 
             }

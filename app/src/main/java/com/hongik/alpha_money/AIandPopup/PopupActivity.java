@@ -52,6 +52,8 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //category click X
+                ApplicationSingleton.getInstance().onInsertdata(date, price, storeName, "00", "",String.valueOf(gridX) , String.valueOf(gridY),String.valueOf(payment),1);
+
                 finish();
             }
         });
@@ -64,7 +66,7 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //식비
-                ApplicationSingleton.getInstance().onInsertdata(date, price, storeName, "10", "",String.valueOf(gridX) , String.valueOf(gridY),String.valueOf(payment),option);
+                ApplicationSingleton.getInstance().onInsertdata(date, price, storeName, "10", "",String.valueOf(gridX) , String.valueOf(gridY),String.valueOf(payment),1);
 
                 finish();
             }
@@ -74,6 +76,8 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //생활비
+                ApplicationSingleton.getInstance().onInsertdata(date, price, storeName, "20", "",String.valueOf(gridX) , String.valueOf(gridY),String.valueOf(payment),1);
+
                 finish();
             }
         });
@@ -82,6 +86,8 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //여가비
+                ApplicationSingleton.getInstance().onInsertdata(date, price, storeName, "30", "",String.valueOf(gridX) , String.valueOf(gridY),String.valueOf(payment),1);
+
                 finish();
             }
         });
