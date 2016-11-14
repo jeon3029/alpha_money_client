@@ -74,9 +74,6 @@ public class DetailActivity extends Activity implements OnClickListener{
         buttonConfirm.setOnClickListener(this);
         buttonDelete.setOnClickListener(this);
         buttonMap.setOnClickListener(this);
-
-        gridX = 37.555899;
-        gridY = 126.931810;
     }
     @Override
     public void onClick(View v) {
@@ -118,10 +115,12 @@ public class DetailActivity extends Activity implements OnClickListener{
                 break;
             case R.id.detail_map:
                 intent = new Intent(ApplicationSingleton.getInstance().GetMainActivityContext(), MapsActivity.class);
+                intent.putExtra("storename", storeName);
+                intent.putExtra("price", price);
                 intent.putExtra("gridX",gridX);
                 intent.putExtra("gridY",gridY);
                 setResult(RESULT_OK,intent);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
 
                 //finish (x)
             default:

@@ -1,7 +1,6 @@
 package com.hongik.alpha_money.Fragment;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -70,6 +69,7 @@ public class MainBottomFragment extends Fragment {
                 buttonToday.invalidate();
                 buttonWeek.invalidate();
                 buttonMonth.invalidate();
+
                 Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
                 if(((MainActivity)ctx).GetPageState() < 4)
                     ApplicationSingleton.getInstance().GetExpenseFragment().onclickWeek(customDate.strCurYearMonthDay);
@@ -87,6 +87,7 @@ public class MainBottomFragment extends Fragment {
                 buttonToday.invalidate();
                 buttonWeek.invalidate();
                 buttonMonth.invalidate();
+
                 Log.i("tag", String.valueOf(((MainActivity)ctx).GetPageState()));
                 if(((MainActivity)ctx).GetPageState() < 4) {
                     ApplicationSingleton.getInstance().GetExpenseFragment().onclickMonth(customDate.strCurYearMonthDay);

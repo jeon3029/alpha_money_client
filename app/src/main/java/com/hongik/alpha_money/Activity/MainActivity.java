@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
     BroadcastReceiver smsReceiver;
 
-    FragmentManager fm = getSupportFragmentManager();
-
     ArrayList<struct> arrayList_income;
     ArrayList<struct> arrayList_expense;
     Bundle instance;
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     TextView priceView;
     ImageView signalLightView;
 
-    int pageState = 1;/*1 : expense, today
+    int pageState = 2;/*1 : expense, today
                         2 : expense, week
                         3 : expense, month
                         4 : income, today
@@ -106,6 +104,13 @@ public class MainActivity extends AppCompatActivity {
         intentFilter.addAction("android.provide.Telephony.SMS_RECEIVED");
         smsReceiver = new SmsReceiver();
         registerReceiver(smsReceiver, intentFilter);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
+        }
     }
 
     private void initiate() {

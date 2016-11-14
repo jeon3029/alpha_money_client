@@ -67,7 +67,6 @@ public class MainMiddleExpenseFragment extends Fragment{
         listView_expense = (ListView)rootViewBasic.findViewById(R.id.main_expense_listview);
 
         stateInFrag = 2;
-        ((MainActivity)ctx).SetPageState(2);
 
         //TODO : 상황에 맞는 (월,주,일) 출력 해야 함.
 
