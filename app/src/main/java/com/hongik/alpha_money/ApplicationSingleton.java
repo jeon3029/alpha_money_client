@@ -31,7 +31,7 @@ public class ApplicationSingleton extends Application {
     MainMiddleStatisticsFragment StatisticsFragment;
     MainMiddleExpenseFragment ExpenseFragment;
     MainMiddleIncomeFragment IncomeFragment;
-    PopupActivity popupActivity;
+    PopupActivity popupActivity = new PopupActivity();
 
     int botLimit=100000,topLimit=200000;//about signal light
     public int GetBotLimit(){
@@ -95,7 +95,6 @@ public class ApplicationSingleton extends Application {
     }
     public void SetExpenseFragment(MainMiddleExpenseFragment fm) { ExpenseFragment = fm; }
     public void SetIncomeFragment(MainMiddleIncomeFragment fm) { IncomeFragment = fm; }
-    public void SetPopupActivity(PopupActivity pa) { popupActivity = pa; }
     public MainMiddleExpenseFragment GetExpenseFragment() { return ExpenseFragment;}
     public MainMiddleIncomeFragment GetIncomeFragment() { return IncomeFragment;}
     public MainMiddleStatisticsFragment GetStatisticsFragment(){

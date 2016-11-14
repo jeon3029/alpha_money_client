@@ -1,5 +1,7 @@
 package com.hongik.alpha_money.Sms;
 
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.util.Log;
 
 import com.hongik.alpha_money.DataStructure.struct;
@@ -30,16 +32,19 @@ G마켓
 지급가능액336,396원
 스위트스페이
      */
-    public struct parsingString(String str){
-        struct temp = new struct();
+
+    struct temp;
+
+    public struct parsingString(String str) {
+        temp = new struct();
         int type;
         temp.price = "1";
         //first type check
         type = typecheck(str);
-        if(type == 0){//농협
-            Pattern p =Pattern.compile("(.+)\n(.+)\n(.+)\n(.+)\n(.+)\n(.+)\n(.+)");
+        if (type == 0) {//농협
+            Pattern p = Pattern.compile("(.+)\n(.+)\n(.+)\n(.+)\n(.+)\n(.+)\n(.+)");
             //Pattern p = Pattern.compile("")
-            Matcher m =p.matcher(str);
+            Matcher m = p.matcher(str);
             /*Pattern pp = Pattern.compile("(.+)\t(\\d+)\t(male|female)");
             Matcher mm = pp.matcher("jakeWarten 25  male");
             if(mm.matches()){
@@ -48,7 +53,7 @@ G마켓
                 Log.i("PATTERN",mm.group(2));
             }*/
 
-            if(m.matches()) {
+            if (m.matches()) {
                 Log.i("PATTERN", "0 : " + m.group(0));// 전체
                 Log.i("PATTERN", "1 : " + m.group(1));//웹발신 (졸전때 보내는 문자에는 웹발신 없음...?)
                 Log.i("PATTERN", "2 : " + m.group(2));//체크승인
@@ -58,8 +63,8 @@ G마켓
                 Log.i("PATTERN", "6 : " + m.group(6));//날짜
                 Log.i("PATTERN", "7 : " + m.group(7));//내역
                 String price = m.group(3);
-                price = price.replaceAll(",","");
-                price = price.replace("원","");
+                price = price.replaceAll(",", "");
+                price = price.replace("원", "");
                 temp.price = price;
                 temp.payment = m.group(4);
                 temp.storeName = m.group(7);
@@ -67,18 +72,15 @@ G마켓
                 Date date = new Date();
                 temp.date = dateFormat.format(date);
 
-                temp.gridX = 0;
-                temp.gridY = 0;
 
                 //TODO :: double x, double y GPS로 받아 넣어 줘야함, GOOGLE MAP API 관련
-
-            }
-            else{
+            } else {
                 //Log...?
             }
         }
         else if(type == 1){//우리은행
         }
+
         return temp;
     }
     private int typecheck(String str) {

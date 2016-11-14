@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.hongik.alpha_money.AIandPopup.PopupActivity;
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.DataBase.DBHelper;
 import com.hongik.alpha_money.DataStructure.CustomDate;
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     MainBottomFragment mainBottomFragment;
     StatisticsMenuFragment statisticsMenuFragment;
     MainMiddleStatisticsFragment mainMiddleStatisticsFragment;
-    PopupActivity popupActivity;
     CustomDate customDate = new CustomDate();
 
     BroadcastReceiver smsReceiver;
@@ -108,9 +106,6 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         }
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
-        }
     }
 
     private void initiate() {
@@ -121,10 +116,8 @@ public class MainActivity extends AppCompatActivity {
         emptyFragment2 = new EmptyFragment();
         emptyFragment3= new EmptyFragment();
         statisticsMenuFragment = new StatisticsMenuFragment();
-        popupActivity = new PopupActivity();
         //mainMiddleStatisticsFragment = new MainMiddleStatisticsFragment();
 
-        ApplicationSingleton.getInstance().SetPopupActivity(popupActivity);
         mainMiddleStatisticsFragment = ApplicationSingleton.getInstance().GetStatisticsFragment();
     }
 

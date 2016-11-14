@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.DataStructure.Category;
@@ -121,7 +122,10 @@ public class DetailActivity extends Activity implements OnClickListener{
                 intent.putExtra("gridX",gridX);
                 intent.putExtra("gridY",gridY);
                 setResult(RESULT_OK,intent);
-                startActivityForResult(intent, 1);
+                if(gridX == 0 || gridY == 0)
+                    Toast.makeText(this,"지도정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                else
+                    startActivityForResult(intent, 1);
 
                 //finish (x)
             default:

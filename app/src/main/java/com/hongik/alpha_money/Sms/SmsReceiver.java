@@ -8,10 +8,8 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
-
-import com.hongik.alpha_money.DataStructure.struct;
-
 import com.hongik.alpha_money.AIandPopup.PopupActivity;
+import com.hongik.alpha_money.DataStructure.struct;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
