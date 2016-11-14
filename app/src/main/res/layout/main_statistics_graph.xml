@@ -58,24 +58,52 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
+        android:id="@+id/graph_layout2"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:paddingTop="50dp"
             android:paddingBottom="50dp"
-            android:visibility="gone"
-            android:id="@+id/graph_layout2"
             android:orientation="vertical"
             android:gravity="center"
             >
             <!--1st-->
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/top2"
+                android:background="#ffffffff">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/left"
+                    android:clickable="true"
+                    android:layout_weight="1"
+                    android:id="@+id/date_left_weekGraph"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:id="@+id/date_weekGraph"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/right"
+                    android:id="@+id/date_right_weekGraph"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal"
                 android:background="#eeeeee"
                 >
@@ -94,7 +122,7 @@
                     android:textSize="30sp"
                     android:textAlignment="center"
                     android:id="@+id/week_graph_1_price"
-                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
                     />
             </LinearLayout>
 

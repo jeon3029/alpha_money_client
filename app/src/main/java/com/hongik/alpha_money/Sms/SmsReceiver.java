@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
+
 import com.hongik.alpha_money.DataStructure.struct;
+
+import com.hongik.alpha_money.AIandPopup.PopupActivity;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -54,7 +57,9 @@ public class SmsReceiver extends BroadcastReceiver{
                 }
             }
 
-            Log.i("TAG", strMessage);
+
+            Log.i("TAG", strMessage); // message 의 string 전체
+
             Date curDate = new Date(smsMessage[0].getTimestampMillis());
             Log.i("TAG", curDate.toString());
             Log.i("TAG", String.valueOf(curDate.getMonth()));
@@ -101,5 +106,9 @@ public class SmsReceiver extends BroadcastReceiver{
 */
 
         }
+        // 팝업실행 코드부분
+        Intent intentPop = new Intent(context, PopupActivity.class);
+        intentPop.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);   // 이거 안해주면 안됨
+        context.startActivity(intentPop);
     }
 }
