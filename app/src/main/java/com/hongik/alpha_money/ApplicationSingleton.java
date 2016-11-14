@@ -3,6 +3,7 @@ package com.hongik.alpha_money;
 import android.app.Application;
 import android.content.Context;
 
+import com.hongik.alpha_money.AIandPopup.PopupActivity;
 import com.hongik.alpha_money.DataBase.DBHelper;
 import com.hongik.alpha_money.DataStructure.struct;
 import com.hongik.alpha_money.Fragment.MainMiddleExpenseFragment;
@@ -30,6 +31,7 @@ public class ApplicationSingleton extends Application {
     MainMiddleStatisticsFragment StatisticsFragment;
     MainMiddleExpenseFragment ExpenseFragment;
     MainMiddleIncomeFragment IncomeFragment;
+    PopupActivity popupActivity;
 
     int botLimit=100000,topLimit=200000;//about signal light
     public int GetBotLimit(){
@@ -94,9 +96,11 @@ public class ApplicationSingleton extends Application {
     }
     public void SetExpenseFragment(MainMiddleExpenseFragment fm) { ExpenseFragment = fm; }
     public void SetIncomeFragment(MainMiddleIncomeFragment fm) { IncomeFragment = fm; }
+    public void SetPopupActivity(PopupActivity pa) { popupActivity = pa; }
     public MainMiddleExpenseFragment GetExpenseFragment() { return ExpenseFragment;}
     public MainMiddleIncomeFragment GetIncomeFragment() { return IncomeFragment;}
     public MainMiddleStatisticsFragment GetStatisticsFragment(){
         return StatisticsFragment;
     }
+    public PopupActivity GetPopupActivity() { return popupActivity; }
 }

@@ -30,7 +30,8 @@ public class DetailActivity extends Activity implements OnClickListener{
     TextView detailStore;
     TextView detailCategory;
     TextView detailMemo;
-    private Button buttonConfirm, buttonDelete;
+    private Button buttonConfirm, buttonDelete, buttonMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,7 @@ public class DetailActivity extends Activity implements OnClickListener{
         storeName = intent.getStringExtra("storeName");
         category = intent.getStringExtra("category");
         memo = intent.getStringExtra("memo");
-        gridX = intent.getDoubleExtra("gridX", 0.000000);
+        gridX = intent.getDoubleExtra("gridX", 0.000000); // TODO : 0.000000으로 초기화해야함 테스트를 위해 수정했음
         gridY = intent.getDoubleExtra("gridY", 0.000000);
         option = intent.getIntExtra("option", 0);//1 expense 2 income
 
@@ -68,9 +69,14 @@ public class DetailActivity extends Activity implements OnClickListener{
 
         buttonConfirm = (Button) findViewById(R.id.detail_confirmButton);
         buttonDelete = (Button) findViewById(R.id.detail_deleteButton);
+        buttonMap = (Button)findViewById(R.id.detail_map);
 
         buttonConfirm.setOnClickListener(this);
         buttonDelete.setOnClickListener(this);
+        buttonMap.setOnClickListener(this);
+
+        gridX = 37.555899;
+        gridY = 126.931810;
     }
     @Override
     public void onClick(View v) {
@@ -110,6 +116,14 @@ public class DetailActivity extends Activity implements OnClickListener{
                 setResult(RESULT_OK, intent);
                 this.finish();
                 break;
+            case R.id.detail_map:
+                intent = new Intent(ApplicationSingleton.getInstance().GetMainActivityContext(), MapsActivity.class);
+                intent.putExtra("gridX",gridX);
+                intent.putExtra("gridY",gridY);
+                setResult(RESULT_OK,intent);
+                startActivity(intent);
+
+                //finish (x)
             default:
                 break;
         }

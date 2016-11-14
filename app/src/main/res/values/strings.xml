@@ -26,4 +26,5 @@
     <string name="today">오늘</string>
     <string name="DetailActivity">DetailActivity</string>
     <string name="confirm">확인</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

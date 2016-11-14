@@ -66,9 +66,11 @@ public class MainMiddleStatisticsFragment extends Fragment {
 
     TextView date_monthGraph;
     TextView date_paymentGraph;
+    TextView date_weekGraph;
     String str_date_MonthGraph;
     String str_date_PaymentGraph;
-    ImageView date_left_month, date_right_month, date_left_payment, date_right_payment;
+    String str_date_WeekGraph;
+    ImageView date_left_month, date_right_month, date_left_payment, date_right_payment, date_left_week, date_right_week;
 
 
     ApplicationSingleton instance = ApplicationSingleton.getInstance();
@@ -83,14 +85,19 @@ public class MainMiddleStatisticsFragment extends Fragment {
 
         date_monthGraph = (TextView)rootView.findViewById(R.id.date_monthGraph);
         date_paymentGraph = (TextView)rootView.findViewById(R.id.date_paymentGraph);
+        date_weekGraph = (TextView)rootView.findViewById(R.id.date_weekGraph);
         date_monthGraph.setText(customDate.strCurYearMonth.substring(0,4) + "." + customDate.strCurYearMonth.substring(4,6));
         date_paymentGraph.setText(customDate.strCurYearMonth.substring(0,4) + "." + customDate.strCurYearMonth.substring(4,6));
+        date_weekGraph.setText(customDate.strCurYearMonth.substring(0,4) + "." + customDate.strCurYearMonth.substring(4,6));
         str_date_MonthGraph = customDate.strCurYearMonth;
         str_date_PaymentGraph = customDate.strCurYearMonth;
+        str_date_WeekGraph = customDate.strCurYearMonth;
         date_left_month = (ImageView)rootView.findViewById(R.id.date_left_monthGraph);
         date_right_month = (ImageView)rootView.findViewById(R.id.date_right_monthGraph);
         date_left_payment = (ImageView)rootView.findViewById(R.id.date_left_paymentGraph);
         date_right_payment = (ImageView)rootView.findViewById(R.id.date_right_paymentGraph);
+        date_left_week = (ImageView)rootView.findViewById(R.id.date_left_weekGraph);
+        date_right_week = (ImageView)rootView.findViewById(R.id.date_right_weekGraph);
 
         date_left_month.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +136,24 @@ public class MainMiddleStatisticsFragment extends Fragment {
                 str_date_PaymentGraph = customDate.GetNextMonth(str_date_PaymentGraph);
                 date_paymentGraph.setText(str_date_PaymentGraph.substring(0,4) + "." + str_date_PaymentGraph.substring(4,6));
                 ShowPaymentGraph(str_date_PaymentGraph);
+            }
+        });
+
+        date_left_week.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str_date_WeekGraph = customDate.GetBeforeMonth(str_date_WeekGraph);
+                date_weekGraph.setText(str_date_WeekGraph.substring(0,4) + "." + str_date_WeekGraph.substring(4,6));
+                ShowWeekGraph(str_date_WeekGraph);
+            }
+        });
+
+        date_right_week.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str_date_WeekGraph = customDate.GetNextMonth(str_date_WeekGraph);
+                date_weekGraph.setText(str_date_WeekGraph.substring(0,4) + "." + str_date_WeekGraph.substring(4,6));
+                ShowWeekGraph(str_date_WeekGraph);
             }
         });
 
@@ -212,7 +237,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
     }
 
 
-    public void ShowWeekGraph() {//graph2
+    public void ShowWeekGraph(String str) {//graph2
         Graph_Layout2.setVisibility(LinearLayout.VISIBLE);
         Graph_Layout1.setVisibility(LinearLayout.GONE);
         Graph_Layout3.setVisibility(LinearLayout.GONE);
@@ -279,7 +304,7 @@ public class MainMiddleStatisticsFragment extends Fragment {
         weeks[6] = new Week(6);
 
         struct struct;
-        arrayList = instance.GetExpenseList(1, customDate.strCurYearMonth); // 해당 월의 DB 부름
+        arrayList = instance.GetExpenseList(1, str); // 해당 월의 DB 부름
 
         for(Iterator<struct> iterator = arrayList.iterator(); iterator.hasNext();) { // 가져온 데이터를 돌면서
             struct = iterator.next();
