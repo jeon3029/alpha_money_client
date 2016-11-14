@@ -23,6 +23,7 @@ import java.util.Date;
  * Created by Patabear on 2016-10-13.
  */
 public class SmsReceiver extends BroadcastReceiver{
+    struct ret;
 
     public SmsReceiver(){
         Log.i("TAG", "knjbvbuvctydcytvkjnk");
@@ -91,7 +92,6 @@ public class SmsReceiver extends BroadcastReceiver{
             //bank
             //date
             //-->struct 에 저장해서 반환
-            struct ret;
             ret = new Tokenizer().parsingString(strMessage);
             Log.i("PATTERN",ret.date);
             //이거로 작업하면 됨 price,storename, bank
@@ -109,6 +109,14 @@ public class SmsReceiver extends BroadcastReceiver{
         // 팝업실행 코드부분
         Intent intentPop = new Intent(context, PopupActivity.class);
         intentPop.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);   // 이거 안해주면 안됨
+        intentPop.putExtra("price",ret.price);
+        intentPop.putExtra("storeName",ret.storeName);
+        intentPop.putExtra("grixX",ret.gridX);
+        intentPop.putExtra("gridY",ret.gridY);
+        intentPop.putExtra("date",ret.date);
+        //memo X category X
+        intentPop.putExtra("payment",ret.payment);
+        intentPop.putExtra("option",1);//option 1 = expense
         context.startActivity(intentPop);
     }
 }
