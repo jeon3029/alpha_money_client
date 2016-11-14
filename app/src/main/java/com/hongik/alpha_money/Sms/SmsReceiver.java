@@ -86,8 +86,6 @@ public class SmsReceiver extends BroadcastReceiver{
             //bank
             //date
             //-->struct 에 저장해서 반환
-
-
             struct ret;
             ret = new Tokenizer().parsingString(strMessage);
             Log.i("PATTERN",ret.date);

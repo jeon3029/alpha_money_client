@@ -49,34 +49,35 @@ G마켓
             }*/
 
             if(m.matches()) {
-                Log.i("PATTERN", m.group(0));//웹발신 (졸프때 보내는 문자에는 웹발신 없음...?)
-                Log.i("PATTERN", m.group(1));//체크승인
-                Log.i("PATTERN", m.group(2));//금액
-                Log.i("PATTERN", m.group(3));//카드
-                Log.i("PATTERN", m.group(4));//사용자 이름
-                Log.i("PATTERN", m.group(5));//날짜
-                Log.i("PATTERN", m.group(6));//내역
-
-                String price = m.group(2);
+                Log.i("PATTERN", "0 : " + m.group(0));// 전체
+                Log.i("PATTERN", "1 : " + m.group(1));//웹발신 (졸전때 보내는 문자에는 웹발신 없음...?)
+                Log.i("PATTERN", "2 : " + m.group(2));//체크승인
+                Log.i("PATTERN", "3 : " + m.group(3));//금액
+                Log.i("PATTERN", "4 : " + m.group(4));//카드
+                Log.i("PATTERN", "5 : " + m.group(5));//이름
+                Log.i("PATTERN", "6 : " + m.group(6));//날짜
+                Log.i("PATTERN", "7 : " + m.group(7));//내역
+                String price = m.group(3);
                 price = price.replaceAll(",","");
                 price = price.replace("원","");
                 temp.price = price;
-                temp.payment = m.group(3);
-                temp.storeName = m.group(6);
-                DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+                temp.payment = m.group(4);
+                temp.storeName = m.group(7);
+                DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
                 Date date = new Date();
                 temp.date = dateFormat.format(date);
+
+                //TODO :: double x, double y GPS로 받아 넣어 줘야함, GOOGLE MAP API 관련
+
             }
             else{
-                //Log.i("PATTERN",m.)
+                //Log...?
             }
         }
         else if(type == 1){//우리은행
-
         }
         return temp;
     }
-
     private int typecheck(String str) {
         if(str.contains("NH농협카드")){
             return 0;
