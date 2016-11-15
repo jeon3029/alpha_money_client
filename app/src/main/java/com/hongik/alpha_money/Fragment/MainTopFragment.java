@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hongik.alpha_money.Activity.AboutDialog;
 import com.hongik.alpha_money.Activity.AddDataActivity;
 import com.hongik.alpha_money.Activity.MainActivity;
 import com.hongik.alpha_money.ApplicationSingleton;
@@ -27,8 +29,11 @@ public class MainTopFragment extends Fragment{
     ImageView searchImage;
     ImageView menuImage;
     ImageView lightImage;
-    public MainTopFragment() {
+    TextView aboutText;
+    boolean clickmenu;
 
+    public MainTopFragment() {
+        clickmenu = false;
     }
 
     @Override
@@ -61,13 +66,32 @@ public class MainTopFragment extends Fragment{
         searchImage = (ImageView)rootViewBasic.findViewById(R.id.top_search_image);
         menuImage = (ImageView)rootViewBasic.findViewById(R.id.top_menu_image);
         lightImage = (ImageView)rootViewBasic.findViewById(R.id.top_signalLight);
-
+        aboutText = (TextView)rootViewBasic.findViewById(R.id.top_about_text);
         menuImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("TAG_IMAGE","menuClicked");
+                //aboutText.setVisibility(TextView.VISIBLE);
+                if(clickmenu == false) {
+                    ((MainActivity) ApplicationSingleton.getInstance().GetMainActivityContext()).topMenuClicked();
+                    clickmenu = true;
+                    showAboutDialog();
+                    Log.i("MENU","clicked");
+                }
+                else{
+                    ((MainActivity) ApplicationSingleton.getInstance().GetMainActivityContext()).topMenuBack();
+                    clickmenu = false;
+                    Log.i("MENU","unclicked");
+                }
             }
-        });
+        });/*
+        aboutText.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //aboutText.setVisibility(TextView.GONE);
+                //showAboutDialog();
+            }
+        });*/
         searchImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,5 +108,10 @@ public class MainTopFragment extends Fragment{
             }
         });
         return rootViewBasic;
+    }
+
+    private void showAboutDialog() {
+        AboutDialog about = new AboutDialog(ApplicationSingleton.getInstance().GetMainActivityContext());
+        about.show();
     }
 }

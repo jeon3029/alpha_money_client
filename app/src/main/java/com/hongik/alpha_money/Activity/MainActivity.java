@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.hongik.alpha_money.AIandPopup.PopupActivity;
 import com.hongik.alpha_money.ApplicationSingleton;
 import com.hongik.alpha_money.DataBase.DBHelper;
 import com.hongik.alpha_money.DataStructure.CustomDate;
@@ -24,6 +25,7 @@ import com.hongik.alpha_money.Fragment.MainBottomFragment;
 import com.hongik.alpha_money.Fragment.MainMiddleStatisticsFragment;
 import com.hongik.alpha_money.Fragment.MainTopFragment;
 import com.hongik.alpha_money.Fragment.MainViewPagerFragment;
+import com.hongik.alpha_money.Fragment.MenuClickedFragment;
 import com.hongik.alpha_money.Fragment.StatisticsMenuFragment;
 import com.hongik.alpha_money.R;
 import com.hongik.alpha_money.Sms.SmsReceiver;
@@ -37,9 +39,12 @@ public class MainActivity extends AppCompatActivity {
     EmptyFragment emptyFragment;
     EmptyFragment emptyFragment2;
     EmptyFragment emptyFragment3;
+    EmptyFragment emptyFragment4;
     MainBottomFragment mainBottomFragment;
     StatisticsMenuFragment statisticsMenuFragment;
     MainMiddleStatisticsFragment mainMiddleStatisticsFragment;
+    MenuClickedFragment menuClickedFragment;
+    PopupActivity popupActivity;
     CustomDate customDate = new CustomDate();
 
     BroadcastReceiver smsReceiver;
@@ -87,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             //통계에서 메뉴바 레이아웃으로 사용 될 것임
             fragmentManager.beginTransaction().add(R.id.statistics_bottom_layout,emptyFragment).commit();
 
+            fragmentManager.beginTransaction().add(R.id.main_topmenu_clicked_layout,emptyFragment4).commit();
             pageState = 0;
             //처음엔 아무것도 안보이게 세팅
         }
@@ -115,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
         emptyFragment = new EmptyFragment();
         emptyFragment2 = new EmptyFragment();
         emptyFragment3= new EmptyFragment();
+        emptyFragment4 = new EmptyFragment();
+        menuClickedFragment = new MenuClickedFragment();
         statisticsMenuFragment = new StatisticsMenuFragment();
         //mainMiddleStatisticsFragment = new MainMiddleStatisticsFragment();
 
@@ -133,7 +141,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    public void topMenuClicked(){
+        fragmentManager.beginTransaction().replace(R.id.main_topmenu_clicked_layout,menuClickedFragment);
+    }
+    public void topMenuBack(){
+        fragmentManager.beginTransaction().replace(R.id.main_topmenu_clicked_layout,emptyFragment4);
 
+    }
 
     public void ShowExpenseIncomeFragment(){
         fragmentManager.beginTransaction().replace(R.id.main_bottom_layout, mainBottomFragment).commit();
