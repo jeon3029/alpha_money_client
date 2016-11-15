@@ -112,9 +112,6 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         }
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
-        }
     }
 
     private void initiate() {
@@ -127,10 +124,8 @@ public class MainActivity extends AppCompatActivity {
         emptyFragment4 = new EmptyFragment();
         menuClickedFragment = new MenuClickedFragment();
         statisticsMenuFragment = new StatisticsMenuFragment();
-        popupActivity = new PopupActivity();
         //mainMiddleStatisticsFragment = new MainMiddleStatisticsFragment();
 
-        ApplicationSingleton.getInstance().SetPopupActivity(popupActivity);
         mainMiddleStatisticsFragment = ApplicationSingleton.getInstance().GetStatisticsFragment();
     }
 
