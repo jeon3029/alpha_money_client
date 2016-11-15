@@ -64,7 +64,7 @@ public class PopupActivity extends Activity {
 
 
 
-        
+
         //TODO : GPS 작동여부 묻는 부분
 
 
