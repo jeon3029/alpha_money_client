@@ -19,6 +19,6 @@ public class AIMent {
         else if(t==2){//빨간불
 
         }
-        return "";
+        return "헤이 도르마무 다이어트를 하러왔다";
     }
 }
