@@ -105,16 +105,18 @@ public class SmsReceiver extends BroadcastReceiver{
 
         }
         // 팝업실행 코드부분
-        Intent intentPop = new Intent(context, PopupActivity.class);
-        intentPop.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);   // 이거 안해주면 안됨
-        intentPop.putExtra("price",ret.price);
-        intentPop.putExtra("storeName",ret.storeName);
-        intentPop.putExtra("grixX",ret.gridX);
-        intentPop.putExtra("gridY",ret.gridY);
-        intentPop.putExtra("date",ret.date);
-        //memo X category X
-        intentPop.putExtra("payment",ret.payment);
-        intentPop.putExtra("option",1);//option 1 = expense
-        context.startActivity(intentPop);
+        if(!ret.date.equals("에러")) {
+            Intent intentPop = new Intent(context, PopupActivity.class);
+            intentPop.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);   // 이거 안해주면 안됨
+            intentPop.putExtra("price", ret.price);
+            intentPop.putExtra("storeName", ret.storeName);
+            intentPop.putExtra("grixX", ret.gridX);
+            intentPop.putExtra("gridY", ret.gridY);
+            intentPop.putExtra("date", ret.date);
+            //memo X category X
+            intentPop.putExtra("payment", ret.payment);
+            intentPop.putExtra("option", 1);//option 1 = expense
+            context.startActivity(intentPop);
+        }
     }
 }
