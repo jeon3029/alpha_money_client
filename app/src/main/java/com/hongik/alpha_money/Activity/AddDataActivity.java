@@ -62,7 +62,7 @@ public class AddDataActivity extends Activity {
                     ApplicationSingleton.getInstance().onInsertdata("20161105", "2300", "한가람", "20", "", "38.556275", "126.446555", "NH(8*7*)", 1);
                     ApplicationSingleton.getInstance().onInsertdata("20161107", "10300", "다이소", "20", "", "37.551341", "126.925179", "NH(8*7*)", 1);
                     ApplicationSingleton.getInstance().onInsertdata("20161108", "36400", "GIODANO", "35", "", "37.580341", "126.925179", "NH(8*7*)", 1);
-                    ApplicationSingleton.getInstance().onInsertdata("20161109", "5300", "M&M", "35", "", "37.55031", "126.925129", "NH(8*7*)", 1);
+                    ApplicationSingleton.getInstance().onInsertdata("20161109", "5300", "M&M", "35", "", "37.550310", "126.925129", "NH(8*7*)", 1);
                     ApplicationSingleton.getInstance().onInsertdata("20161109", "7600", "맥도날드", "10", "", "37.557341", "126.925179", "KB(5*8*)", 1);
                     ApplicationSingleton.getInstance().onInsertdata("20161112", "15600", "신선설농탕", "11", "", "37.850341", "126.925179", "KB(5*8*)", 1);
                     ApplicationSingleton.getInstance().onInsertdata("20161114", "34700", "Z:PC", "10", "", "37.550391", "126.925379", "NH(8*7*)", 1);

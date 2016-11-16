@@ -31,7 +31,7 @@ public class MainMiddleIncomeFragment extends Fragment {
     View rootViewBasic;
     ListView listView_income;
     ListCustomAdapter listCustomAdapter_income;
-    ArrayList<struct> arrayList_income;
+    ArrayList<struct> arrayList_income = new ArrayList<struct>();
     TextView LayoutDate;
     TextView TotalIncome;
     Context ctx = ApplicationSingleton.getInstance().GetMainActivityContext();
@@ -69,7 +69,7 @@ public class MainMiddleIncomeFragment extends Fragment {
             arrayListWeek.clear();
 
         int sum = 0, today = 0, nextday = 0;
-        arrayList_income = ApplicationSingleton.getInstance().GetIncomeList(2, customDate.strCurYearMonthDay);
+
 
         for(int i = 0; i < arrayList_income.size(); i++) {
             String date = arrayList_income.get(i).date;
