@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="5dp"
+            android:textAlignment="center"
             android:layout_marginLeft="82dp"
             android:ems="10"
             android:hint="ex)20160515"
@@ -37,6 +38,7 @@
             android:layout_below="@+id/editTextStore"
             android:layout_marginTop="22dp"
             android:ems="10"
+            android:textAlignment="center"
             android:inputType="text" />
 
         <TextView
@@ -118,6 +120,7 @@
             android:layout_alignLeft="@+id/editTextDate"
             android:layout_below="@+id/editTextPrice"
             android:ems="10"
+            android:textAlignment="center"
             android:inputType="text" >
         </EditText>
 
@@ -127,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/editTextStore"
             android:layout_below="@+id/editTextDate"
+            android:textAlignment="center"
             android:ems="10"
             android:hint="(필수)"
             android:gravity="center"

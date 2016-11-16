@@ -33,7 +33,7 @@ public class ApplicationSingleton extends Application {
     MainMiddleIncomeFragment IncomeFragment;
     PopupActivity popupActivity = new PopupActivity();
 
-    int botLimit=100000,topLimit=200000;//about signal light
+    int botLimit=150000,topLimit=300000;//about signal light
     public int GetBotLimit(){
         return botLimit;
     }

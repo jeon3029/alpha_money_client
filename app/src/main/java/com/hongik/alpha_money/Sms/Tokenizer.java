@@ -1,7 +1,5 @@
 package com.hongik.alpha_money.Sms;
 
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.util.Log;
 
 import com.hongik.alpha_money.DataStructure.struct;
@@ -52,7 +50,6 @@ G마켓
                 Log.i("PATTERN",mm.group(1));
                 Log.i("PATTERN",mm.group(2));
             }*/
-
             if (m.matches()) {
                 Log.i("PATTERN", "0 : " + m.group(0));// 전체
                 Log.i("PATTERN", "1 : " + m.group(1));//웹발신 (졸전때 보내는 문자에는 웹발신 없음...?)
@@ -71,14 +68,14 @@ G마켓
                 DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
                 Date date = new Date();
                 temp.date = dateFormat.format(date);
-
-
                 //TODO :: double x, double y GPS로 받아 넣어 줘야함, GOOGLE MAP API 관련
             } else {
                 //Log...?
+                temp.date = "에러";
             }
         }
         else if(type == 1){//우리은행
+            temp.date = "에러";
         }
 
         return temp;

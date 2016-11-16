@@ -424,22 +424,22 @@ public class MainMiddleStatisticsFragment extends Fragment {
         arrayList = ApplicationSingleton.getInstance().GetExpenseList(1, str);
 
         for(i = 0; i < arrayList.size(); i++) {
-            if(arrayList.get(i).payment.length() != 0) {
-                for (j = 0; j < count; j++) {
-                    if (payment[j].equals(arrayList.get(i).payment)) {
-                        paymentsum[j] += Integer.parseInt(arrayList.get(i).price);
+                if (arrayList.get(i).payment != null && arrayList.get(i).payment.length() != 0) {
+                    for (j = 0; j < count; j++) {
+                        if (payment[j].equals(arrayList.get(i).payment)) {
+                            paymentsum[j] += Integer.parseInt(arrayList.get(i).price);
+                            sum += Integer.parseInt(arrayList.get(i).price);
+                            find = true;
+                            break;
+                        }
+                    }
+                    if (find == false) {
+                        payment[count] = arrayList.get(i).payment;
+                        paymentsum[count] += Integer.parseInt(arrayList.get(i).price);
                         sum += Integer.parseInt(arrayList.get(i).price);
-                        find = true;
-                        break;
+                        count++;
                     }
                 }
-                if(find == false) {
-                    payment[count] = arrayList.get(i).payment;
-                    paymentsum[count] += Integer.parseInt(arrayList.get(i).price);
-                    sum += Integer.parseInt(arrayList.get(i).price);
-                    count++;
-                }
-            }
             find = false;
         }
 

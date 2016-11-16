@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -224,6 +225,18 @@ public class MainActivity extends AppCompatActivity {
                         temp.payment = data.getStringExtra("payment");
                         mydb.onUpdate(temp.date, temp.price, temp.storeName, temp.category, temp.memo
                                 , Double.toString(temp.gridX), Double.toString(temp.gridY),temp.payment, option, temp.ID);
+
+                    }
+
+                    int stateForRefresh = GetPageState();
+
+                    if(stateForRefresh < 4) {//expense page
+                        Log.i("tag", "stateForRefresh ex");
+                        ApplicationSingleton.getInstance().GetExpenseFragment().onclickRefresh();
+                    }
+                    else if(3 < stateForRefresh && stateForRefresh < 7) {//income page
+                        Log.i("tag", "stateForRefresh in");
+                        ApplicationSingleton.getInstance().GetIncomeFragment().onclickRefresh();
                     }
                 }
                 break;
